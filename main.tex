@@ -75,7 +75,9 @@
 \usepackage{pgf}
 \usepackage{tikz}
 \usetikzlibrary{arrows,automata,positioning}
+\usetikzlibrary{decorations.pathmorphing}
 
+\tikzset{squigly/.style={decorate, decoration=snake}}
 %%USAGE
 % \begin{center}
 % 		\begin{tikzpicture}[.-., >=stealth', auto, node distance = 2cm,on grid, semithick]
