@@ -1,0 +1,96 @@
+\documentclass[./main.tex]{subfiles}
+\begin{document}
+
+\begin{subsection}{The Local Connectivity ATSP Problem}
+Fix some function $\lb : 2^V\rightarrow \mathbb{R}^+$ that obeys the following properties:
+\begin{enumerate}
+\item $\lb(S) = \sum\limits_{v\in S}\lb(\{v\})$ for all $S\subseteq V$
+\item $\lb(V) = \val(I)$
+\end{enumerate}
+One can think of \lb\ as being defined by distributing the LP value among the vertices in some way.\vspace{3mm}
+\begin{problem}
+\ \\Input: $I$ (the instance) and $V_1,\ldots,V_k$ (a partitioning of $V$) such that $V_i$ is strongly connected.
+\\Output: $F$, an eulerian set of edges such that for every $i$, $F$ exits (and hence enters) $V_i$ at least once.\end{problem}\vspace{4mm}
+\begin{definition}
+An algorithm for local connectivity ATSP is called $\bm{\alpha}$\textbf{-light} if it outputs $F$ such that for each strongly connected component of $F$, say $\tilde{G}$, $w(\tilde{G})\leq \alpha\cdot \lb(\tilde{G})$.
+\end{definition}\vspace{2mm}
+\begin{theorem}[Svensson '15] An $\alpha$-light algorithm for local connectivity ATSP implies a $O(\alpha)$-approximation algorithm for ATSP.
+\end{theorem}
+The paper describes an $O(1)$-light algorithm for local connectivity on vertebrate pairs, which gives us an $O(1)$-approximation algorithm for ATSP on vertebrate pairs, and hence an $O(1)$-approximation algorithm for general ATSP.\vspace{2mm}
+\\We will also assume that $w(B)\leq O(1)\cdot \val(I)$, since in the previous reduction, this inequality is always true.
+\begin{definition}
+For this algorithm, we will define \lb\ as $$\textbf{\lb(v)}:=
+\begin{cases}
+\dfrac{\val(I)}{|V(B)|}\quad \text{if }v\in B\\
+2\cdot y_v\quad \text{otherwise}
+\end{cases}$$
+\end{definition}
+Note that this definition does not guarantee that $\lb(V) = \val(I)$, but $\lb(V)$ is always a constant factor away from $\val(I)$, so we can work with these \lb\ values and suffer a constant factor loss in the approximation ratio.\vspace{2mm}
+\end{subsection}
+\\To make corner cases easier, we add $V$ to $L_{\geq 2}$ for the rest of this write up.\vspace{2mm}
+\\The following is the main technical lemma of the paper. \vspace{1mm}
+\begin{lemma}[Lemma 7.3 in the paper]\label{lemma7}
+Given $U_1,\ldots,U_l$ disjoint subsets of $V\setminus V(B)$ that are strongly connected in $G$, such that for each $S\in L_{\geq 2}$, either $U_i\in S$ or $U_i$ is disjoint from $S$, we can find eulerian $F\subseteq E$ such that:
+\begin{enumerate}
+\item[(1)] $w(F)\leq 3\cdot \val(I)$
+\item[(2)] $|\delta^-_F(U_i)|\geq 1$ for all $i$
+\item[(3)] $|\delta^-_F(v)|\leq 4$ for all $v$ such that $x(\delta^-(v)) = 1$
+\item[(4)] Any subtour in $F$ that crosses a set in $L_{\geq 2}$ visits a vertex of the backbone
+\end{enumerate}
+\end{lemma}\vspace{2mm}
+We will use the lemma to prove the following theorem, and prove the lemma later on.\vspace{2mm}\pagebreak[2]
+\begin{theorem}
+There is an $O(1)$-light algorithm for local connectivity ATSP on vertebrate pairs.
+\end{theorem}
+\begin{proof}
+We receive $(I,B)$ and $V_1,\ldots,V_k$ as input. We output $F^*=B\cup P\cup F$, where $P$ and $F$ are defined as:
+\begin{enumerate}
+\item[$P$:] If $B$ exists entirely within some $V_i$, then we pick $u\in B$ and $v\notin V_i$, and set $P$ to be the shortest cycle containing $u$ and $v$. Otherwise we keep $P$ empty.
+\item[$F$:] WLOG, let $V_1,\ldots,V_l$ be the partitions that are disjoint from $B$. Now let $V_i'$ be the intersection of $V_i$ with a minimal set in $L_{\geq 2}$ that $V_i$ intersects. Let $U_i$ be the first strongly connected component of $V_i'$ (in the topological order). Set $F$ to be the eulerian set guaranteed by running the algorithm of Lemma \ref{lemma7} on $U_1,\ldots,U_l$.
+\end{enumerate}\vspace{2mm}
+Now we need to verify that $B\cup P\cup F$ is feasible, and that it is $O(1)$-light.
+\\For each $V_i$, there are three possibilities:
+\begin{enumerate}
+\item[(a)] $V_i$ completely contains the backbone. The set $P$ guarantees that $F^*$ enters $V_i$ at least once.
+\item[(b)] $V_i$ partially contains the backbone. In this case, $B$ trivially crosses $V_i$, so $F^*$ must enter $V_i$.
+\item[(c)] $V_i$ is disjoint from the backbone. In this case, (2) tells us that some edge $(u,v)$ must enter $U_i$. $u\notin V_i'$ since $U_i$ is the source component of $V_i'$. So either $u\in S\setminus V_i$ or $u\notin S$. If the former is true, then $(u,v)$ enters $V_i$ from outside. If the latter is true, then $(u,v)$ crosses $S$, and guarantee $(4)$ of Lemma \ref{lemma7} tells us that the subtour containing $(u,v)$ visits the backbone, which is outside $V_i$.
+\end{enumerate}
+In any case, $F^*$ crosses each $V_i$, so it is indeed feasible.\vspace{2mm}
+\\Now consider any strongly connected component of $F^*$, say $\tilde{G}$. We would like to bound $w(\tilde(G))$ by $O(\lb(\tilde{G}))$. There are two possibilities for $\tilde{G}$:
+\begin{enumerate}
+\item[(a)] $\tilde{G}$ contains the backbone. So $$w(\tilde{G})\leq w(B) + w(P) + w(F)\leq O(\val(I)) + \val(I) + 3\cdot\val(I) = O(\val(I))$$
+$$\lb(\tilde{G})\geq \lb(V(B)) = \val(I)$$
+And it follows that $w(\tilde{G})\leq O(\lb(\tilde{G}))$.
+\item[(b)] $\tilde{G}$ is disjoint from the backbone. In this case, $(4)$ guarantees that $\tilde{G}$ did not cross any set in $L_{\geq 2}$, so the only sets it might have crossed are singletons. Additionally, $(3)$ guarantees that it crosses each singleton at most four times. $$w(\tilde{G})\leq \sum_{v\in V(\tilde{G})}4\cdot 2\cdot y_v = 4\cdot\lb(\tilde{G})$$
+\end{enumerate}
+\end{proof}
+\begin{subsection}{Proof of Lemma \ref{lemma7}: The final ingredient}
+
+Order the laminar sets in $L_{\geq 2}$ by size so that $|S_1|\leq |S_2|\leq\cdots\leq |S_l| = |V|$. For each $v\in V$, define $level(v)$ to be the index of the smallest set it is contained in.\vspace{2mm}
+\begin{definition}
+An edge $e$ is called a \textbf{forward edge}, \textbf{backward edge}, or \textbf{neutral edge} if $e\in E_f$, $e\in E_b$, or $e\in E_n$ respectively, where $E_f, E_b,$ and $E_n$ are defined as:
+\begin{enumerate}[$-$]
+\item $\bm{E_f}:=\{(u,v)\in E\mid level(u) > level(v)\}$
+\item $\bm{E_b}:=\{u,v)\in E\mid level(u) < level(v)\}$
+\item $\bm{E_n}:=E\setminus (E_f\cup E_b)$
+\end{enumerate}
+\end{definition}
+\vspace{2mm}\pagebreak[2]
+\begin{definition}
+Call $\bm{G_{sp}}$ the \textbf{split graph}, where we define it as follows: for each $v\in V$, create $v^0$ and $v^1$ in $V(G_{sp})$. Create the following edges along with weights $\bm{w_{sp}}$:
+\begin{itemize}[$-$]
+\item $(v^0, v^1)$ for all $v\in V$ with weight $0$. Call these edges $0-1$ edges.
+\item $(v^1, v^0)$ for all $v\in V(B)$ with weight $0$. Call these edges $1-0$ edges.
+\item $(u^1, v^1)$ for all $(u,v)\in E_f\cup E_n$ with weight $w(u,v)$. Call these edges $1-1$ edges.
+\item $(u^0, v^0)$ for all $(u,v)\in E_b\cup E_n$ with weight $w(u,v)$. Call these edges $0-0$ edges.
+\end{itemize}
+\end{definition}\vspace{2mm}
+Consider the lift of some subtour in $G_{sp}$ that crosses at least one set in $L_{\geq 2}$. Let $S$ be the smallest set in $L_{\geq 2}$ that the subtour crosses. Then the edge of the subtour going into $S$ must be a forward edge (i.e. a $1-1$ edge) by definition, and the edge going out of $S$ must be a backward edge (i.e. a $0-0$ edge). This means at some point, the subtour must use a $1-0$ edge, which it can only do if it crosses the backbone.\vspace{1mm}
+\\So if we restrict ourself to lifts of subtours of $G_{sp}$ (instead of all subtours of $G$), guarantee (4) will always be true.\vspace{2mm}
+\begin{lemma}
+We can find $x_{sp}$, an eulerian vector on $G_{sp}$ that the image of $x_{sp}$ in $G$ is $x$.
+\end{lemma}
+If we want the image of $x_{sp}$ to be $x$, we must necessarily set $x_{sp}(u^1,v^1)=x(u,v)$ for all $(u,v)\in E_f$, and $x_{sp}(u^0,v^0) = x(u,v)$ for all $(u,v)\in E_b$. But for neutral edges $(u,v)$, we have a choice - how do we distribute $x(u,v)$ among $x_{sp}(u^1,v^1)$ and $x_{sp}(u^0,v^0)$?\vspace{2mm}
+\\After distributing the $x$ value on neutral edges, there will be some "potential" on each vertex (i.e. the net outgoing flow), and since $x$ was eulerian, the potential of the $0$-copy of a vertex, say $v$, is exactly the negative potential of the $1$-copy. If the potential of the $1$-copy is positive, this can be fixed by routing that amount of flow through $(v^0,v^1)$. But if it is negative, this can only be fixed using a $(v^1,v^0)$ edge, which is impossible unless $v\in V(B)$. In other words, we want to ensure that 
+\end{subsection}
+\end{document}

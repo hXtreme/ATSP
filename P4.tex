@@ -1,0 +1,25 @@
+\documentclass[./main.tex]{subfiles}
+\begin{document}
+\begin{definition}
+Fix some $\delta$. A set $S\in L$ is called \textbf{reducible} if $\max\limits_{u\in S_{in}, v\in S_{out}}D_S(u,v)\leq \delta\cdot \val_I(S)$, and \textbf{irreducible} otherwise. An instance $I$ is irreducible if every laminar set is irreducible.
+\end{definition}
+By this definition, we see that if we contract a reducible set $S$, the LP-value goes down by at least $\val_I(S) - \max D_S(u,v)\geq(1-\delta)\cdot \val_I(S)$.\vspace{4mm}
+\begin{theorem} A $\rho$-approximation algorithm for ATSP on irreducible instances implies a $\frac{2\rho}{1-\delta}$-approximation algorithm for ATSP on laminarly weighted instances.
+\end{theorem}
+\begin{algorithm}\label{alg:1}
+	\caption{LAMINARLY WEIGHTED $\rightarrow$ IRREDUCIBLE}
+	\SetKwData{DATAMACRO}{DATA}
+	\SetKwFunction{FUNCTIONMACRO}{FUNCTION}
+    If $I$ is irreducible, simply use the algorithm for irreducible instances\\
+	$S\leftarrow$ any minimal reducible set of $L$\\
+	$T\leftarrow$ tour in $I\setminus S$ found using recursion\\
+	$T_S\leftarrow$ tour in $I[S]$ found using algorithm for irreducible instances\\
+    $T'\leftarrow \text{LIFT}(T), T_S'\leftarrow \text{LIFT}(T_S)$\\
+	\Return $T'\cup T_S'$
+\end{algorithm}
+\begin{proof}
+Note that step 4 of the algorithm is valid because $I[S]$ is irreducible - all the laminar sets inside $S$ were already irreducible, and all singleton sets are trivially irreducible, so the new laminar set is also irreducible.
+\\Also note that the base case (i.e $I$ is already irreducible) is trivial.\vspace{2mm}
+\\For the sake of induction, assume that recursing gives us a tour $T$ of $I/S$ such that $w_{I/S}(T)\leq \rho\cdot \val(I/S)$. We know that $w_{I[S]}(T_S)\leq \rho\cdot \val(I[S]) = 2\rho\cdot\val_S(I)$. Now, $$ALG = w_I(T') + w_I(T_S')\leq w_{I[S]}(T) + w_{I/S}(T_S)\leq \frac{2\cdot\rho}{1-\delta}\val(I/S) + \rho\cdot \val(I[S])$$ $$\leq \frac{2\cdot\rho}{1-\delta}(\val(I) - (1-\delta)\cdot \val_I(S)) + 2\rho\cdot \val_I(S)= \frac{2\cdot\rho}{1-\delta}\cdot \val(I) $$
+\end{proof}
+\end{document}

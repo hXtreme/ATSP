@@ -1,0 +1,206 @@
+\documentclass[10pt]{extarticle}
+\setcounter{secnumdepth}{1}
+
+%%---------------------------------------
+%%Subfile
+%%---------------------------------------
+\usepackage{subfiles}
+
+
+%%----------------------------------------
+%%Canvas Dimensions
+%%----------------------------------------
+\usepackage[letterpaper,top=0.5in,bottom=0.5in,left=1.2in,right=1.2in,includeheadfoot]{geometry}
+\usepackage{paralist}
+
+
+%%----------------------------------------
+%%Math
+%%----------------------------------------
+\usepackage{amssymb,amsmath, mathrsfs, amsthm, mathtools, bbold}
+\usepackage{bm}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{claim}{Claim}[section]
+\newtheorem*{corollary}{Corollary}
+\newtheorem{fact}{Fact}[section]
+\newtheorem*{claim*}{Claim}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem*{problem}{Problem Statement}
+
+\usepackage [english]{babel}
+\usepackage [autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
+
+%%----------------------------------------
+%%Referencing and Linking
+%%----------------------------------------
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+
+%%USAGE
+% \href{label}{text}
+
+%%----------------------------------------
+%%Header&Paragraphs&Lists&Fonts
+%%----------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+\usepackage{wasysym}
+\usepackage{textcomp}
+\newcommand{\lb}{\textup{lb}}
+\newcommand{\val}{\textup{value}}
+%% Conditional breaking
+\usepackage{etoolbox}
+\providetoggle{break}
+\newcommand{\breaking}{\settoggle{break}{true}}
+\newcommand{\nobreaking}{\settoggle{break}{false}}
+
+% If you want to disable the condpagebreak command invoke \nobreaking.
+\breaking
+\nobreaking
+\newcommand{\condpagebreak}{\iftoggle{break}{\pagebreak}{}}
+
+%%----------------------------------------
+%%Graphics&Tables
+%%----------------------------------------
+\usepackage{graphicx}
+\usepackage{tabu}
+
+%%----------------------------------------
+%%Advance Graphics & Automata
+%%----------------------------------------
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,positioning}
+
+%%USAGE
+% \begin{center}
+% 		\begin{tikzpicture}[.-., >=stealth', auto, node distance = 2cm,on grid, semithick]
+			
+% 		% \node[state]				(name)				[location]						{label};			
+% 		\node[state]				(1)												{$1$};
+% 		\node[state]				(2)				[above right=1cm and 1cm of 1]	{$2$};
+% 		\node[state]				(3)				[right of=2]					{$3$};
+% 		\node[rectangle]			(4)				[below=2cm of 3]				{$\cdots$};
+% 		\node[state]				(k)				[left of=4]					{$k$};
+		
+% 		\path
+% 		%(source)	edge	[style]			node		[swap]		{TEXT}		(dest)
+% 		(1)		edge					node					{ }			(2)
+% 		(2)		edge					node					{ }			(3)
+% 		(3)		edge					node					{ }			(4)
+% 		(4)		edge					node					{ }			(k)
+% 		(k)		edge					node					{ }			(1)
+% 		;	
+% 		\end{tikzpicture}
+% \end{center}
+
+%%----------------------------------------
+%%Algorithms
+%%----------------------------------------
+\usepackage[linesnumbered,lined,boxed,commentsnumbered]{algorithm2e}
+\SetAlgoLined
+\RestyleAlgo{boxruled}
+\IncMargin{7mm}
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+
+%%USAGE
+%\begin{algorithm}\label{alg:1}
+%	\caption{NAME OF ALGORITHM}
+%	\SetKwData{DATAMACRO}{DATA}
+%	\SetKwFunction{FUNCTIONMACRO}{FUNCTION}
+%	This is step 1\\
+%	This is step 2\\
+%	\For{every element} {
+%		do-this
+%	}
+%	\While{condition is true} {
+%		this
+%	}
+%	\Return value
+%\end{algorithm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%HEADER 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand {\Course}		{UMich, Summer 18}
+\newcommand {\Date}			{}
+\newcommand {\Scriber}		{Ansh Nagda, Harsh Parekh}
+\newcommand {\SpeakerName}	{ }
+\newcommand {\Talk}			{ATSP Paper}
+
+\newcommand {\handout}[5] {
+	\noindent
+	\begin{center}
+		\framebox{
+			\vbox{
+				\hbox to 5.78in { {\bf \Course}
+					\hfill #2 }
+				\vspace{4mm}
+				\hbox to 5.78in { {\Large \hfill #5  \hfill} }
+				\vspace{2mm}
+				\hbox to 5.78in { {\it #3 \hfill #4} }
+			}
+		}
+	\end{center}
+	\vspace*{4mm}
+}
+
+\newcommand	{\lecture}[4]		{\handout{#1}{#2}{ }{\Scriber}{\Talk}}
+
+\newcommand {\PrintHeader} {
+	\lecture{1}{\Date}{\SpeakerName}{\Scriber}
+}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot[L]{\Scriber \text{ } $\vert$ \Talk}
+\fancypagestyle{firstpage}{
+	\fancyhead{}
+	\fancyfoot{}
+}
+
+\begin{document}
+\thispagestyle{firstpage}
+\PrintHeader
+
+%% Solutions Go In Their Respective Files.
+%% In most scenarios, there should be no need to edit anything here.
+
+\section{Laminarly Weighted Instances}
+\subfile{P1.tex}
+\condpagebreak
+
+\section{Paths in Laminar Sets}
+\subfile{P2.tex}
+\condpagebreak
+
+\section{Operations on Laminar Sets}
+\subfile{P3.tex}
+\condpagebreak
+
+\section{Reduction to Irreducible Instances}
+\subfile{P4.tex}
+\condpagebreak
+
+\section{Reduction to Vertebrate Pairs}
+\subfile{P5.tex}
+\condpagebreak
+
+\section{Algorithm for Vertebrate Pairs}
+\subfile{P6.tex}
+\condpagebreak
+
+
+
+
+
+
+
+
+
+\end{document}

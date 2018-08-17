@@ -1,0 +1,44 @@
+\documentclass[./main.tex]{subfiles}
+
+\begin{document}
+\begin{definition} Given a graph, let $\bm{\delta(U,V)}$ be the set of all edges from $U$ to $V$. Let $\bm{\delta^+(U)}$ and $\bm{\delta^-(V)}$ be the set of outgoing and incoming edges from $U$ respectively. Let $\bm{\delta(U)}:=\delta^+(U)\cup \delta^-(U)$.\end{definition}\vspace{4mm}
+\begin{definition} Given an edge-weighted ATSP instance (G,w), consider the following LPs:
+\end{definition}
+\begin{minipage}{0.20\textwidth}
+\begin{align*}
+&\textbf{LP(G,w):}\\
+\min\quad\sum_{e\in E}&w_e\cdot x_e\\
+s.t.\quad x(\delta^+(v)) &= x(\delta^-(v))\quad &v\in V\\
+x(\delta(S)) &\geq 2\quad &\emptyset\neq S\subseteq V\\
+x&\geq 0
+\end{align*}
+\end{minipage}
+\hfill\vline\hfill
+\begin{minipage}{0.55\textwidth}
+\begin{align*}
+\textbf{DUAL}&\textbf{(G,w):}\\
+\max\quad\sum_{S\subseteq V}&2\cdot y_S\\
+s.t.\quad\sum_{S:(u,v)\in \delta(S)}y_S + \alpha_u - \alpha_v&\leq w(u,v)\quad (u,v)\in E\\
+y&\geq 0
+\end{align*}
+\end{minipage}
+\vspace{7mm}
+\begin{definition} $(G,L,x,y)$ is called a \textbf{laminarly weighted instance} if $L$ forms a laminar family of subsets of $V$ and the following hold:
+\begin{enumerate}
+\item $x$ is a solution to $LP(G,0)$ and $x > 0$
+\item $y$ is a solution to $DUAL(G,0)$, and $y_S>0\iff S\in L$
+\item The primal constraint corresponding to each $S\in L$ is tight
+\end{enumerate}
+Sets in $L$ are called laminar sets.
+\end{definition}\vspace{4mm}
+If $w$ is the weight function induced by $y$ (i.e the weight of an edge equals the total $y$-value of the laminar sets it crosses), and if we set $\alpha$ to $0$, then complementary slackness tells us that $x$ and $(y,\alpha)$ are optimal solutions to LP(G,w) and DUAL(G,w) respectively.\vspace{4mm}
+\begin{claim*}Given a graph $G$, we can find an optimal dual solution $(\alpha, y)$ such that the support of $y$ forms a laminar family.\end{claim*}
+This can be shown using an "uncrossing" argument - given a dual solution, if the support of $y$ is not laminar, then there must exist two sets in its support, say $X$ and $Y$, such that $X\setminus Y$ and $Y\setminus X$ are nonempty. WLOG, assume that $y_X \leq y_Y$. Then $y_X$ amount of value can be redistributed from $X$ and $Y$ to $X\setminus Y$ and $Y\setminus X$ without disturbing feasibility or optimality. Note that $X$ will no longer be in the support of $y$, so $X$ and $Y$ are now "uncrossed". Applying this procedure repeatedly (and choosing $X$ and $Y$ carefully), we can obtain a solution with laminar support in polynomial time.\vspace{4mm}\\
+\begin{minipage}{\textwidth}\begin{theorem} An $\alpha$-approximation algorithm for ATSP on laminarly weighted instances implies an $\alpha$-approximation algorithm for ATSP on general instances.
+\end{theorem}
+\begin{proof} We are given $I=(G,w)$ as input to general ATSP. Let $x$ be a primal optimal solution to LP(G,w) and $(y,\alpha)$ be the dual optimal solution to DUAL(G,w) guaranteed by the above claim. Let $E'$ be the support of $x$, and $L$ be the support of $y$. Then complimentary slackness implies that $I'=((V,E'), L, x, y)$ is a laminarly weighted instance.\vspace{2mm}
+\\Note that (by complimentary slackness) the induced weight on $I'$ is $w'(u,v) = w(u,v) + \alpha_v - \alpha_u$. Although these weights are different from our original weights, the weight of every circulation in $I'$ is the same as its weight in $I$ (this can be seen using a cycle decomposition of $x$). In particular, the weight of a tour remains the same, and the optimal LP-value remains the same. This leads to the final algorithm - simply run the $\alpha$-approximation algorithm for laminarly weighted instances on $I'$ and return the resulting tour, say $T$. The analysis is easy: \[w(T) = w'(T)\leq \alpha\cdot \val(I') = \alpha\cdot\val(I)\]
+\end{proof}\end{minipage}\vspace{6mm}
+We have now reduced ATSP to laminarly weighted instances.\vspace{2mm}
+
+\end{document}
