@@ -139,7 +139,7 @@ Now if we know that the primal optimal value is equal to $\sum_{e\in E_f}x_e$, t
 		So consider any dual optimal solution, say $(z,\pi)$. Our goal is to convert it into a dual optimal solution whose $\pi$ has strictly smaller support. 
 		Running this procedure repeatedly proves that there is a dual optimal where $\pi = 0$.\vspace{2mm}
 		\\Let $T$ be the set of vertices in support($\pi$) with the smallest level, and let $S$ be the set corresponding to that level.
-		
+		Also, let $F = \delta(V\setminus S, T)$, and $F' = \delta(T,S\setminus T)$.
 	\end{proof}
 
 
