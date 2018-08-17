@@ -38,7 +38,8 @@ It follows that $x(\delta^-(S_1)) = 1$. Using induction along with a similar arg
 \begin{definition} Let $\bm{d_S(u,v)}$ be the weight of the shortest path from $u$ to $v$ inside $S$. Also, let \begin{equation}\bm{D_S(u,v)}:=\sum_{R\in L : u\in R\subsetneq S}y_R + d_s(u,v) + \sum_{R\in L : v\in R\subsetneq S}y_R\label{def-1}\end{equation}
 	Furthermore, let $D_{\max}(S) = \max_{u \in S_{in}, v \in S_{out}}D_S(u,v)$.
 \end{definition}
-Intuitively, $D_s(u,v)$ is the total cost of entering $u$ from outside $S$, a shortest path from $u$ to $v$, and exiting from $v$ to outside $S$.\vspace{2mm}
+\subfile{Diagrams/D.tex}
+Intuitively, $D_s(u,v)$ is the total cost of entering $u$ from outside $S$, a shortest path from $u$ to $v$, and exiting from $v$ to outside $S$.See \hyperref[fig:Duv]{Figure \ref{fig:Duv}}.\vspace{2mm}
 \begin{lemma}\label{lemm:2:D-val} $S\subseteq V$ be any set such that $L\cup \{S\}$ is a laminar family. Then\begin{enumerate}
 	\item[(1)] $d_S(u,v)\leq \val_I(S)$ if there exists a $u-v$ path inside $S$.
 	\item[(2)] $D_S(u,v)\leq \val_I(S)$ if $u\in S_{in}$ or $v\in S_{out}$
