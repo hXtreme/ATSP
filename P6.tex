@@ -91,6 +91,7 @@
 		\begin{lemma}
 		\label{lemma6-1}		We can find $x_{sp}$, an eulerian vector on $G_{sp}$ that the image of $x_{sp}$ in $G$ is $x$.
 		\end{lemma}
+		\begin{proof}
 		If we want the image of $x_{sp}$ to be $x$, we must necessarily have the following conditions:
 		\begin{itemize}
 			\item[(a)] $x_{sp}(u^0,v^0) = 0$, for all $(u,v)\in E_f$, since there is no $(u^0,v^0)$ edge in $G_{sp}$.
@@ -115,7 +116,6 @@ After defining some $x_{sp}$ values on the $0-0$ and $1-1$ edges, there will be 
 			0\leq f(e)&\leq x(e) &e\in E\\
 		\end{align*}
 		\end{minipage}
-	\end{subsection}
 	\hfill\vline\hfill
 	\begin{minipage}{0.50\textwidth}
 	\begin{align*}
@@ -130,7 +130,8 @@ After defining some $x_{sp}$ values on the $0-0$ and $1-1$ edges, there will be 
 Once we have some primal feasible $f$, we can extend it by defining $x_{sp}$ as $f$ on $1-1$ edges, $x-f$ on $0-0$ edges, and eliminating potential differences between $0$ and $1$ copies using $0-1$ and $1-0$ edges. 
 The first inequality of the LP guarantees (d) by definition. 
 The second inequality guarantees (b) by definition. And the way we extend $f$ to $0-0$ edges guarantees (c). 
-Now if we know that the primal optimal value is equal to $\sum_{e\in E_f}x_e$, then it guarantees (a) as well.\vspace{2mm}
+Now if we know that the primal optimal value is equal to $\sum_{e\in E_f}x_e$, then it guarantees (a) as well. The following claim proves this, so (a), (b), (c), and (d) must all hold.	\end{proof}
+\vspace{2mm}
 	\begin{claim}
 		The primal optimal value is equal to $\sum_{e\in E_f}x_e$.
 	\end{claim}
@@ -140,7 +141,19 @@ Now if we know that the primal optimal value is equal to $\sum_{e\in E_f}x_e$, t
 		Running this procedure repeatedly proves that there is a dual optimal where $\pi = 0$.\vspace{2mm}
 		\\Let $T$ be the set of vertices in support($\pi$) with the smallest level, and let $S$ be the set corresponding to that level.
 		Also, let $F = \delta(V\setminus S, T)$, and $F' = \delta(T,S\setminus T)$.
-	\end{proof}
+		\\To start off, let's decrement the $\pi$-values of all vertices in $T$ by the smallest $\pi$-value of any vertex in $T$, say $\varepsilon$. Now $\pi$ has a smaller support, but it may not be feasible. In order to correct this, we increase $z(e)$ by $\varepsilon$ for all $e\in F$. Now the solution might not be optimal. In order to correct this, we decrease $z(e)$ by $\varepsilon$ for all $e\in F'$. In order to see why the new dual is feasible, note that an edge $(u,v)$ can be of the following types:
+		\begin{itemize}
+		\item[Case 1:] $v\notin T$. Since we only decreased the $\pi$-value of vertices in $T$ (and left all other vertices unchanged), the left hand side of each of the first two dual inequalities can only increase. So these inequalities are still satisfied.
+		\item[Case 2:] $u,v\in T$. In this case, the decrease in $\pi_v$ is matched by the increase in $-\pi_u$, so the inequalities are still satisfied.
+		\item[Case 3:] $u\notin S, v\in T$. In this case, the decrease in $\pi_v$ is matched by the increase in $z(u,v)$, so the inequalities are still satisfied.
+		\item[Case 4:] $u\in S\setminus T, v\in T$. In this case, $(u,v)$ cannot be a forward edge, since if it were, then $T$ would intersect a set in $L_{\geq 2}$ which was smaller than $S$. But we defined $S$ to be the smallest such set. So we only consider the second inequality, which must be satisfied, since $\pi_u$ was already $0$ and $\pi_v$ is nonnegative.
+		\end{itemize}
+		The inequality $\pi\geq 0$ must be satisfied simply because we reduced $\pi_v$ for $v\in T$ by $\min_{u\in T}\pi_u$. 
+		Also, since all edges $(u,v)$ in $F'$ are either neutral or forward, we originally satisfied $\pi_v - \pi_u + z(u,v)\geq 0$. Since $u\in T$ and $v\in S\setminus T$, we must have that $0 - \varepsilon + z(u,v)\geq 0$, that is, $z(u,v)\geq \varepsilon$. 
+So the inequality $z\geq 0$ must be satisfied since we only reduced $z$-value in $F'$, and for all edges in $F'$, we already had $\varepsilon$ $z$-value to begin with.\vspace{2mm}
+\\Now we will see that the new dual value is still optimal. The decrease in dual objective value was precisely $\varepsilon (x(F') - x(F\cap( E_f\cup E_n))\geq \varepsilon(x(F') - x(F))$. If we can show that this is positive, then the new dual value is still optimal.
 
+	\end{proof}
+	\end{subsection}
 
 \end{document}

@@ -5,7 +5,7 @@ Consider any $S\in L$. Let $S_1,\ldots, S_k$ be the strongly connected component
 	\item $x(\delta^-(S)) = 1$
 	\item Every edge into $S_1$ is also an edge into $S$
 \end{enumerate}
-It follows that $x(\delta^-(S_1)) = 1$. Using induction along with a similar argument, one can also see that for all $i$, $x(\delta^-(S_i)) = x(\delta^+(S_i)) = 1$, and the only edges from one SCC to another are edges† from $S_i$ to $S_{i + 1}$. As a consequence, there always exists a path from $u\in S_{in}$ to $v\in S_{out}$ within $S$. This structure allows us to "shortcut" paths that enter or exit $S$ multiple times - we can replace the entire portion of the path between the first time it enters $S$ and the last time it exits $S$ with a path completely inside $S$.\vspace{2mm}
+It follows that $x(\delta^-(S_1)) = 1$. Using induction along with a similar argument, one can also see that for all $i$, $x(\delta^-(S_i)) = x(\delta^+(S_i)) = 1$, and the only edges from one SCC to another are edges from $S_i$ to $S_{i + 1}$. As a consequence, there always exists a path from $u\in S_{in}$ to $v\in S_{out}$ within $S$. This structure allows us to "shortcut" paths that enter or exit $S$ multiple times - we can replace the entire portion of the path between the first time it enters $S$ and the last time it exits $S$ with a path completely inside $S$.\vspace{2mm}
 \begin{figure}[h]
 	\centering
 	\begin{tikzpicture}[.->, >=stealth', auto, node distance = 2cm,on grid, semithick]
@@ -39,7 +39,7 @@ It follows that $x(\delta^-(S_1)) = 1$. Using induction along with a similar arg
 	Furthermore, let $D_{\max}(S) = \max_{u \in S_{in}, v \in S_{out}}D_S(u,v)$.
 \end{definition}
 \subfile{Diagrams/D.tex}
-Intuitively, $D_s(u,v)$ is the total cost of entering $u$ from outside $S$, a shortest path from $u$ to $v$, and exiting from $v$ to outside $S$.See \hyperref[fig:Duv]{Figure \ref{fig:Duv}}.\vspace{2mm}
+Intuitively, $D_s(u,v)$ is the total cost of entering $u$ from outside $S$, a shortest path from $u$ to $v$, and exiting from $v$ to outside $S$. See \hyperref[fig:Duv]{Figure \ref{fig:Duv}}.\vspace{2mm}
 \begin{lemma}\label{lemm:2:D-val} $S\subseteq V$ be any set such that $L\cup \{S\}$ is a laminar family. Then\begin{enumerate}
 	\item[(1)] $d_S(u,v)\leq \val_I(S)$ if there exists a $u-v$ path inside $S$.
 	\item[(2)] $D_S(u,v)\leq \val_I(S)$ if $u\in S_{in}$ or $v\in S_{out}$
