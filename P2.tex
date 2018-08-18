@@ -6,33 +6,7 @@ Consider any $S\in L$. Let $S_1,\ldots, S_k$ be the strongly connected component
 	\item Every edge into $S_1$ is also an edge into $S$
 \end{enumerate}
 It follows that $x(\delta^-(S_1)) = 1$. Using induction along with a similar argument, one can also see that for all $i$, $x(\delta^-(S_i)) = x(\delta^+(S_i)) = 1$, and the only edges from one SCC to another are edges† from $S_i$ to $S_{i + 1}$. As a consequence, there always exists a path from $u\in S_{in}$ to $v\in S_{out}$ within $S$. This structure allows us to "shortcut" paths that enter or exit $S$ multiple times - we can replace the entire portion of the path between the first time it enters $S$ and the last time it exits $S$ with a path completely inside $S$.\vspace{2mm}
-\begin{figure}[h]
-	\centering
-	\begin{tikzpicture}[.->, >=stealth', auto, node distance = 2cm,on grid, semithick]
-
-		% \node[state]		(name)	[location]			{label};
-		\node[rectangle]	(s0)						{};
-		\node[state]		(s1)	[right=2cm of s0]	{$S_1$};
-		\node[state]		(s2)	[right=1.5cm of s1]	{$S_2$};
-		\node[rectangle]	(sd)	[right=1.5cm of s2]	{$\cdots$};
-		\node[state]		(sk)	[right=1.5cm of sd]	{$S_k$};
-		\node[rectangle]	(so)	[right=2cm of sk]	{};
-
-		% Set S
-		\draw (4.25,0) ellipse (3cm and 1cm);
-		% Little bit of a hack
-		\node[rectangle] (S) [above right=0.75cm and 1cm of s2] {$S$};
-
-		\path
-		%(source)	edge		node	{TEXT}	(dest)
-		(s0)		edge		node	{}		(s1)
-		(s1)		edge		node	{}		(s2)
-		(s2)		edge		node	{}		(sd)
-		(sd)		edge		node	{}		(sk)
-		(sk)		edge		node	{}		(so);
-	\end{tikzpicture}
-	\caption{Paths traverse through a tight set $S$ by entering at $S_1$, visiting each connected component in $S$ exactly once before leaving from $S_l$.}
-\end{figure}\vspace{4mm}
+\subfile{Diagrams/TightPaths.tex}\vspace{4mm}
 \begin{definition} Let $\bm{\textbf{value}_I(S)}$ be the LP value of $I$ stored within $S$, and let $\bm{\textbf{value}(I)}$ be the total LP value of $I$. Formally, $$\bm{\textbf{value}_I(S)}:=\sum\limits_{R\in L:R\subsetneq S}2\cdot y_R\qquad \bm{\textbf{value}(I)}:=\val_I(V)$$
 \end{definition}\vspace{2mm}
 \begin{definition} Let $\bm{d_S(u,v)}$ be the weight of the shortest path from $u$ to $v$ inside $S$. Also, let \begin{equation}\bm{D_S(u,v)}:=\sum_{R\in L : u\in R\subsetneq S}y_R + d_s(u,v) + \sum_{R\in L : v\in R\subsetneq S}y_R\label{def-1}\end{equation}
