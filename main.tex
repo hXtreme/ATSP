@@ -75,9 +75,19 @@
 \usepackage{pgf}
 \usepackage{tikz}
 \usetikzlibrary{arrows,automata,positioning}
-\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.pathmorphing,decorations.markings}
 
 \tikzset{squigly/.style={decorate, decoration=snake}}
+\tikzset{->-/.style={
+			decoration={
+				markings,
+				mark=at position #1 with {
+					\arrow{>}}
+				},
+			postaction={decorate}
+		},
+		->-/.default=0.5,
+}
 %%USAGE
 % \begin{center}
 % 		\begin{tikzpicture}[.-., >=stealth', auto, node distance = 2cm,on grid, semithick]
