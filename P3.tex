@@ -61,7 +61,9 @@
 	Let $S_1, \dots, S_l$ be the SCC in $S \in \calL$, indexed in topological order.
 	\begin{definition}\label{def:3:indu-lift}
 		For a tour $T$ in $\calI[S]$, we define its lift to be the following:\\
-		For any strongly connected component $S_i \subseteq S$ we obtain a tour $F_i$ of $S_i$ by taking all the edges in $T$ that are contained within $S_i$ and for every time the $T$ exits $S_i$ from $u_{out}$ and enters the next time to a vertex $v_{in}$, we add the shortest $u_{out} - v_{in}$ path in $S_i$. $F = \cup_{i \in [l]} F_i$ is the lift of $T$.
+		For any strongly connected component $S_i \subseteq S$ we obtain a tour $F_i$ of $S_i$ by taking all the edges in $T$ that are contained within $S_i$ and for every time the $T$ exits $S_i$ from $u_{out}$ and enters the next time to a vertex $v_{in}$, we add the shortest $u_{out} - v_{in}$ path in $S_i$. This is illustrated in \hyperref[fig:lift-i]{Figure \ref{fig:lift-i}}.
+		\subfile{Diagrams/Lift-Induced.tex}
+		$F = \cup_{i \in [l]} F_i$ is the lift of $T$.
 	\end{definition}\vspace{2mm}
 	\begin{definition}
 		We say that a set $S \in \calL$ is contractible with respect to an Eulerian set of egdes $F \subseteq E$ if the lift of any tour of $\calI/S$ plus the set $F$ is a tour in $\calI$.
