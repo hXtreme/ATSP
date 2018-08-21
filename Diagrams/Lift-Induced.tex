@@ -1,0 +1,66 @@
+\documentclass[./main.tex]{subfiles}
+
+
+\begin{document}
+  \begin{figure}\label{fig:lift-i}
+  \centering
+  \begin{tikzpicture}
+    \path [use as bounding box] (-3.2,-5) rectangle (3.2,1);
+    \begin{scope}[gray,text=black]
+      \node[state] at (0,0) (I) {$\bar{s}$};
+      \coordinate (n2) at ($ (I.south east)!0.5!(I.east) $);
+      \coordinate (s2) at ($ (I.south west)!0.5!(I.west) $);
+      \draw[->-] (I.south west) .. controls (-7.7,-3.7) and (7.7,-3.7) ..  (I.south east);
+      \draw[->-] (s2) .. controls (-9, -4.4) and (9, -4.4) .. (n2);
+      \draw[->-] (I.west) .. controls (-10,-5.2) and (10,-5.2) .. (I.east);
+      \coordinate (box-tl) at (-2, -2.2);
+      \coordinate (box-br) at (2, -4.2);
+    \end{scope}
+    \draw (box-tl) rectangle (box-br);
+    \draw (-0.66, -2.2) -- (-0.66, -4.2);
+    \draw (0.66, -2.2) -- (0.66, -4.2);
+    
+    \draw[color=black] (0, -2.5) node {$S$};
+    \draw[color=black] (-1.5,-4) node {$S_1$};
+    \draw[color=black] (1.5,-4) node {$S_l$};
+    \draw[color=black] (-1.5,-1.2) node {$T$};
+  \end{tikzpicture}
+  \begin{tikzpicture}
+    \definecolor{cust-blue}{rgb}{0.30196078431372547,0.30196078431372547,1.}
+    
+    \path [use as bounding box] (-3.2,-5) rectangle (3.2,1);
+    
+    \draw (-1,-1.2) rectangle (1,-4.2);
+    \draw[color=black] (0, -1.5) node {$S_i$};
+    
+    \coordinate (u1) at (-1, -2.2);
+    \coordinate (v1) at (1, -2.2);
+    \coordinate (u2) at (-1, -2.85);
+    \coordinate (v2) at (1, -2.85);
+    \coordinate (u3) at (-1, -3.5);
+    \coordinate (v3) at (1, -3.5);
+    
+    \node[rectangle] at (-1.2, -2.) (1) {$u_1$};
+    \node[rectangle] at (1.2, -2.) (2) {$v_1$};
+    \node[rectangle] at (-1.3, -2.85) (1) {$u_2$};
+    \node[rectangle] at (1.3, -2.85) (2) {$v_2$};
+    \node[rectangle] at (-1.2, -3.7) (3) {$u_3$};
+    \node[rectangle] at (1.2, -3.7) (4) {$v_3$};
+    
+    \draw[->-] (u1) .. controls (0, -2) .. (v1);
+    \draw[->-, dash pattern={on 1.7pt off 1.7pt}] (v1) .. controls (1, -2.5) and (-1, -2.5) .. (u2);
+    \draw[->-] (u2) -- (v2);
+    \draw[->-, dash pattern={on 1.7pt off 1.7pt}] (v2) .. controls (1, -3.3) and (-1, -3.3) .. (u3);
+    \draw[->-] (u3) .. controls (0, -3.8) .. (v3);
+    \draw[->-, dash pattern={on 1.7pt off 1.7pt}] (v3) .. controls (0, -2.5) .. (u1);
+    
+    \draw[fill=cust-blue] (u1) circle (1.5pt);
+    \draw[fill=cust-blue] (v1) circle (1.5pt);
+    \draw[fill=cust-blue] (u2) circle (1.5pt);
+    \draw[fill=cust-blue] (v2) circle (1.5pt);
+    \draw[fill=cust-blue] (u3) circle (1.5pt);
+    \draw[fill=cust-blue] (v3) circle (1.5pt);
+  \end{tikzpicture}
+    \caption{The figure on the right shows a tour $T$ in instance $\calI[S]$. The figure on the left shows the subtour $F_i$ constructed by using $T$. Here the dashed edges represent the shortest $u_{out} - v_{in}$ paths mentioned in the definition.}
+  \end{figure}
+\end{document}
