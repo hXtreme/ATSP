@@ -46,14 +46,14 @@
 		We receive $(I,B)$ and $V_1,\ldots,V_k$ as input. We output $F^*=B\cup P\cup F$, where $P$ and $F$ are defined as:
 		\begin{enumerate}
 			\item[$P$:] If $B$ exists entirely within some $V_i$, then we pick $u\in B$ and $v\notin V_i$, and set $P$ to be the shortest cycle containing $u$ and $v$. Otherwise we keep $P$ empty.
-			\item[$F$:] WLOG, let $V_1,\ldots,V_l$ be the partitions that are disjoint from $B$. Now let $V_i'$ be the intersection of $V_i$ with a minimal set in $L_{\geq 2}$ that $V_i$ intersects. Let $U_i$ be the first strongly connected component of $V_i'$ (in the topological order). Set $F$ to be the eulerian set guaranteed by running the algorithm of Lemma \ref{lemma7} on $U_1,\ldots,U_l$.
+			\item[$F$:] WLOG, let $V_1,\ldots,V_l$ be the partitions that are disjoint from $B$. Now let $V_i'$ be the intersection of $V_i$ with a minimal set in $L_{\geq 2}$ that $V_i$ intersects. Let $U_i$ be the first strongly connected component of $V_i'$ (in the topological order). Set $F$ to be the eulerian set guaranteed by running the algorithm of \hyperref[lemma7]{Lemma \ref{lemma7}} on $U_1,\ldots,U_l$.
 		\end{enumerate}\vspace{2mm}
 		Now we need to verify that $B\cup P\cup F$ is feasible, and that it is $O(1)$-light.
 		\\For each $V_i$, there are three possibilities:
 		\begin{enumerate}
 			\item[(a)] $V_i$ completely contains the backbone. The set $P$ guarantees that $F^*$ enters $V_i$ at least once.
 			\item[(b)] $V_i$ partially contains the backbone. In this case, $B$ trivially crosses $V_i$, so $F^*$ must enter $V_i$.
-			\item[(c)] $V_i$ is disjoint from the backbone. In this case, (2) tells us that some edge $(u,v)$ must enter $U_i$. $u\notin V_i'$ since $U_i$ is the source component of $V_i'$. So either $u\in S\setminus V_i$ or $u\notin S$. If the former is true, then $(u,v)$ enters $V_i$ from outside. If the latter is true, then $(u,v)$ crosses $S$, and guarantee $(4)$ of Lemma \ref{lemma7} tells us that the subtour containing $(u,v)$ visits the backbone, which is outside $V_i$.
+			\item[(c)] $V_i$ is disjoint from the backbone. In this case, (2) tells us that some edge $(u,v)$ must enter $U_i$. $u\notin V_i'$ since $U_i$ is the source component of $V_i'$. So either $u\in S\setminus V_i$ or $u\notin S$. If the former is true, then $(u,v)$ enters $V_i$ from outside. If the latter is true, then $(u,v)$ crosses $S$, and guarantee $(4)$ of \hyperref[lemma7]{Lemma \ref{lemma7}} tells us that the subtour containing $(u,v)$ visits the backbone, which is outside $V_i$.
 		\end{enumerate}
 		In any case, $F^*$ crosses each $V_i$, so it is indeed feasible.\vspace{2mm}
 		\\Now consider any strongly connected component of $F^*$, say $\tilde{G}$. We would like to bound $w(\tilde(G))$ by $O(\lb(\tilde{G}))$. There are two possibilities for $\tilde{G}$:
@@ -64,7 +64,7 @@
 			\item[(b)] $\tilde{G}$ is disjoint from the backbone. In this case, $(4)$ guarantees that $\tilde{G}$ did not cross any set in $L_{\geq 2}$, so the only sets it might have crossed are singletons. Additionally, $(3)$ guarantees that it crosses each singleton at most four times. $$w(\tilde{G})\leq \sum_{v\in V(\tilde{G})}4\cdot 2\cdot y_v = 4\cdot\lb(\tilde{G})$$
 		\end{enumerate}
 	\end{proof}
-	\begin{subsection}{Proof of Lemma \ref{lemma7}: The final ingredient}
+	\begin{subsection}{Proof of \hyperref[lemma7]{Lemma \ref{lemma7}}: The final ingredient}
 
 		Order the laminar sets in $L_{\geq 2}$ by size so that $|S_1|\leq |S_2|\leq\cdots\leq |S_l| = |V|$. For each $v\in V$, define $level(v)$ to be the index of the smallest set it is contained in.\vspace{2mm}
 		\begin{definition}
@@ -84,6 +84,7 @@
 				\item $(u^1, v^1)$ for all $(u,v)\in E_f\cup E_n$ with weight $w(u,v)$. Call these edges $1-1$ edges.
 				\item $(u^0, v^0)$ for all $(u,v)\in E_b\cup E_n$ with weight $w(u,v)$. Call these edges $0-0$ edges.
 			\end{itemize}
+			Also for any set $S\subseteq V$, let $S^{sp}$ be its image in $G_{sp}$.
 		\end{definition}\vspace{2mm}
 		Consider the lift of some subtour in $G_{sp}$ that crosses at least one set in $L_{\geq 2}$. Let $S$ be the smallest set in $L_{\geq 2}$ that the subtour crosses. 
 		Then the edge of the subtour going into $S$ must be a forward edge (i.e. a $1-1$ edge) by definition, and the edge going out of $S$ must be a backward edge (i.e. a $0-0$ edge). This means at some point, the subtour must use a $1-0$ edge, which it can only do if it crosses the backbone.\vspace{1mm}
@@ -151,9 +152,21 @@ Now if we know that the primal optimal value is equal to $\sum_{e\in E_f}x_e$, t
 		The inequality $\pi\geq 0$ must be satisfied simply because we reduced $\pi_v$ for $v\in T$ by $\min_{u\in T}\pi_u$. 
 		Also, since all edges $(u,v)$ in $F'$ are either neutral or forward, we originally satisfied $\pi_v - \pi_u + z(u,v)\geq 0$. Since $u\in T$ and $v\in S\setminus T$, we must have that $0 - \varepsilon + z(u,v)\geq 0$, that is, $z(u,v)\geq \varepsilon$. 
 So the inequality $z\geq 0$ must be satisfied since we only reduced $z$-value in $F'$, and for all edges in $F'$, we already had $\varepsilon$ $z$-value to begin with.\vspace{2mm}
-\\Now we will see that the new dual value is still optimal. The decrease in dual objective value was precisely $\varepsilon (x(F') - x(F\cap( E_f\cup E_n))\geq \varepsilon(x(F') - x(F))$. If we can show that this is positive, then the new dual value is still optimal.
-
+\\Now we will see that the new dual value is still optimal. 
+The decrease in dual objective value was precisely $\varepsilon (x(F') - x(F\cap( E_f\cup E_n))\geq \varepsilon(x(F') - x(F))$. If we can show that this is positive, then the new dual value is still optimal. The proof relies on the fact that $S$ is either an original laminar set or $V$, so $x(\delta^-(S))\leq 1$. Now, $$1\leq x(\delta^-(S\setminus T)) = \underbrace{x(\delta^-(S)) - x(F)}_{\text{edges from outside } S} + \underbrace{x(F')}_{\text{edges from } T}\leq 1 - x(F) + x(F')$$
+It follows that $x(F)\leq x(F')$, so the updated dual solution is still optimal, and there exists a dual optimal solution with $\pi = 0$.
 	\end{proof}
+	At this point, it can be shown that (with a few modifications) rounding $x_{sp}$ to an integral solution and taking its image in $G$ would fulfil conditions $(1)$, $(3)$, and $(4)$ of \hyperref[lemma7]{Lemma \ref{lemma7}}. To fulfil $(2)$, the split graph is further modified taking into account the $U_i$s.\vspace{2mm}
+	\begin{definition}
+		The modified split graph $\bm{G'_{sp}}$ is created by modifying $G_{sp}$ according to the following procedure for every $U_i$:
+		\begin{itemize}[$-$]
+		\item Add a new vertex called $a_i$.
+		\item Pick $X_i^-$ to be a subset of incoming edges to $U_i^{sp}$ such that $x_{sp}(X_i^-) = 1/2$ and $X_i^-$ consists of either solely $1-1$ edges or solely $0-0$ edges. This must be possible since the total $x$-value coming into $U_i^{sp}$ is at least $1$.
+		\item Let $X_i^+$ be a subset of edges leaving $U_i^{sp}$ that entered through some edge in $X_i^-$. This can be found using a path decomposition of $x_{sp}$ on $U_i$ and following each edge of $X_i^-$ along its paths. Then $x_{sp}(X_i^+) = 1/2$.
+		\item Redirect every edge in $X_i^-$ to $a_i$, and every edge in $X_i^+$ from $a_i$. In other words, $(u,v)\in X_i^-$ becomes $(u,a_i)$ and $(u,v)\in X_i^+$ becomes $(a_i, v)$. Also for each $u-v$ path we considered in the path decomposition (where $u\in X_i^-, v\in X_i^+$), reroute the $x_{sp}$ flow to the path $(u,a_i),(a_i,v)$. Call this modified flow $x'_{sp}$. Note that $x_{sp}'$ is still a circulation, and the original paths we considered are effectively deleted in $G'_{sp}$.
+		\end{itemize}
+	\end{definition}
+		
 	\end{subsection}
 
 \end{document}
