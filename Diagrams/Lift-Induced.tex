@@ -3,6 +3,7 @@
 \begin{document}
   \begin{figure}\label{fig:lift-i}
   \centering
+  \resizebox{!}{.9\totalheight}{
   \begin{tikzpicture}
     \path [use as bounding box] (-3.2,-5) rectangle (3.2,1);
     \begin{scope}[gray,text=black]
@@ -60,6 +61,7 @@
     \draw[fill=cust-blue] (u3) circle (1.5pt);
     \draw[fill=cust-blue] (v3) circle (1.5pt);
   \end{tikzpicture}
+  }
     \caption{The figure on the left shows a tour $T$ in instance $\calI[S]$. The figure on the right shows the subtour $F_i$ constructed by using $T$. Here the solid edges represent the egdes from $T$ and the dashed edges represent the shortest $u_{out} - v_{in}$ paths mentioned in the definition.}
   \end{figure}
 \end{document}
