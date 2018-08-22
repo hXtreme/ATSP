@@ -50,8 +50,9 @@
 \usepackage{enumerate}
 \usepackage{wasysym}
 \usepackage{textcomp}
-\newcommand{\lb}{\textup{lb}}
-\newcommand{\val}{\textup{value}}
+\usepackage{color}
+
+
 %% Conditional breaking
 \usepackage{etoolbox}
 \providetoggle{break}
@@ -175,6 +176,12 @@
 	\fancyhead{}
 	\fancyfoot{}
 }
+
+%% Macros
+\newcommand{\lb}{\textup{lb}}
+\newcommand{\val}{\textup{value}}
+\newcommand{\calI}{\ensuremath{\mathcal{I}}}
+\newcommand{\lam}{\ensuremath{\mathcal{L}}}
 
 \begin{document}
 \thispagestyle{firstpage}
