@@ -2,24 +2,26 @@
 
 \begin{document}
   \begin{figure}\centering\label{fig:tightPath}
-    \begin{tikzpicture}[line cap=round,line join=round,x=1.0cm,y=1.0cm]
-      \draw [line width=0.7pt] (5.5,3.) ellipse (4.923791041330765cm and 1.9984289376130242cm);
-      \draw [line width=0.7pt] (2.9485580465317556,4.709191641784741)-- (2.9485580465317556,1.2908083582152596);
-      \draw [line width=0.7pt] (5.000491745815229,4.988118750035707)-- (5.000491745815229,1.0118812499642926);
-      \draw [line width=0.7pt] (6.987780052197644,4.905015874946583)-- (6.990053922049515,1.0952769102105502);
-      \draw [line width=0.7pt] (8.967345689968308,4.418883020787342)-- (8.967345689968308,1.5811169792126585);
-      \draw [->,line width=0.7pt] (-0.5,3.) -- (2.,3.);
-      %\draw [->,line width=0.7pt] (2.,3.) -- (4.,3);
-      \draw [->-,line width=0.7pt,dash pattern={on 1.5pt off 1.7pt}] (2,3) .. controls (5,4) and (8,2) .. (9.5,3);
-      %\path [draw=gray, squigly, line width=0.8pt] (4,3) -- (6,3) -- (8,3);
-      %\draw [->,line width=0.7pt] (8.,3.) -- (9.5,3.);
-      \draw [->,line width=0.7pt] (9.5,3.) -- (12.,3.);
-      \draw (2.011909993648514,2.4263721728991627) node[anchor=north west] {$S_1$};
-      \draw (4,2.4263721728991627) node[anchor=north west] {$S_2$};
-      \draw (9,2.4263721728991627) node[anchor=north west] {$S_l$};
-      \draw (6,2.5473488626713094) node[anchor=north west] {$\cdots$};
-      \draw (2.9,5.2) node[anchor=north west] {S};
-    \end{tikzpicture}
+    \resizebox{!}{.7\totalheight}{
+      \begin{tikzpicture}[line cap=round,line join=round,x=1.0cm,y=1.0cm]
+        \draw [line width=0.7pt] (5.5,3.) ellipse (4.923791041330765cm and 1.9984289376130242cm);
+        \draw [line width=0.7pt] (2.9485580465317556,4.709191641784741)-- (2.9485580465317556,1.2908083582152596);
+        \draw [line width=0.7pt] (5.000491745815229,4.988118750035707)-- (5.000491745815229,1.0118812499642926);
+        \draw [line width=0.7pt] (6.987780052197644,4.905015874946583)-- (6.990053922049515,1.0952769102105502);
+        \draw [line width=0.7pt] (8.967345689968308,4.418883020787342)-- (8.967345689968308,1.5811169792126585);
+        \draw [->,line width=0.7pt] (-0.5,3.) -- (2.,3.);
+        %\draw [->,line width=0.7pt] (2.,3.) -- (4.,3);
+        \draw [->-,line width=0.7pt,dash pattern={on 1.5pt off 1.7pt}] (2,3) .. controls (5,4) and (8,2) .. (9.5,3);
+        %\path [draw=gray, squigly, line width=0.8pt] (4,3) -- (6,3) -- (8,3);
+        %\draw [->,line width=0.7pt] (8.,3.) -- (9.5,3.);
+        \draw [->,line width=0.7pt] (9.5,3.) -- (12.,3.);
+        \draw (2.011909993648514,2.4263721728991627) node[anchor=north west] {$S_1$};
+        \draw (4,2.4263721728991627) node[anchor=north west] {$S_2$};
+        \draw (9,2.4263721728991627) node[anchor=north west] {$S_l$};
+        \draw (6,2.5473488626713094) node[anchor=north west] {$\cdots$};
+        \draw (2.9,5.2) node[anchor=north west] {S};
+      \end{tikzpicture}
+    }
     \caption{Paths traverse through a tight set $S$ by entering at $S_1$, visiting each connected component in $S$ exactly once before leaving from $S_l$.}
   \end{figure}
 \end{document}

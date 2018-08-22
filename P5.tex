@@ -36,7 +36,7 @@
 	\end{proof}
 	
 	\subsection{Obtaining a Vertebrate Pair}
-	Now we would like to find a way to convert an instance $\calI$ and quasi-backbone $B$ into a vertebrate pair $(\calI', B')$ and then use it, along with an approximation algorithm for ATSP on vertebrate pair to approximate ATSP on irreducible instances.
+	Now we would like to find a way to convert an instance $\calI$ and quasi-backbone $B$ into a vertebrate pair $(\calI', B')$ and then use it, along with an approximation algorithm for ATSP on vertebrate pair to approximate ATSP on irreducible instances.\\
 	
 	\begin{algorithm}\label{alg:6:irr-atsp}
 		\caption{Irreducible ATSP ($A_{irr}$)}
@@ -45,7 +45,7 @@
 			Algorithm $A$ for ATSP on vertebrate pair that returns a tour of cost at most $\kappa\val(\calI') + \eta w(B)$.
 		}
 		Use \hyperref[lemm:6:q-bb]{Lemma \ref{lemm:6:q-bb}} to obtain a quasi-backbone $B$.\\
-		$L^*_{\max} \leftarrow $ all non-singleton maximal sets in $\lam^*$.\\
+		$\lam^*_{\max} \leftarrow $ all non-singleton maximal sets in $\lam^*$.\\
 		\For{each $S \in \lam^*_{\max}$} {
 			Find $T_S \leftarrow A_{irr}(\calI[S])$.\\
 			Use $T_S$ to find $F_S$ for which $S$ is contractible. 
@@ -56,7 +56,7 @@
 	\end{algorithm}
 	
 	\begin{theorem}
-		Given an irreducible instance $\calI$, \hyperref[alg:6:irr-atsp]{Algorithm \ref{alg:6:irr-atsp}} returns a Tour of $\calI$ of cost no more than $\rho\val(\calI)$ where, $\rho = \frac{\kappa + \eta(\alpha_{NW} + 3)}{1 - 2(1 - \delta)}$.
+		Given an irreducible instance $\calI$, \hyperref[alg:6:irr-atsp]{Algorithm \ref{alg:6:irr-atsp}} returns a Tour of $\calI$ of cost no more than $\rho\cdot\val(\calI)$ where, $\rho = \frac{\kappa + \eta(\alpha_{NW} + 3)}{1 - 2(1 - \delta)}$.
 	\end{theorem}
 	\begin{proof}
 		\begin{align*}
