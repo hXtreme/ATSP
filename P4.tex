@@ -2,17 +2,17 @@
 
 \begin{document}
 	\begin{definition}
-		Fix some $\delta$. A set $S\in \lam$ is called \textbf{reducible} if 
+		Fix some $\delta$. A set $S\in \lam$ is called \textbf{reducible} if
 		\[
 			\max_{u\in S_{in}, v\in S_{out}}D_S(u,v)\leqslant \delta \val_\calI(S),
-		\] 
-		and \textbf{irreducible} otherwise. 
+		\]
+		and \textbf{irreducible} otherwise.
 		An instance $\calI$ is irreducible if every laminar set is irreducible.
 	\end{definition}
-	
+
 	By this definition, we see that if we contract a reducible set $S$, the LP-value goes down by at least $\val_\calI(S) - \max D_S(u,v)\geqslant(1-\delta)\cdot \val_\calI(S)$.\\
-	
-	\begin{theorem} 
+
+	\begin{theorem}
 		A $\rho$-approximation algorithm for ATSP on irreducible instances $(A_{irr})$ implies a $\frac{2\rho}{1-\delta}$-approximation algorithm for ATSP on laminarly weighted instances.
 	\end{theorem}
 	\begin{algorithm}\label{alg:1}
@@ -31,11 +31,10 @@
 	\begin{proof}
 		Note that step 6 of the algorithm is valid because $\calI[S]$ is irreducible - all the laminar sets inside $S$ were already irreducible, and all singleton sets are trivially irreducible, so the new laminar set is also irreducible.\\
 		Also note that the base case (i.e $\calI$ is already irreducible) is trivial.
-		
-		{\color{red} Something fishy seems to be going on here. Cross-check later.}
-		For the sake of induction, assume that our algorithm gives us a tour $T$ of $\calI/S$ such that: 
+
+		For the sake of induction, assume that our algorithm gives us a tour $T$ of $\calI/S$ such that:
 		\[
-			w_{\calI/S}(T) \leqslant \rho\cdot \val(\calI/S).
+			w_{\calI/S}(T) \leqslant \frac{2\rho}{1-\delta}\cdot \val(\calI/S).
 		\]
 		We know that $w_{\calI[S]}(T_S)\leqslant \rho\cdot \val(\calI[S]) = 2\rho\cdot\val_S(\calI)$.\\
 		Now,
