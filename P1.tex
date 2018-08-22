@@ -1,13 +1,14 @@
 \documentclass[./main.tex]{subfiles}
 
 \begin{document}
-	\begin{definition} 
-		Given a graph, let $\bm{\delta(U,V)}$ be the set of all edges from $U$ to $V$. 
-		Let $\bm{\delta^+(U)}$ and $\bm{\delta^-(V)}$ be the set of outgoing and incoming edges from $U$ respectively. 
+	\begin{definition}
+		Given a graph, let $\bm{\delta(U,V)}$ be the set of all edges from $U$ to $V$.
+		Let $\bm{\delta^+(U)}$ and $\bm{\delta^-(V)}$ be the set of outgoing and incoming edges from $U$ respectively.
 		Let $\bm{\delta(U)}:=\delta^+(U)\cup \delta^-(U)$.
+		\\Also for any set $S$, let $\bm{S_{in}}\subseteq S$ be the set of entry points to $S$, and $\bm{S_{out}}\subseteq S$ be the set of exit points of $S$.
 	\end{definition}\vspace{4mm}
 
-	\begin{definition} 
+	\begin{definition}
 		Given an edge-weighted ATSP instance (G,w), consider the following LPs:\\
 		\begin{minipage}{0.20\textwidth}
 			\begin{align*}
@@ -30,7 +31,7 @@
 		\vspace{7mm}
 	\end{definition}
 
-	\begin{definition} 
+	\begin{definition}
 		$(G,\lam,x,y)$ is called a \textbf{laminarly weighted instance} if $\lam$ forms a laminar family of subsets of $V$ and the following hold:
 		\begin{enumerate}
 			\item $x$ is a solution to $\LP(G,0)$ and $x > 0$
@@ -47,20 +48,20 @@
 		Given a graph $G$, we can find an optimal dual solution $(\alpha, y)$ such that the support of $y$ forms a laminar family.
 	\end{claim*}
 
-	This can be shown using an "uncrossing" argument - given a dual solution, if the support of $y$ is not laminar, then there must exist two sets in its support, say $A$ and $B$, such that $A\setminus B$ and $B\setminus A$ are nonempty. 
-	WLOG, assume that $y_A \leqslant y_B$. Then $y_A$ amount of value can be redistributed from $A$ and $B$ to $A\setminus B$ and $B\setminus A$ without disturbing feasibility or optimality. 
-	Note that $A$ will no longer be in the support of $y$, so $A$ and $B$ are now "uncrossed". 
+	This can be shown using an "uncrossing" argument - given a dual solution, if the support of $y$ is not laminar, then there must exist two sets in its support, say $A$ and $B$, such that $A\setminus B$ and $B\setminus A$ are nonempty.
+	WLOG, assume that $y_A \leqslant y_B$. Then $y_A$ amount of value can be redistributed from $A$ and $B$ to $A\setminus B$ and $B\setminus A$ without disturbing feasibility or optimality.
+	Note that $A$ will no longer be in the support of $y$, so $A$ and $B$ are now "uncrossed".
 	Applying this procedure repeatedly (and choosing $A$ and $B$ carefully), we can obtain a solution with laminar support in polynomial time.\\
 		%\begin{minipage}{\textwidth}
-		\begin{theorem} 
+		\begin{theorem}
 			An $\alpha$-approximation algorithm for ATSP on laminarly weighted instances implies an $\alpha$-approximation algorithm for ATSP on general instances.
 		\end{theorem}
-		\begin{proof} 
-			We are given $I=(G,w)$ as input to general ATSP. Let $x$ be a optimal solution to $\LP(G,w)$ and $(y,\alpha)$ be the laminar optimal solution to $\DUAL(G,w)$ guaranteed by the above claim. 
+		\begin{proof}
+			We are given $I=(G,w)$ as input to general ATSP. Let $x$ be a optimal solution to $\LP(G,w)$ and $(y,\alpha)$ be the laminar optimal solution to $\DUAL(G,w)$ guaranteed by the above claim.
 			Let $E'$ be the support of $x$, and $\lam$ be the support of $y$. Then complimentary slackness implies that $\calI'=((V,E'), \lam, x, y)$ is a laminarly weighted instance.\\
-			Note that (by complimentary slackness) the induced weight on $\calI'$ is $w'(u,v) = w(u,v) + \alpha_v - \alpha_u$. Although these weights are different from our original weights, the weight of every cycle in $\calI'$ is the same as its weight in $I$ and therefore the weight of every circulation in $\calI'$ is also the same as its weight in $\calI$. In particular, the weight of a tour remains the same, and the optimal \LP-value remains the same. 
-			This leads to the final algorithm - simply run the $\alpha$-approximation algorithm for laminarly weighted instances on $\calI'$ and return the resulting tour, say $T$. 
-			Then the weight of $T$ in $\calI$ is given by: 
+			Note that (by complimentary slackness) the induced weight on $\calI'$ is $w'(u,v) = w(u,v) + \alpha_v - \alpha_u$. Although these weights are different from our original weights, the weight of every cycle in $\calI'$ is the same as its weight in $I$ and therefore the weight of every circulation in $\calI'$ is also the same as its weight in $\calI$. In particular, the weight of a tour remains the same, and the optimal \LP-value remains the same.
+			This leads to the final algorithm - simply run the $\alpha$-approximation algorithm for laminarly weighted instances on $\calI'$ and return the resulting tour, say $T$.
+			Then the weight of $T$ in $\calI$ is given by:
 			\[
 				w(T) = w'(T)\leqslant \alpha\cdot \val(\calI') = \alpha\cdot\val(I)
 			\]
