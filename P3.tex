@@ -61,14 +61,15 @@
 		For a tour $T$ in $\calI[S]$, we define its lift to be the following:\\
 		For any strongly connected component $S_i \subseteq S$ we obtain a tour $F_i$ of $S_i$ by taking all the edges in $T$ that are contained within $S_i$ and for every time the $T$ exits $S_i$ from $u_{out}$ and enters the next time to a vertex $v_{in}$, we add the shortest $u_{out} - v_{in}$ path in $S_i$. 
 		This is illustrated in \hyperref[fig:lift-i]{Figure \ref{fig:lift-i}}.\\
-		$F = \cup_{i \in [l]} F_i$ is the lift of $T$.
+		$F = \cup_{i \in [l]} F_i$ is the lift of $T$.\\
 	\end{definition}
 	\subfile{Diagrams/Lift-Induced.tex}
 	
 	\begin{definition}
-		We say that a set $S \in \lam$ is contractible with respect to an Eulerian set of egdes $F \subseteq E$ if the lift of any tour of $\calI/S$ plus the set $F$ is a tour in $\calI$.
-	\end{definition}\vspace{2mm}
-	We note that $F$, the lift of a tour in $\calI[S]$ makes $S$ contractible as lift of any tour in $\calI/S$ will visit each $S_i \in S$ at least once.
+		We say that a set $S \in \lam$ is contractible with respect to an Eulerian set of egdes $F \subseteq E$ if the lift of any tour of $\calI/S$ plus the set $F$ is a tour in $\calI$.\\
+	\end{definition}
+	
+	We note that $F$, the lift of a tour in $\calI[S]$ makes $S$ contractible as lift of any tour in $\calI/S$ will visit each $S_i \in S$ at least once.\\
 		
 	\begin{lemma}\label{lemm:3:lift-i}
 		Let $T$ be a tour in $\calI[S]$. Then the lift $F$ of $T$ satisfies $w_\calI(F) \leqslant w_{\calI[S]}(T).$
@@ -76,7 +77,7 @@
 	\begin{proof}
 		We can show that any connected component $S_i$ agrees with the laminar family $\lam'$. With this, we can bound the cost of the shortest $u_{out} - v_{in}$ path in $S_i$ by $\val_{\calI[S]}(S_i)$.Also, let $k$ be the number of times $T$ visits $\bar{s}$. Therefore weight of $F$ is
 		\begin{align*}
-			w_{\calI}(F) &= \sum_{i \in [l]} w_{\calI}F_i\\
+			w_{\calI}(F) &= \sum_{i \in [l]} w_{\calI}(F_i)\\
 			&\leqslant \sum_{i \in [l]} \left[k\val(S) + w_{\calI}(T \cap E(S_i))\right]\\
 			&\leqslant 2k \frac{\val(S)}{2} + \sum_{i \in [l]}w_{\calI}(T \cap E(S_i)) = w_{\calI[S]}(T).
 		\end{align*}
