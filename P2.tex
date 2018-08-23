@@ -1,37 +1,38 @@
 \begin{document}
-	Consider any $S\in \lam$. Let $S_1,\dots, S_k$ be the strongly connected components of $S$ in topological order. 
+	Consider any $S\in \lam$. Let $S_1,\dots, S_k$ be the strongly connected components of $S$ in topological order.
 	We know that
 	\begin{enumerate}
 		\item $x(\delta^-(S_1)) \geq 1$; as $x$ is a feasible solution to $\LP(G,w)$,
 		\item $x(\delta^-(S)) = 1$; as the primal constraint for $S$ is tight,
 		\item Every edge into $S_1$ is also an edge into $S$.
 	\end{enumerate}
-	It follows that $x(\delta^-(S_1)) = 1$. 
-	Using induction along with a similar argument, one can also see that for all $i$, $x(\delta^-(S_i)) = x(\delta^+(S_i)) = 1$ and, the only edges from one SCC to another are edges that go from $S_i$ to $S_{i + 1}$. 
+	It follows that $x(\delta^-(S_1)) = 1$.
+	Using induction along with a similar argument, one can also see that for all $i$, $x(\delta^-(S_i)) = x(\delta^+(S_i)) = 1$ and the only edges from one SCC to another are edges that go from $S_i$ to $S_{i + 1}$.
 	As a consequence, there will always exist a path from $u\in S_{in}$ to $v\in S_{out}$ within $S$.
-	
+
 	This structure allows us to "shortcut" paths that enter or exit $S$ multiple times. Consider a path $P$ that enters $S$ for the first time at $u_1$ and last exits $S$ from $v_k$ then, we can replace the entire portion of $P$ between $u_1$ and $v_k$ with a $u_1 - v_k$ path completely inside $S$.\\
-	
+	\subfile{Diagrams/TightPaths.tex}
+
 	\begin{definition}\label{def:value}
-		Let $\bm{\textbf{\val}_\calI(S)}$ be the LP value of $\calI$ stored within $S$, and let $\bm{\textbf{\val}(\calI)}$ be the total LP value of $\calI$. Formally, 
+		Let $\bm{\textbf{\val}_\calI(S)}$ be the LP value of $\calI$ stored within $S$, and let $\bm{\textbf{\val}(\calI)}$ be the total LP value of $\calI$. Formally,
 		\[
 			\bm{\textbf{\val}_\calI(S)}:=\sum\limits_{R\in \lam:R\subsetneq S}2\cdot y_R\qquad \bm{\textbf{\val}(\calI)}:=\val_\calI(V)
 		\]
 	\end{definition}
-	
-	\begin{definition} 
-		Let $\bm{d_S(u,v)}$ be the weight of the shortest path from $u$ to $v$ inside $S$. Also, let 
+
+	\begin{definition}
+		Let $\bm{d_S(u,v)}$ be the weight of the shortest path from $u$ to $v$ inside $S$. Also, let
 		\begin{equation}
-			\bm{D_S(u,v)}:=\sum_{R\in \lam : u\in R\subsetneq S}y_R + d_s(u,v) + \sum_{R\in \lam : v\in R\subsetneq S}y_R\label{def:1}
+			\bm{D_S(u,v)}:=\overbrace{\sum_{\substack{R\in \lam \\ u\in R\subsetneq S}}y_R}^{(a)} + \overbrace{\rule{0pt}{4mm}d_s(u,v)}^{(b)} + \overbrace{\sum_{\substack{R\in \lam \\ v\in R\subsetneq S}}y_R}^{(c)}\label{def:1}
 		\end{equation}
-		Furthermore, let $\bm{D_{\max}(S)} := \max_{u \in S_{in}, v \in S_{out}}D_S(u,v)$.
-		
-		Intuitively, $D_s(u,v)$ is paying the cost of entering $u$ from outside $S$, taking a shortest path from $u$ to $v$, and exiting from $v$ to outside $S$. See \hyperref[fig:Duv]{Figure \ref{fig:Duv}} for a visualization of this split of cost.\\
+		Furthermore, let $\bm{D_{\max}(S)} := \max\limits_{u \in S_{in}, v \in S_{out}}D_S(u,v)$.
+
+		Intuitively, $D_s(u,v)$ is the cost of entering $u$ from outside $S$, taking a shortest path from $u$ to $v$, and exiting from $v$ to outside $S$. See \hyperref[fig:Duv]{Figure \ref{fig:Duv}} for a visualization of this split of cost.\\
 	\end{definition}
 	\subfile{Diagrams/D.tex}
-	
-	\begin{lemma}\label{lemm:2:D-val} 
-		$S\subseteq V$ be any set such that $\lam \cup \{S\}$ is a laminar family. 
+
+	\begin{lemma}\label{lemm:2:D-val}
+		$S\subseteq V$ be any set such that $\lam \cup \{S\}$ is a laminar family.
 		Then,
 		\begin{enumerate}
 			\item[(1)] $d_S(u,v)\leq \val_\calI(S)$ if there exists a $u-v$ path inside $S$.
@@ -39,17 +40,17 @@
 		\end{enumerate}
 	\end{lemma}
 	\begin{proof}
-		The main idea for the proof for $(1)$ is that a path that enters some laminar set multiple times can be shortcut to just enter that laminar set once. 
-		After repeatedly shortcutting until each laminar set is entered at most once, the cost of the path that each set $R$ is responsible for is at most $2\cdot y_R$ (one for entering $R$, and one for exiting $R$), and \textit{(1)} follows from the \hyperref[def:value]{definition of $\val_\calI(S)$}.\\
-		The idea for \textit{(2)} is similar and one can show (using a case-by-case analysis) that for all $R\in \lam$ with $R\subsetneq S$, after shortcutting the path, at most two of the following are true:
+		The main idea for the proof for $(1)$ is that a path that enters some laminar set multiple times can be shortcut to just enter that laminar set once.
+		After repeatedly shortcutting any $u-v$ path until each laminar set is entered at most once, the cost of the path that each set $R$ is responsible for is at most $2\cdot y_R$ (one for entering $R$, and one for exiting $R$), and \textit{(1)} follows from the \hyperref[def:value]{definition of $\val_\calI(S)$}.\\
+		The idea for \textit{(2)} is similar. One can show (using a case-by-case analysis) that for all $R\in \lam$ with $R\subsetneq S$, after shortcutting a path, at most two of the following are true:
 		\begin{enumerate}
-			\item $u\in R$
-			\item $v\in R$
-			\item The path enters $R$
-			\item The path exits $R$
+			\item $u\in R$ (contributes to $(a)$)
+			\item $v\in R$ (contributes to $(c)$)
+			\item The path enters $R$ (contributes to $(b)$)
+			\item The path exits $R$ (contributes to $(b)$)
 		\end{enumerate}
-		In other words, every laminar set $R\subsetneq S$ appears at most twice in the right hand side of \hyperref[def:1]{Equation \ref{def:1}}. So, \textit{(2)} follows from the definition of $\val_\calI(S)$.
+		In other words, every laminar set $R\subsetneq S$ contibutes at most $2\cdot y_R$ in the right hand side of \hyperref[def:1]{Equation \ref{def:1}}. So, \textit{(2)} follows from the definition of $\val_\calI(S)$.
 	\end{proof}
-	
+
 	This lemma gives us useful bounds on costs our algorithm will be incurring.
 \end{document}

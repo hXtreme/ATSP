@@ -5,7 +5,7 @@
 	\definecolor{qqqqff}{rgb}{0.,0.,1.}
 	\definecolor{ffqqqq}{rgb}{1.,0.,0.}
 	\definecolor{ududff}{rgb}{0.30196078431372547,0.30196078431372547,1.}
-	
+
 	\begin{figure}
 		\centering
 		\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
@@ -20,7 +20,7 @@
 		\draw [->,line width=0.7pt,color=ffqqqq] (0.5,2.5) -- (2.803,2.495);
 		\draw [->,line width=0.7pt,color=qqqqff] (10.122,2.486) -- (12.5,2.5);
 		\draw [->-,line width=0.7pt,dash pattern={on 1.5pt off 1.7pt},color=qqffqq] (2.803,2.495) .. controls (5.5,1.5) and (7.5,3) .. (10.122,2.486);
-		
+
 		\begin{scriptsize}
 		\draw[color=black] (1.5,3.2) node {$S$};
 		\draw [fill=ududff] (2.803,2.495) circle (2.5pt);
@@ -32,6 +32,6 @@
 		\draw [fill=ududff] (7.5,2.5) circle (2.5pt);
 		\end{scriptsize}
 		\end{tikzpicture}
-		\caption{The Red edge is paid for by $\sum_{R\in L : u\in R\subsetneq S} y_R$, the shortest $u-v$ path is shown in green and, the blue edge is paid for by $\sum_{R\in L : v\in R\subsetneq S} y_R$; summing to $D_S(u, v)$.}\label{fig:Duv}
+		\caption{The leftmost edge is paid for by $(a)$, the dotted path is paid for by $(b)$, and the rightmost edge is paid for by $(c)$ summing to $D_S(u, v)$.}\label{fig:Duv}
 	\end{figure}
 \end{document}
