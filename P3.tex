@@ -18,25 +18,29 @@
 	\begin{fact}\label{fact:3:val-c}
 		$\val(\calI/S) = \val(\calI) - (\val_\calI(S) - D_{\max}(S)) \leqslant \val(\calI)$.
 	\end{fact}
-	\begin{proof}
-		$\val(\calI/S) - \val(\calI) = D_{\max}(S) - \val_\calI(S)$ and from \hyperref[lemm:2:D-val]{Lemma \ref{lemm:2:D-val}}
-	\end{proof}
-
-	Now that we have defined contracted instance, we would like to convert any tour $T$ in $\calI/S$ to a subtour in $\calI$. We call this procedure Lift.
-
+The equality follows from the definition of $\val$ and $\calI\setminus S$, and the inequality follows from \hyperref[lemm:2:D-val]{Lemma \ref{lemm:2:D-val}}.\vspace{2mm}
+\\Assume that somehow we find a good tour in $\calI\setminus S$. We would like to use this to make some progress toward a tour in $\calI$. We call this lifting.\vspace{2mm}
 	\begin{definition}
-		For a tour $T$ in $\calI/S$, we define its lift to be the subtour in $\calI$ formed by replacing every consecutive pair $(u_{in}, s), (s, v_{out})$ of incoming and outgoing edges by their pre-images $(u_{in}, v_{in}), (u_{out}, v_{out})$ and the shortest $v_{in} - u_{out}$ path in $S$.
-	\end{definition}\vspace{2mm}
+		For a tour $T$ in $\calI/S$, we define its \textbf{lift} to be the subtour in $\calI$ formed by replacing every consecutive pair of edges into and out of $s$, say $(u_{in}, s)$ and $(s, v_{out})$, by their pre-images $(u_{in}, v_{in}), (u_{out}, v_{out})$ and the shortest $v_{in} - u_{out}$ path in $S$.
+	\end{definition}\vspace{4mm}
 
 	\begin{lemma}\label{lemm:3:lift-c}
 		Let $T$ be a tour in $\calI/S$. Then the lift $F$ of $T$ satisfies $w_\calI(F) \leqslant w_{\calI/S}(T).$
 	\end{lemma}
 	\begin{proof}
-		Let $T$ cross the set $R\in\lam'$, $\alpha_R$ times. Let $\left(v_{in}^{(1)}, u_{out}^{(1)}\right), \left(v_{in}^{(2)}, u_{out}^{(2)}\right), \dots, \left(v_{in}^{(\alpha_S)}, u_{out}^{(\alpha_S)}\right)$ be the pairs of consecutive incoming and outgoing vertices for $S$.
-		\begin{align*}
-			w_\calI(F) &= \sum_{R \in \lam': R \nsubseteq S}\alpha_R y_R + \sum_{i = 1}^{\alpha_S}\left(2y_S + D_S\left(v_{in}^{(i)}, u_{out}^{(i)}\right)\right)\\
-			&\leqslant\sum_{R \in \lam': R \nsubseteq S}\alpha_R y_R + \sum_{i = 1}^{\alpha_S}2\left(y_S + \frac{1}{2}D_{\max}(S)\right) = w_{\calI/S}(T)
-		\end{align*}
+	Note that the only edges that differ between $T$ and $F$ are of the following types:
+	\begin{itemize}
+		\item[Type 1:] Edges of the form $(u_{in},s)$ and $(s,v_{out})$ are in $T$ but not $F$
+		\item[Type 2:] The image in $\calI$ of edges of type 1 are in $F$ but not in $T$
+		\item[Type 3:] For every pair $(u_{in}, v_{in}),(u_{out},v_{out})$ of type 2, $F$ contains a shortest $v_{in}-u_{out}$ path in $S$.
+	\end{itemize}
+Pick a pair $(u_{in}, s),(s,v_{out})$ in $T$. By the definition of lifting $T$, we replace these edges by their image in $\calI$, say $(u_{in}, v_{in}),(u_{out},v_{out})$, along with a shortest $v_{in}-u_{out}$ path within $S$. The new edges $(u_{in}, v_{in}),(u_{out},v_{out})$ still pay for everything that the old edges $(u_{in}, s),(s,v_{out})$ used to pay, except for $D_{max}(S)$. The new edges also pay the cost of entering and exiting laminar sets in $S$ using $u_{out}$ and $v_{in}$. The cost payed by the new path is precisely $d_S(u_{out},v_{in})$, so the net loss in weight is $D_{max}(S) - D_{S}(v_{in}, u_{out})\geq 0$.\vspace{2mm}
+\\If we the weight only goes down after for every such replacement, then the weight of the lift can only be smaller than the weight of $T$, proving the lemma.
+	%	Let $\alpha_R$ be the number of times $T$ crosses the laminar set $R$. Let $(u_{in}^{(1)}, s), (s, v_{out}^{(1)}),\cdots, (u_{in}^{(k)}, s), (s, v_{out}^{(k)})$ be the edges of $T$ going in or out of $s$ in the order used to construct the lift of $T$.
+	%	\begin{align*}
+	%		w_\calI(F) &= \sum_{\substack{R \in \lam'; R \nsubseteq S}}\alpha_R y_R + \sum_{i = 1}^{\alpha_S}\left(2y_S + D_S\left(v_{in}^{(i)}, u_{out}^{(i)}\right)\right)\\
+	%		&\leqslant\sum_{R \in \lam': R \nsubseteq S}\alpha_R y_R + \sum_{i = 1}^{\alpha_S}2\left(y_S + \frac{1}{2}D_{\max}(S)\right) = w_{\calI/S}(T)
+%		\end{align*}
 	\end{proof}
 
 	\subsection{Inducing}
