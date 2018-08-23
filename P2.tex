@@ -16,12 +16,19 @@
 		For any SCC $S_i \in S$, $\lam \cup S_i$ is also a laminar familiy.
 	\end{lemma}
 	\begin{proof}
-<<<<<<< HEAD
-		Assume for contradiction that $\lam \cup S_i$
+		Assume for contradiction that $\lam \cup S_i$ is not a laminar family.
+		Therefore, there must be some $R \in \lam$ such that $R\setminus S_i, S\setminus R$ and $R \cap S_i$ are all non-empty and $R \subsetneq S$.
+		We partition $R$ into three sets $R_{<i>}, R_i,$ and $R_{>i}$ containing the part of $R$ that intersects with any SCC before $S_i$, with $S_i$, and after $S_i$ respectively. Where as per our assumption $R_{<i}, R_i, R_{>i} \ne \emptyset$.
+		\begin{align*}
+			x(\delta^-(R)) &\geqslant x(\delta^-(R_{<i})) + x(\delta(S_i\setminus R_i, R_i)) & \text{Due to topological order.}\\
+			&\geqslant 1 + x(\delta(S_i\setminus R_i, R_i))\\
+			\therefore x(\delta^-(R)) &>1 & \text{A contradiction.}
+		\end{align*}
 	\end{proof}
+	\begin{corollary}
+		For any SCC $S_i \in S$, $S_i$ agrees with all laminar sets that are a subset of $S$.
+	\end{corollary}
 
-=======
->>>>>>> 6ac20b80eb24af434140c46d9a699a605b873c5a
 	\begin{definition}\label{def:value}
 		Let $\bm{\textbf{\val}_\calI(S)}$ be the LP value of $\calI$ stored within $S$, and let $\bm{\textbf{\val}(\calI)}$ be the total LP value of $\calI$. Formally,
 		\[
