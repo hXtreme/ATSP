@@ -12,6 +12,13 @@
 	
 	This structure allows us to "shortcut" paths that enter or exit $S$ multiple times. Consider a path $P$ that enters $S$ for the first time at $u_1$ and last exits $S$ from $v_k$ then, we can replace the entire portion of $P$ between $u_1$ and $v_k$ with a $u_1 - v_k$ path completely inside $S$.\\
 	
+	\begin{lemma}\label{lemm:2:SiAgree}
+		For any SCC $S_i \in S$, $\lam \cup S_i$ is also a laminar familiy.
+	\end{lemma}
+	\begin{proof}
+		Assume for contradiction that $\lam \cup S_i$ 
+	\end{proof}
+	
 	\begin{definition}\label{def:value}
 		Let $\bm{\textbf{\val}_\calI(S)}$ be the LP value of $\calI$ stored within $S$, and let $\bm{\textbf{\val}(\calI)}$ be the total LP value of $\calI$. Formally, 
 		\[
