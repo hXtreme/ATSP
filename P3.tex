@@ -76,7 +76,7 @@
 		Let $T$ be a tour in $\calI[S]$. Then the lift $F$ of $T$ satisfies $w_\calI(F) \leqslant w_{\calI[S]}(T).$
 	\end{lemma}
 	\begin{proof}
-		We can show that any connected component $S_i$ agrees with the laminar family $\lam'$. With this, we can bound the cost of the shortest $u_{out} - v_{in}$ path in $S_i$ by $\val_{\calI[S]}(S_i)$.Also, let $k$ be the number of times $T$ visits $\bar{s}$. Therefore weight of $F$ is
+		We showed in \hyperref[lemm:2:SiAgree]{lemma \ref{lemm:2:SiAgree}} that any connected component $S_i$ agrees with the laminar family $\lam'$. We can use this in conjunction with \hyperref[lemm:2:D-val]{lemma \ref{lemm:2:D-val}} to bound the cost of the shortest $u_{out} - v_{in}$ path in $S_i$ by $\val_{\calI[S]}(S_i)$. Also, let $k$ be the number of times $T$ visits $\bar{s}$. Therefore weight of $F$ is
 		\begin{align*}
 			w_{\calI}(F) &= \sum_{i \in [l]} w_{\calI}(F_i)\\
 			&\leqslant \sum_{i \in [l]} \left[k\val(S) + w_{\calI}(T \cap E(S_i))\right]\\

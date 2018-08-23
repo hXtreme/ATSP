@@ -10,5 +10,3 @@ D(u,v)
 Lemma 2.1
 
 Definition custom spacing
-
-Add proof $S_i$ agrees with $\lam$
