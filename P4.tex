@@ -6,15 +6,15 @@
 		Fix some $\epsilon$. A set $S\in \lam$ is called \textbf{reducible} if
 		\[
 			%D_{\max}(S) \leqslant \delta \val_\calI(S),
-			D_{\max}(S) \leqslant (1 - \epsilon) \val_\calI(S),
-		\] 
-		and \textbf{irreducible} otherwise. 
+			D_{\max}(S) \leqslant (1 - \epsilon)\cdot \val_\calI(S),
+		\]
+		and \textbf{irreducible} otherwise.
 		An instance $\calI$ is irreducible if every laminar set is irreducible.
 	\end{definition}
-	
+
 	%By this definition, we see that if we contract a reducible set $S$, the LP-value goes down by at least $\val_\calI(S) - D_{\max}(S) \geqslant(1-\delta)\cdot \val_\calI(S)$.\\
 	By this definition, we see that if we contract a reducible set $S$, the LP-value goes down by at least $\val_\calI(S) - D_{\max}(S) \geqslant \epsilon\cdot \val_\calI(S)$.\\
-	
+
 	\begin{algorithm}[h]\label{alg:1}
 		\caption{LAMINARLY WEIGHTED $\rightarrow$ IRREDUCIBLE}
 		\SetKwFunction{Lift}{Lift}
@@ -28,8 +28,8 @@
 			\Return $T'\cup T_S'$
 		}
 	\end{algorithm}
-	
-	\begin{theorem} 
+
+	\begin{theorem}
 		%A $\rho$-approximation algorithm for ATSP on irreducible instances $(A_{irr})$ implies a $\frac{2\rho}{1-\delta}$-approximation algorithm for ATSP on laminarly weighted instances.
 		A $\rho$-approximation algorithm for ATSP on irreducible instances $(A_{irr})$ implies a $\frac{2\rho}{\epsilon}$-approximation algorithm for ATSP on laminarly weighted instances.
 	\end{theorem}
