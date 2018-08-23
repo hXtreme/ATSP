@@ -1,7 +1,7 @@
 \documentclass{../main.tex}
 
 \begin{document}
-  \begin{figure}\centering\label{fig:tightPath}
+  \begin{figure}\centering
     \resizebox{!}{.7\totalheight}{
       \begin{tikzpicture}[line cap=round,line join=round,x=1.0cm,y=1.0cm]
         \draw [line width=0.7pt] (5.5,3.) ellipse (4.923791041330765cm and 1.9984289376130242cm);
@@ -22,6 +22,6 @@
         \draw (2.9,5.2) node[anchor=north west] {S};
       \end{tikzpicture}
     }
-    \caption{Paths traverse through a tight set $S$ by entering at $S_1$, visiting each connected component in $S$ exactly once before leaving from $S_l$. See \hyperref[sec:2]{Section \ref{sec:2}}}
+    \caption{Paths traverse through a tight set $S$ by entering at $S_1$, visiting each connected component in $S$ exactly once before leaving from $S_l$. See \hyperref[sec:2]{Section \ref{sec:2}}}\label{fig:tightPath}
   \end{figure}
 \end{document}
