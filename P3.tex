@@ -7,27 +7,27 @@
 		\begin{itemize}[-]
 			\item $G'$ is obtained by contracting the set $S \in \lam$ to a single vertex $s$, keeping parallel edges but removing self-loops.
 			\item For each edge $e' \in E(G')$, $x'(e') = x(e)$ where $e$ is the pre-image of $e'$ in $G$.
-			%\item $\lam' = \{(R\setminus S) \cup \{s\} : R\in \lam, S \subseteq R\} 
+			%\item $\lam' = \{(R\setminus S) \cup \{s\} : R\in \lam, S \subseteq R\}
 			%\cup
 			%\{R: R\in \lam, S \cap R = \emptyset\}$
 			%\\i.e. contract all occurrences of set $S$ into a single vertex $s$.
 			\item Remove all subsets of $S$ from $\lam$ and, add a singleton set containing $s$.
-			\item $y'_{\{s\}} = y_S + \frac{1}{2}D_{\max}(S)$. For all other sets $R'$, $y'_{R'} = y_R$ where, $R$ is the pre-image of $R'$.
+			\item $y'_{\{s\}} = y_S + \frac{1}{2}\cdot D_{\max}(S)$. For all other sets $R'$, $y'_{R'} = y_R$ where, $R$ is the pre-image of $R'$.
 		\end{itemize}
-	\end{definition}\vspace{2mm}
+	\end{definition}\vspace{3mm}
 	\begin{fact}\label{fact:3:val-c}
 		$\val(\calI/S) = \val(\calI) - (\val_\calI(S) - D_{\max}(S)) \leqslant \val(\calI)$.
 	\end{fact}
 	\begin{proof}
 		$\val(\calI/S) - \val(\calI) = D_{\max}(S) - \val_\calI(S)$ and from \hyperref[lemm:2:D-val]{Lemma \ref{lemm:2:D-val}}
 	\end{proof}
-	
+
 	Now that we have defined contracted instance, we would like to convert any tour $T$ in $\calI/S$ to a subtour in $\calI$. We call this procedure Lift.
-	
+
 	\begin{definition}
 		For a tour $T$ in $\calI/S$, we define its lift to be the subtour in $\calI$ formed by replacing every consecutive pair $(u_{in}, s), (s, v_{out})$ of incoming and outgoing edges by their pre-images $(u_{in}, v_{in}), (u_{out}, v_{out})$ and the shortest $v_{in} - u_{out}$ path in $S$.
 	\end{definition}\vspace{2mm}
-	
+
 	\begin{lemma}\label{lemm:3:lift-c}
 		Let $T$ be a tour in $\calI/S$. Then the lift $F$ of $T$ satisfies $w_\calI(F) \leqslant w_{\calI/S}(T).$
 	\end{lemma}
@@ -38,7 +38,7 @@
 			&\leqslant\sum_{R \in \lam': R \nsubseteq S}\alpha_R y_R + \sum_{i = 1}^{\alpha_S}2\left(y_S + \frac{1}{2}D_{\max}(S)\right) = w_{\calI/S}(T)
 		\end{align*}
 	\end{proof}
-	
+
 	\subsection{Inducing}
 	\begin{definition}
 		The instance $\bm{\calI[S]} = (G', \lam', x', y')$ is called the induced instance by inducing on a tight set $S$. It is formally defined as:
@@ -49,29 +49,29 @@
 			\item[-] $y'_{\bar{s}} = \val(S)/2$ and for every other set $R \in \lam'$ its the same as $y_R$.\\
 		\end{itemize}
 	\end{definition}\vspace{2mm}
-	
+
 	\begin{fact}
-		$\val(\calI[S]) = 2 \val(S)$
+		$\val(\calI[S]) = 2\cdot\val(S)$
 	\end{fact}
 
 	The sub-tour obtained by lifting a tour in contracted instance is guaranteed to be a single component but its not guaranteed to cover all vertices, for this we use a tour in the induced graph to patch in the vertices that are not visited.\\
-	
+
 	\subfile{Diagrams/Lift-Induced.tex}
-	Let $S_1, \dots, S_l$ be the SCC in $S \in \lam$, indexed in topological order.
+	Let $S_1, \dots, S_l$ be the strongly connected components in $S \in \lam$, indexed in topological order.
 	\begin{definition}\label{def:3:indu-lift}
 		For a tour $T$ in $\calI[S]$, we define its lift to be the following:\\
-		For any strongly connected component $S_i \subseteq S$ we obtain a tour $F_i$ of $S_i$ by taking all the edges in $T$ that are contained within $S_i$ and for every time the $T$ exits $S_i$ from $u_{out}$ and enters the next time to a vertex $v_{in}$, we add the shortest $u_{out} - v_{in}$ path in $S_i$. 
+		For any strongly connected component $S_i \subseteq S$ we obtain a tour $F_i$ of $S_i$ by taking all the edges in $T$ that are contained within $S_i$ and for every time the $T$ exits $S_i$ from $u_{out}$ and enters the next time to a vertex $v_{in}$, we add the shortest $u_{out} - v_{in}$ path in $S_i$.
 		This is illustrated in \hyperref[fig:lift-i]{Figure \ref{fig:lift-i}}.\\
 		$F = \cup_{i \in [l]} F_i$ is the lift of $T$.\\
 	\end{definition}
-	
-	
+
+
 	\begin{definition}
 		We say that a set $S \in \lam$ is contractible with respect to an Eulerian set of egdes $F \subseteq E$ if the lift of any tour of $\calI/S$ plus the set $F$ is a tour in $\calI$.\\
 	\end{definition}
 	\subfile{Diagrams/TightPaths.tex}
 	Due to the \hyperref[fig:tightPath]{path-like structure} of tight sets, $F$ the lift of a tour in $\calI[S]$ must visit each stringly connected component in $S$ at least once. Therefore, $F$ makes $S$ contractible.\\
-		
+
 	\begin{lemma}\label{lemm:3:lift-i}
 		Let $T$ be a tour in $\calI[S]$. Then the lift $F$ of $T$ satisfies $w_\calI(F) \leqslant w_{\calI[S]}(T).$
 	\end{lemma}
