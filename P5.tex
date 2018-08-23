@@ -11,7 +11,8 @@
 	\begin{definition}
 		For an instance $\calI$ we say that a subtour $B$ a quasi-backbone if 
 		\begin{equation}\label{def:6:q-bb}
-			2\sum_{S \in \lam^*} y_S \leqslant \left(1 - \delta\right)\val(\calI)
+			%2\sum_{S \in \lam^*} y_S \leqslant \left(1 - \delta\right)\val(\calI)
+			2\sum_{S \in \lam^*} y_S \leqslant \epsilon\cdot\val(\calI)
 		\end{equation}
 		where $\lam^*$ is the set of all $S \in \lam$ that are not crossed by $B$.
 	\end{definition}
@@ -39,7 +40,7 @@
 	Now we would like to find a way to convert an instance $\calI$ and quasi-backbone $B$ into a vertebrate pair $(\calI', B')$ and then use it, along with an approximation algorithm for ATSP on vertebrate pair to approximate ATSP on irreducible instances.\\
 	
 	\begin{algorithm}\label{alg:6:irr-atsp}
-		\caption{Irreducible ATSP ($A_{irr}$)}
+		\caption{Irreducible ATSP ($A_{irr}$) $\rightarrow$ Vertebrate Pair}
 		\KwIn{
 			Irreducible instance $\calI = (G, \lam, x, y)$\\
 			Algorithm $A$ for ATSP on vertebrate pair that returns a tour of cost at most $\kappa\val(\calI') + \eta w(B)$.
@@ -66,11 +67,13 @@
 		\begin{align*}
 			w(F_S) &\leqslant w_{\calI[S]}(T_S) \leqslant \rho \val(\calI[S])\\
 			w(F_S)&\leqslant 2\rho\val_{\calI}(S)\\
-			\bigcup_{S \in \lam^*_{\max}} w(F_S) &\leqslant 2\rho \left(1 - \delta\right) \val(\calI)  \hspace*{2cm} -  \text{ As all $S$ are disjoint and, \hyperref[def:6:q-bb]{from \ref{def:6:q-bb}} as $B$ was a quasi-backbone.}
+			%\bigcup_{S \in \lam^*_{\max}} w(F_S) &\leqslant 2\rho \left(1 - \delta\right) \val(\calI)  \hspace*{2cm} -  \text{ As all $S$ are disjoint and, \hyperref[def:6:q-bb]{from \ref{def:6:q-bb}} as $B$ was a quasi-backbone.}
+			\bigcup_{S \in \lam^*_{\max}} w(F_S) &\leqslant 2\rho (\epsilon\cdot\val(\calI))  \hspace*{2cm} -  \text{ As all $S$ are disjoint and, \hyperref[def:6:q-bb]{from \ref{def:6:q-bb}} as $B$ was a quasi-backbone.}
 		\end{align*}
 		\begin{align*}
-			Cost(\calI) &= w(F) + \cup_{S \in \lam^*_{\max}} w(F_S) &\\
-			&\leqslant \left(\kappa + \eta(\alpha_{NW} + 3)\right)\val(\calI) + 2\rho \left(1 - \delta\right) \val(\calI) & \text{ Substituting $\rho$ and $\delta = 0.75$.}\\
+			Cost(\calI) &= w(F) + \cup_{S \in \lam^*_{\max}} w(F_S)\\
+			%&\leqslant \left(\kappa + \eta(\alpha_{NW} + 3)\right)\val(\calI) + 2\rho \left(1 - \delta\right) \val(\calI)\\
+			&\leqslant \left(\kappa + \eta(\alpha_{NW} + 3)\right)\val(\calI) + 2\rho (\epsilon\cdot \val(\calI))\\
 			Cost(\calI) &\leqslant \rho\val(\calI)
 		\end{align*}
 		
