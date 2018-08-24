@@ -2,43 +2,44 @@
 
 \begin{document}
 	\subsection{Definitions}
-	
+
 	\begin{definition}
-		We say that a subtour $B$, is a backbone of the instance $\calI$ if for every non-singleton set $S \in \lam$. $B$ crosses $S$ i.e. $\delta(S) \cap B \ne \emptyset$.\\
+		We say that a subtour $B$ is a backbone of the instance $\calI$ if for every non-singleton set $S \in \lam$. $B$ crosses $S$ i.e. $\delta(S) \cap B \ne \emptyset$.\\
 		The pair $(\calI, B)$ is called the vertebrate pair.\\
 	\end{definition}
-	
+
 	\begin{definition}
-		For an instance $\calI$ we say that a subtour $B$ a quasi-backbone if 
+		We say that a subtour $B$ a quasi-backbone of the instance $\calI$ if
 		\begin{equation}\label{def:6:q-bb}
 			%2\sum_{S \in \lam^*} y_S \leqslant \left(1 - \delta\right)\val(\calI)
 			2\sum_{S \in \lam^*} y_S \leqslant \epsilon\cdot\val(\calI)
 		\end{equation}
 		where $\lam^*$ is the set of all $S \in \lam$ that are not crossed by $B$.
 	\end{definition}
-	
+
 	Here we note that a quasi-backbone may not be a backbone and vice-versa especially if majority of $\val(\calI)$ is concentrated on singleton laminar sets in $\lam$.\footnote{While the backbones we construct will also be quasi-backbones but our future reductions do not use this fact.}
-	
+
 	\subsection{Finding a Quasi-Backbone}
-	
+
 	\begin{lemma}\label{lemm:6:q-bb}
-		Given an irreducible instance $\calI$, we can construct a quasi-backbone $B$ such that $B$ crosses all maximal non-singleton sets in $\lam$ and $w(B) \leqslant (\alpha_{NW} + 3)\val(\calI)$.
+		Given an irreducible instance $\calI$, we can construct a quasi-backbone $B$ that crosses all maximal non-singleton sets in $\lam$ and $w(B) \leqslant (\alpha_{NW} + 3)\val(\calI)$.
 	\end{lemma}
 	\begin{proof}
-		Let $\lam_{\max}$ be the set of all maximal sets in $\lam$ and $\calI'$ be the instance obtained by contracting each set in $\lam_{\max}$. 
-		The instance $\calI'$ is node weighted and to find a subtour $B'$ in $\calI$ we find a tour $T$ in $\calI'$ using $\alpha_{NW}$ approx algorithm for Node-Weighted ATSP and lift it. 
-		From \hyperref[lemm:3:lift-c]{Lemma \ref{lemm:3:lift-c}} and \hyperref[fact:3:val-c]{Fact \ref{fact:3:val-c}} we know that 
-		$w_\calI(B') \leqslant w_{\calI'}(T) \leqslant \alpha_{NW}\val(\calI') \leqslant \alpha_{NW}\val(\calI)$ and that $B'$ crosses all maximal non-singleton laminar sets but, we still need to ensure that it crosses at least $\delta\val(\calI)$ of sets. For this we modify $B'$ to get our quasi-backbone $B$ as follows:
+		Let $\lam_{max}$ be the set of all maximal sets in $\lam$. If we can find a subtour that crosses each set in $\lam_{max}$, and a $(1-\epsilon)$ fraction of laminar sets inside each $S\in L_{max}$, then that subtour will be a quasi-backbone.\vspace{2mm}
+		\\Let $\calI'$ be the instance obtained by contracting each set in $\lam_{max}$. The instance $\calI'$ is node weighted. So we can use the $\alpha_{NW}$-appromxation algorithm for node weighted instances to find a tour of $\calI'$, and lift it to find a subtour $B'$ of $\calI$. This ensures that we cross every maximal set. Now we need to ensure we cross a large fraction of laminar sets inside each $S\in L_{max}$.
+		For this we modify $B'$ to get our quasi-backbone $B$ as follows:
 		\begin{itemize}[-]
 			\item Let $u^S, v^S$ be the first entry and exit vertex for $S$ in $B'$ respectively, and $u^S_{\max}, v^S_{\max}$ be the vertices corresponding to $D_{\max}(S)$.
-			\item Replace the $u^S - v^S$ path by the path $P$ composed of the shortest paths\footnote{These paths exists as $u^S, u^S_{\max} \in S_1$ and $v^S, v^S_{\max} \in S_l$.} from $u^S$ to $u^S_{\max}$ to $v^S_{\max}$ to $v^S$, from \hyperref[lemm:2:D-val]{Lemma \ref{lemm:2:D-val}} $w(P) \leqslant 3\val_{\calI}(S)$
+			\item Replace the $u^S - v^S$ path by the path $P$ composed of the shortest paths\footnote{These paths exists as $u^S, u^S_{\max} \in S_1$ and $v^S, v^S_{\max} \in S_l$.} from $u^S$ to $u^S_{\max}$ to $v^S_{\max}$ to $v^S$, from \hyperref[lemm:2:D-val]{Lemma \ref{lemm:2:D-val}} $w(P) \leqslant 3\cdot\val_{\calI}(S)$
 		\end{itemize}
-		As $S$ is irreducible, with this modification we automatically satisfy our last requirement while only increasing the weight by at most $3\val(\calI)$.
+		Since $S$ is irreducible (and there is always a shortest path crossing every laminar set at most twice), this modification automatically satisies our last requirement while only increasing the weight by at most $3\cdot\val(\calI)$.
 	\end{proof}
-	
+
 	\subsection{Obtaining a Vertebrate Pair}
 	Now we would like to find a way to convert an instance $\calI$ and quasi-backbone $B$ into a vertebrate pair $(\calI', B')$ and then use it, along with an approximation algorithm for ATSP on vertebrate pair to approximate ATSP on irreducible instances.\\
-	
+	\begin{theorem}
+		Given an irreducible instance $\calI$, \hyperref[alg:6:irr-atsp]{Algorithm \ref{alg:6:irr-atsp}} returns a Tour of $\calI$ of cost no more than $\rho\cdot\val(\calI)$ where, $\rho = \frac{\kappa + \eta(\alpha_{NW} + 3)}{1 - 2\epsilon}$.
+	\end{theorem}
 	\begin{algorithm}\label{alg:6:irr-atsp}
 		\caption{Irreducible ATSP ($A_{irr}$) $\rightarrow$ Vertebrate Pair}
 		\KwIn{
@@ -49,16 +50,13 @@
 		$\lam^*_{\max} \leftarrow $ all non-singleton maximal sets in $\lam^*$.\\
 		\For{each $S \in \lam^*_{\max}$} {
 			Find $T_S \leftarrow A_{irr}(\calI[S])$.\\
-			Use $T_S$ to find $F_S$ for which $S$ is contractible. 
+			Use $T_S$ to find $F_S$ for which $S$ is contractible.
 		}
 		$\calI' = $ Instance obtained by contracting every $S \in \lam^*_{\max}$.\\
 		$T' \leftarrow A(\calI', B)$ and $T \leftarrow $ lift of $T'$.\\
 		\Return $T \cup \left(\cup_{S \in \lam^*_{\max}} F_S\right)$
 	\end{algorithm}
-	
-	\begin{theorem}
-		Given an irreducible instance $\calI$, \hyperref[alg:6:irr-atsp]{Algorithm \ref{alg:6:irr-atsp}} returns a Tour of $\calI$ of cost no more than $\rho\cdot\val(\calI)$ where, $\rho = \frac{\kappa + \eta(\alpha_{NW} + 3)}{1 - 2\epsilon}$.
-	\end{theorem}
+
 	\begin{proof}
 		\begin{align*}
 			w(F) &\leqslant w(T') \leqslant \kappa\val(\calI) + \eta(\alpha_{NW} + 3)\val(\calI) \\
@@ -76,6 +74,6 @@
 			&\leqslant \left(\kappa + \eta(\alpha_{NW} + 3)\right)\val(\calI) + 2\rho (\epsilon\cdot \val(\calI))\\
 			Cost(\calI) &\leqslant \rho\val(\calI)
 		\end{align*}
-		
+
 	\end{proof}
 \end{document}

@@ -35,11 +35,6 @@ The equality follows from the definition of $\val$ and $\calI\setminus S$, and t
 		\item[Type 3:] For every pair $(u_{in}, v_{in}),(u_{out},v_{out})$ of type 2, $F$ contains a shortest $v_{in}-u_{out}$ path in $S$.
 	\end{itemize}
 Lifting $T$ consists of a sequence of replacements where in each replacement, a pair of edges of type 1 is replaced by a pair of edges of type 2, along with a path of type 3. Let $u$ be the first vertex in the path, and let $v$ be the last. One can show that the total decrease in weight after performing the replacement is exactly equal to $D_{max}(S) - D_S(u,v) $, which must be nonnegative. Since lifting $T$ consists of a sequence of such replacements, the weight of the lift can only be smaller than that of $T$.
-	%	Let $\alpha_R$ be the number of times $T$ crosses the laminar set $R$. Let $(u_{in}^{(1)}, s), (s, v_{out}^{(1)}),\cdots, (u_{in}^{(k)}, s), (s, v_{out}^{(k)})$ be the edges of $T$ going in or out of $s$ in the order used to construct the lift of $T$.
-	%	\begin{align*}
-	%		w_\calI(F) &= \sum_{\substack{R \in \lam'; R \nsubseteq S}}\alpha_R y_R + \sum_{i = 1}^{\alpha_S}\left(2y_S + D_S\left(v_{in}^{(i)}, u_{out}^{(i)}\right)\right)\\
-	%		&\leqslant\sum_{R \in \lam': R \nsubseteq S}\alpha_R y_R + \sum_{i = 1}^{\alpha_S}2\left(y_S + \frac{1}{2}D_{\max}(S)\right) = w_{\calI/S}(T)
-%		\end{align*}
 	\end{proof}
 
 	\subsection{Inducing}
@@ -57,23 +52,28 @@ Lifting $T$ consists of a sequence of replacements where in each replacement, a 
 		$\val(\calI[S]) = 2\cdot\val(S)$
 	\end{fact}
 
-	The sub-tour obtained by lifting a tour in contracted instance is guaranteed to be a single component but its not guaranteed to cover all vertices, for this we use a tour in the induced graph to patch in the vertices that are not visited.\\
-
-	\subfile{Diagrams/Lift-Induced.tex}
-	Let $S_1, \dots, S_l$ be the strongly connected components in $S \in \lam$, indexed in topological order.
-	\begin{definition}\label{def:3:indu-lift}
-		For a tour $T$ in $\calI[S]$, we define its lift to be the following:\\
-		For any strongly connected component $S_i \subseteq S$ we obtain a tour $F_i$ of $S_i$ by taking all the edges in $T$ that are contained within $S_i$ and for every time the $T$ exits $S_i$ from $u_{out}$ and enters the next time to a vertex $v_{in}$, we add the shortest $u_{out} - v_{in}$ path in $S_i$.
-		This is illustrated in \hyperref[fig:lift-i]{Figure \ref{fig:lift-i}}.\\
-		$F = \cup_{i \in [l]} F_i$ is the lift of $T$.\\
-	\end{definition}
-
-
 	\begin{definition}
 		We say that a set $S \in \lam$ is contractible with respect to an Eulerian set of egdes $F \subseteq E$ if the lift of any tour of $\calI/S$ plus the set $F$ is a tour in $\calI$.\\
 	\end{definition}
 
-	Due to the \hyperref[fig:tightPath]{path-like structure} of tight sets, $F$ the lift of a tour in $\calI[S]$ must visit each stringly connected component in $S$ at least once. Therefore, $F$ makes $S$ contractible.\\
+	The sub-tour obtained by lifting a tour of $\calI\setminus S$ is guaranteed to visit all vertices in $V\setminus S$, but the only guarantee we have about vertices in $S$ is that the lift must visit some vertex of $S$. We would like to use a tour in $\calI[S]$ to find some set $F$ that is contractible with respect to $S$.
+
+	Since every path passing through a laminar set must visit every SCC of that laminar set, the lift of a tour in $\calI\setminus S$ must visit every strongly connected component of
+
+	Let $S_1, \dots, S_l$ be the strongly connected components in $S \in \lam$, indexed in topological order {\color{red} Why do we need it to be indexed in topological order?}.
+	For all strongly connected components $S_i \subseteq S$, we obtain a tour $F_i$ of $S_i$ by taking all the edges in $T$ that are contained within $S_i$ and for every time the $T$ exits $S_i$ from $u_{out}$ and enters the next time to a vertex $v_{in}$, we add the shortest $u_{out} - v_{in}$ path in $S_i$.
+
+	This is illustrated in \hyperref[fig:lift-i]{Figure \ref{fig:lift-i}}.
+	\vspace{2mm}
+	\subfile{Diagrams/Lift-Induced.tex}
+	\begin{definition}\label{def:3:indu-lift}
+		Given a tour $T$ of $\calI[S]$, its \textbf{lift} is defined to be $F_1\cup F_2\cup\cdots\cup F_l$.
+	\end{definition}
+
+
+
+
+	Due to the \hyperref[fig:tightPath]{structure of tight sets}, $F$ the lift of a tour in $\calI[S]$ must visit each stringly connected component in $S$ at least once. Therefore, $F$ makes $S$ contractible.\\
 	\subfile{Diagrams/TightPaths.tex}
 
 	\begin{lemma}\label{lemm:3:lift-i}
@@ -83,8 +83,8 @@ Lifting $T$ consists of a sequence of replacements where in each replacement, a 
 		We showed in \hyperref[lemm:2:SiAgree]{lemma \ref{lemm:2:SiAgree}} that any connected component $S_i$ agrees with the laminar family $\lam'$. We can use this in conjunction with \hyperref[lemm:2:D-val]{lemma \ref{lemm:2:D-val}} to bound the cost of the shortest $u_{out} - v_{in}$ path in $S_i$ by $\val_{\calI[S]}(S_i)$. Also, let $k$ be the number of times $T$ visits $\bar{s}$. Therefore weight of $F$ is
 		\begin{align*}
 			w_{\calI}(F) &= \sum_{i \in [l]} w_{\calI}(F_i)\\
-			&\leqslant \sum_{i \in [l]} \left[k\val(S) + w_{\calI}(T \cap E(S_i))\right]\\
-			&\leqslant 2k \frac{\val(S)}{2} + \sum_{i \in [l]}w_{\calI}(T \cap E(S_i)) = w_{\calI[S]}(T).
+			&\leqslant \sum_{i \in [l]} \left[k\cdot\val(S_i) + w_{\calI}(T \cap E(S_i))\right]\\
+			&\leqslant k \cdot\val(S) + \sum_{i \in [l]}w_{\calI}(T \cap E(S_i)) = w_{\calI[S]}(T).
 		\end{align*}
 	\end{proof}
 \end{document}
