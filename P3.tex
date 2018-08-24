@@ -60,18 +60,20 @@ Lifting $T$ consists of a sequence of replacements where in each replacement, a 
 
 	Since every path passing through a laminar set must visit every SCC of that laminar set, the lift of a tour in $\calI\setminus S$ must visit every strongly connected component of
 
-	Let $S_1, \dots, S_l$ be the strongly connected components in $S \in \lam$, indexed in topological order{\color{red} Why do we need it to be indexed in topological order?}. For all strongly connected components $S_i \subseteq S$, we obtain a tour $F_i$ of $S_i$ by taking all the edges in $T$ that are contained within $S_i$ and for every time the $T$ exits $S_i$ from $u_{out}$ and enters the next time to a vertex $v_{in}$, we add the shortest $u_{out} - v_{in}$ path in $S_i$.
+	Let $S_1, \dots, S_l$ be the strongly connected components in $S \in \lam$, indexed in topological order {\color{red} Why do we need it to be indexed in topological order?}.
+	For all strongly connected components $S_i \subseteq S$, we obtain a tour $F_i$ of $S_i$ by taking all the edges in $T$ that are contained within $S_i$ and for every time the $T$ exits $S_i$ from $u_{out}$ and enters the next time to a vertex $v_{in}$, we add the shortest $u_{out} - v_{in}$ path in $S_i$.
+
 	This is illustrated in \hyperref[fig:lift-i]{Figure \ref{fig:lift-i}}.
 	\vspace{2mm}
 	\subfile{Diagrams/Lift-Induced.tex}
 	\begin{definition}\label{def:3:indu-lift}
-		Given a tour $T$ of $\calI[S]$, its \textbf{lift} is defined to be $F_1\cup F_2\cup\cdots\cup F_l$
+		Given a tour $T$ of $\calI[S]$, its \textbf{lift} is defined to be $F_1\cup F_2\cup\cdots\cup F_l$.
 	\end{definition}
 
 
 
 
-	Due to the \hyperref[fig:tightPath]{path-like structure} of tight sets, $F$ the lift of a tour in $\calI[S]$ must visit each stringly connected component in $S$ at least once. Therefore, $F$ makes $S$ contractible.\\
+	Due to the \hyperref[fig:tightPath]{structure of tight sets}, $F$ the lift of a tour in $\calI[S]$ must visit each stringly connected component in $S$ at least once. Therefore, $F$ makes $S$ contractible.\\
 	\subfile{Diagrams/TightPaths.tex}
 
 	\begin{lemma}\label{lemm:3:lift-i}
@@ -81,8 +83,8 @@ Lifting $T$ consists of a sequence of replacements where in each replacement, a 
 		We showed in \hyperref[lemm:2:SiAgree]{lemma \ref{lemm:2:SiAgree}} that any connected component $S_i$ agrees with the laminar family $\lam'$. We can use this in conjunction with \hyperref[lemm:2:D-val]{lemma \ref{lemm:2:D-val}} to bound the cost of the shortest $u_{out} - v_{in}$ path in $S_i$ by $\val_{\calI[S]}(S_i)$. Also, let $k$ be the number of times $T$ visits $\bar{s}$. Therefore weight of $F$ is
 		\begin{align*}
 			w_{\calI}(F) &= \sum_{i \in [l]} w_{\calI}(F_i)\\
-			&\leqslant \sum_{i \in [l]} \left[k\val(S) + w_{\calI}(T \cap E(S_i))\right]\\
-			&\leqslant 2k \frac{\val(S)}{2} + \sum_{i \in [l]}w_{\calI}(T \cap E(S_i)) = w_{\calI[S]}(T).
+			&\leqslant \sum_{i \in [l]} \left[k\cdot\val(S_i) + w_{\calI}(T \cap E(S_i))\right]\\
+			&\leqslant k \cdot\val(S) + \sum_{i \in [l]}w_{\calI}(T \cap E(S_i)) = w_{\calI[S]}(T).
 		\end{align*}
 	\end{proof}
 \end{document}

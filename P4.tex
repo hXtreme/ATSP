@@ -15,7 +15,7 @@
 	%By this definition, we see that if we contract a reducible set $S$, the LP-value goes down by at least $\val_\calI(S) - D_{\max}(S) \geqslant(1-\delta)\cdot \val_\calI(S)$.\\
 	By this definition, we see that if we contract a reducible set $S$, the LP-value goes down by at least $\val_\calI(S) - D_{\max}(S) \geqslant \epsilon\cdot \val_\calI(S)$.\\
 
-	\begin{algorithm}[h]\label{alg:1}
+	\begin{algorithm}[H]\label{alg:1}
 		\caption{LAMINARLY WEIGHTED $\rightarrow$ IRREDUCIBLE}
 		\SetKwFunction{Lift}{Lift}
 		\eIf{$\calI$ is irreducible}{
@@ -27,30 +27,25 @@
 			$T' \leftarrow \Lift(T)$, $T_S' \leftarrow \Lift(T_S)$.\\
 			\Return $T'\cup T_S'$
 		}
-	\end{algorithm}
-
+	\end{algorithm}\vspace{2mm}
+	
 	\begin{theorem}
 		%A $\rho$-approximation algorithm for ATSP on irreducible instances $(A_{irr})$ implies a $\frac{2\rho}{1-\delta}$-approximation algorithm for ATSP on laminarly weighted instances.
 		A $\rho$-approximation algorithm for ATSP on irreducible instances $(A_{irr})$ implies a $\frac{2\rho}{\epsilon}$-approximation algorithm for ATSP on laminarly weighted instances.
 	\end{theorem}
 	\begin{proof}
-		Note that step 6 of the algorithm is valid because $\calI[S]$ is irreducible - all the laminar sets inside $S$ were already irreducible, and all singleton sets are trivially irreducible, so the new laminar set is also irreducible.\\
+		The reduction is described in Algorithm 1. Note that step 6 of the algorithm is valid because $\calI[S]$ is irreducible - all the laminar sets inside $S$ were already irreducible, and all singleton sets are trivially irreducible, so the new laminar set is also irreducible.\\
 		Also note that the base case (i.e $\calI$ is already irreducible) is trivial.
 
-		For the sake of induction, assume that our algorithm gives us a tour $T$ of $\calI/S$ such that:
-		\[
+		For the sake of induction, assume that our algorithm gives us a $\frac{2\rho}{\epsilon}$-approximate tour $T$ of $\calI/S$. Then
 			%w_{\calI/S}(T) \leqslant \frac{2\rho}{1-\delta}\cdot \val(\calI/S).
-			w_{\calI/S}(T) \leqslant \frac{2\rho}{\epsilon}\cdot \val(\calI/S).
-		\]
-		We know that $w_{\calI[S]}(T_S)\leqslant \rho\cdot \val(\calI[S]) = 2\rho\cdot\val_S(\calI)$.\\
-		Now,
 		\begin{align*}
 				%ALG &= w_\calI(T') + w_\calI(T_S') \leqslant w_{\calI[S]}(T) + w_{\calI/S}(T_S) \leqslant \frac{2\rho}{1-\delta}\val(I/S) + \rho\cdot \val(\calI[S])\\
-				ALG &= w_\calI(T') + w_\calI(T_S') \leqslant w_{\calI[S]}(T) + w_{\calI/S}(T_S) \leqslant \frac{2\rho}{\epsilon}\val(I/S) + \rho\cdot \val(\calI[S])\\
+				ALG &= w_\calI(T') + w_\calI(T_S') \leqslant w_{\calI[S]}(T) + w_{\calI/S}(T_S) \\&\leqslant \frac{2\rho}{\epsilon}\val(I/S) + \rho\cdot \val(\calI[S])\\
 				%&\leqslant \frac{2\rho}{1-\delta}(\val(\calI) - (1-\delta) \val_\calI(S)) + 2\rho\cdot\val_\calI(S)\\
-				&\leqslant \frac{2\rho}{\epsilon}(\val(\calI) - \epsilon \val_\calI(S)) + 2\rho\cdot\val_\calI(S)\\
+				&\leqslant \frac{2\rho}{\epsilon}\cdot(\val(\calI) - \epsilon\cdot\val_\calI(S)) + 2\rho\cdot\val_\calI(S)\\
 				%ALG &= \frac{2\rho}{1-\delta} \val(\calI)
-				ALG &= \frac{2\rho}{\epsilon} \val(\calI)
+				&= \frac{2\rho}{\epsilon} \val(\calI)
 		\end{align*}
 	\end{proof}
 \end{document}
