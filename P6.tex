@@ -66,7 +66,7 @@
 			We receive $(\calI,B)$ and $V_1,\ldots,V_k$ as input. We output $F^*=B\cup P\cup F$, where $P$ and $F$ are defined as:
 			\begin{enumerate}
 				\item[$P$:] If $B$ exists entirely within some $V_i$, then we pick $P$ the shortest cycle containing $u\in B$ and $v\notin V_i$. Otherwise we keep $P$ empty.
-				\item[$F$:] WLOG, let $V_1,\ldots,V_l$ be the partitions that are disjoint from $B$. Now let $V_i'$ be the intersection of $V_i$ with a minimal set in $L_{\geqslant 2}$ that $V_i$ intersects. Let $U_i$ be the first strongly connected component of $V_i'$ (in the topological order). Set $F$ to be the eulerian set guaranteed by running the algorithm of \hyperref[lemma7]{Lemma \ref{lemma7}} on $U_1,\ldots,U_l$.
+				\item[$F$:] WLOG, let $V_1,\ldots,V_l$ be the partitions that are disjoint from $B$. Now let $V_i'$ be the intersection of $V_i$ with a minimal set in $\lamNS$ that $V_i$ intersects. Let $U_i$ be the first strongly connected component of $V_i'$ (in the topological order). Set $F$ to be the eulerian set guaranteed by running the algorithm of \hyperref[lemma7]{Lemma \ref{lemma7}} on $U_1,\ldots,U_l$.
 			\end{enumerate}\vspace{2mm}
 			Now we need to verify that $B\cup P\cup F$ is feasible, and that it is $O(1)$-light.
 			\\For each $V_i$, there are three possibilities:
@@ -81,13 +81,13 @@
 				\item[(a)] $\tilde{G}$ contains the backbone. So $$w(\tilde{G})\leqslant w(B) + w(P) + w(F)\leqslant O(\val(I)) + \val(\calI) + 3\cdot\val(\calI) = O(\val(\calI))$$
 				      $$\lb(\tilde{G})\geqslant \lb(V(B)) = \val(\calI)$$
 				      And it follows that $w(\tilde{G})\leqslant O(\lb(\tilde{G}))$.
-				\item[(b)] $\tilde{G}$ is disjoint from the backbone. In this case, $(4)$ guarantees that $\tilde{G}$ did not cross any set in $L_{\geqslant 2}$, so the only sets it might have crossed are singletons. Additionally, $(3)$ guarantees that it crosses each singleton at most four times. $$w(\tilde{G})\leqslant \sum_{v\in V(\tilde{G})}4\cdot 2\cdot y_v = 4\cdot\lb(\tilde{G})$$
+				\item[(b)] $\tilde{G}$ is disjoint from the backbone. In this case, $(4)$ guarantees that $\tilde{G}$ did not cross any set in $\lamNS$, so the only sets it might have crossed are singletons. Additionally, $(3)$ guarantees that it crosses each singleton at most four times. $$w(\tilde{G})\leqslant \sum_{v\in V(\tilde{G})}4\cdot 2\cdot y_v = 4\cdot\lb(\tilde{G})$$
 			\end{enumerate}
 		\end{proof}
 		
 		\subsection{Proof of \hyperref[lemma7]{Lemma \ref{lemma7}}: The final ingredient}
 
-			Order the laminar sets in $L_{\geqslant 2}$ by size so that $|S_1|\leqslant |S_2|\leqslant\cdots\leqslant |S_l| = |V|$. For each $v\in V$, define $level(v)$ to be the index of the smallest set it is contained in.\vspace{2mm}
+			Order the laminar sets in $\lamNS$ by size so that $|S_1|\leqslant |S_2|\leqslant\cdots\leqslant |S_l| = |V|$. For each $v\in V$, define $level(v)$ to be the index of the smallest set it is contained in.\vspace{2mm}
 			\begin{definition}
 				An edge $e$ is called a \textbf{forward edge}, \textbf{backward edge}, or \textbf{neutral edge} if $e\in E_f$, $e\in E_b$, or $e\in E_n$ respectively, where $E_f, E_b,$ and $E_n$ are defined as:
 				\begin{enumerate}[$-$]
@@ -169,7 +169,7 @@
 					\item[Case 1:] $v\notin T$. Since we only decreased the $\pi$-value of vertices in $T$ (and left all other vertices unchanged), the left hand side of each of the first two dual inequalities can only increase. So these inequalities are still satisfied.
 					\item[Case 2:] $u,v\in T$. In this case, the decrease in $\pi_v$ is matched by the increase in $-\pi_u$, so the inequalities are still satisfied.
 					\item[Case 3:] $u\notin S, v\in T$. In this case, the decrease in $\pi_v$ is matched by the increase in $z(u,v)$, so the inequalities are still satisfied.
-					\item[Case 4:] $u\in S\setminus T, v\in T$. In this case, $(u,v)$ cannot be a forward edge, since if it were, then $T$ would intersect a set in $L_{\geqslant 2}$ which was smaller than $S$. But we defined $S$ to be the smallest such set. So we only consider the second inequality, which must be satisfied, since $\pi_u$ was already $0$ and $\pi_v$ is nonnegative.
+					\item[Case 4:] $u\in S\setminus T, v\in T$. In this case, $(u,v)$ cannot be a forward edge, since if it were, then $T$ would intersect a set in $\lamNS$ which was smaller than $S$. But we defined $S$ to be the smallest such set. So we only consider the second inequality, which must be satisfied, since $\pi_u$ was already $0$ and $\pi_v$ is nonnegative.
 				\end{itemize}
 			The inequality $\pi\geqslant 0$ must be satisfied simply because we reduced $\pi_v$ for $v\in T$ by $\min_{u\in T}\pi_u$. 
 			Also, since all edges $(u,v)$ in $F'$ are either neutral or forward, we originally satisfied $\pi_v - \pi_u + z(u,v)\geqslant 0$. Since $u\in T$ and $v\in S\setminus T$, we must have that $0 - \varepsilon + z(u,v)\geqslant 0$, that is, $z(u,v)\geqslant \varepsilon$. 
@@ -207,7 +207,9 @@
 		For $(u,v),(v',u')\in F$ such that $(u,v)\in X^-_i$ and $(v',u')\in X^+_i$, there is always a $v-v'$ path within $U_i$.
 		\end{claim}
 		\begin{proof}
-			First note that since for every $S\in L_{\geqslant 2}$, $U_i\subseteq S$ or $U_i\cap S = \emptyset$, all the edges within $U_i$ are neutral edges (i.e. they don't cross any set in $L_{\geqslant 2}$). 
+			First note that since for every $S\in \lamNS$, $U_i\subseteq S$ or $U_i\cap S = \emptyset$, all the edges within $U_i$ are neutral edges (i.e. they don't cross any set in $\lamNS$) and, by definition $U_i \cap B = \emptyset$.
+			So all $v \in U_i$ have the same level and all edges are neutral.
+			Therefore all the $0$-vertices, and $1$-vertices in $U_i$ are strongly connected. Furthermore, we can always go from a $0$-vertex to a $1$-vertex. This along with the fact that we can't have $1-1$ edges in $X_i^-$ if we have a $0-0$ edge in $X_i^+$ proves the claim.
 		\end{proof}
 
 \end{document}
