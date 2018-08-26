@@ -36,28 +36,26 @@
 	\end{proof}
 
 	\subsection{Obtaining a Vertebrate Pair}
-	Now we would like to find a way to convert an instance $\calI$ and quasi-backbone $B$ into a vertebrate pair $(\calI', B')$ and then use it, along with an approximation algorithm for ATSP on vertebrate pair to approximate ATSP on irreducible instances.\\
+	Now we would like to find a way to convert an instance $\calI$ and quasi-backbone $B$ into a vertebrate pair $(\calI', B')$ and then use an algorithm for vertebrate pairs to make some progress on finding a tour in $\calI$.\\
 	\begin{theorem}
-		Given an irreducible instance $\calI$, \hyperref[alg:6:irr-atsp]{Algorithm \ref{alg:6:irr-atsp}} returns a Tour of $\calI$ of cost no more than $\rho\cdot\val(\calI)$ where, $\rho = \frac{\kappa + \eta(\alpha_{NW} + 3)}{1 - 2\epsilon}$.
+		Assume there exists an approximation algorithm, that given a vertebrate pair $(\calI, B)$, returns a tour of length at most $\kappa\cdot\val(\calI) + \eta\cdot w(B)$. Then there is a $\rho$-approximation algorithm for irreducible instances, where $\rho = \frac{\kappa + \eta(\alpha_{NW} + 3)}{1 - 2\epsilon}$
 	\end{theorem}
 	\begin{algorithm}\label{alg:6:irr-atsp}
-		\caption{Irreducible ATSP ($A_{irr}$) $\rightarrow$ Vertebrate Pair}
-		\KwIn{
-			Irreducible instance $\calI = (G, \lam, x, y)$\\
-			Algorithm $A$ for ATSP on vertebrate pair that returns a tour of cost at most $\kappa\val(\calI') + \eta w(B)$.
-		}
+		\caption{IRREDUCIBLE $\rightarrow$ VERTEBRATE PAIRS}
 		Use \hyperref[lemm:6:q-bb]{Lemma \ref{lemm:6:q-bb}} to obtain a quasi-backbone $B$.\\
 		$\lam^*_{\max} \leftarrow $ all non-singleton maximal sets in $\lam^*$.\\
 		\For{each $S \in \lam^*_{\max}$} {
-			Find $T_S \leftarrow A_{irr}(\calI[S])$.\\
-			Use $T_S$ to find $F_S$ for which $S$ is contractible.
+		Use recursion to find a tour $T_S$ in $\calI[S]$.\\
+		$F_S\leftarrow$ lift of $T_S$.
 		}
-		$\calI' = $ Instance obtained by contracting every $S \in \lam^*_{\max}$.\\
-		$T' \leftarrow A(\calI', B)$ and $T \leftarrow $ lift of $T'$.\\
-		\Return $T \cup \left(\cup_{S \in \lam^*_{\max}} F_S\right)$
+		$\calI'\leftarrow$ instance obtained by contracting all $S\in L_{max}^*$\\
+		$T'\leftarrow$ tour in $\calI'$ obtained by running the vertebrate pairs algorithm on $(\calI', B)$.\\
+		$T \leftarrow $ lift of $T'$.\\
+		\Return  $\left(\cup\ F_S\right)\cup T$
 	\end{algorithm}
 
 	\begin{proof}
+		The reduction is described in Algorithm 2.
 		\begin{align*}
 			w(F) &\leqslant w(T') \leqslant \kappa\val(\calI) + \eta(\alpha_{NW} + 3)\val(\calI) \\
 			w(F) &\leqslant \left(\kappa + \eta(\alpha_{NW} + 3)\right)\val(\calI)
