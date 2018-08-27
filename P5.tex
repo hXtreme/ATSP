@@ -57,7 +57,7 @@
 	\begin{proof}
 		The reduction is described in Algorithm 2. Note that step 8 is valid since all the sets in $L_{\geq 2}$ that were not visited by $B$ are actually singletons in $\calI'$.\vspace{2mm}
 		\\That the total value of sets in $\lam^*_{\max}$ is at most $\epsilon\cdot \val(\calI)$ by definition of the quasi-backbone. So the total value of the recursive instances is $\sum_{S\in \lam^*_{\max}}2\cdot\val_{\calI}(S)\leqslant 2\epsilon\cdot\val(\calI)$. In other words, the total value at some recursive depth is a geometric sequence with respect to the depth whose ratio is equal to $2\cdot\epsilon$.\vspace{2mm}
-		\\Since the non-recursive cost incurred by the algorithm is at most $(\kappa + \eta (\alpha_{NW} + 3))\cdot\val(\calI) = \rho$, and the $\val$ decays geometrically with recursion, the algorithm's cost is bounded by $\frac{\rho}{1-2\epsilon}\val(\calI)$.
+		\\Since the non-recursive cost incurred by the algorithm is at most $(\kappa + \eta (\alpha_{NW} + 3))\cdot\val(\calI) = \rho$, and the total $\val$ decays geometrically with recursion, the algorithm's cost is bounded by $\frac{\rho}{1-2\epsilon}\val(\calI)$.
 
 	\end{proof}
 \end{document}
