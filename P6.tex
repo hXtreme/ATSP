@@ -11,28 +11,28 @@
 			\item $\lb(V) = \val(\calI)$
 		\end{enumerate}
 		One can think of \lb\ as being defined by distributing the LP value among the vertices in some way.\\
-		
-		\begin{problem}\ 
+
+		\begin{problem}\
 			\begin{itemize}
 				\item[Input:]
 					An instance $\calI$, a partitioning of $V$ $V_1, \dots V_k$ such that each $V_i$ is strongly connected.
 				\item[Output:] $F$, an eulerian set of edges such that for every $i$, $F$ exits (and hence enters) $V_i$ at least once.\\
 			\end{itemize}
 		\end{problem}
-		
+
 		\begin{definition}
 			An algorithm for local connectivity ATSP is called $\bm{\alpha}\textbf{-light}$ if it outputs $F$ such that for each strongly connected component induced by $F$, say $\tilde{G}$, $w(\tilde{G})\leqslant \alpha\cdot \lb(\tilde{G})$.\\
 		\end{definition}
-		
-		\begin{theorem}[Svensson '15] 
+
+		\begin{theorem}[Svensson '15]
 			An $\alpha$-light algorithm for local connectivity ATSP implies a $O(\alpha)$-approximation algorithm for ATSP.
 		\end{theorem}
-		
+
 		The paper describes an $O(1)$-light algorithm for local connectivity on vertebrate pairs, which gives us an $O(1)$-approximation algorithm for ATSP on vertebrate pairs, and hence an $O(1)$-approximation algorithm for general ATSP.\\
 		We will also assume that $w(B)\leqslant O(1)\cdot \val(\calI)$, since in the previous reduction, this inequality is always true.\\
-		
+
 		\begin{definition}
-			For this algorithm, we will define \lb\ as 
+			For this algorithm, we will define \lb\ as
 			\[
 				\textbf{\lb(v)}:=
 				\begin{cases}
@@ -41,14 +41,14 @@
 				\end{cases}
 			\]
 		\end{definition}
-		
+
 		Note that this definition does not guarantee that $\lb(V) = \val(\calI)$, but $\lb(V)$ is always a constant factor away from $\val(\calI)$, so we can work with these \lb\ values and suffer a constant factor loss in the approximation ratio.\\
-		
+
 		To make corner cases easier, we add $V$ to $\lamNS$ for the rest of this write up.\\
-		
+
 		The following is the main technical lemma of the paper. \vspace{1mm}
 		\begin{lemma}[Lemma 7.3 in the paper]\label{lemma7}
-			Given $U_1,\ldots,U_l$ disjoint subsets of $V\setminus V(B)$ that are strongly connected in $G$, such that for each $S\in \lamNS$, either $U_i\in S$ or $U_i$ is disjoint from $S$, we can find eulerian $F\subseteq E$ such that:
+			Given $U_1,\ldots,U_l$ disjoint subsets of $V\setminus V(B)$ that are strongly connected in $G$, such that for each $S\in \lamNS$, either $U_i\in S$ or $U_i$ is disjoint from $S$, we can find eulerian $F\subseteq E$ that guarantees the following:
 			\begin{enumerate}[(1)]
 				\item $w(F)\leqslant 3\cdot \val(I)$
 				\item $|\delta^-_F(U_i)|\geqslant 1$ for all $i$
@@ -56,9 +56,9 @@
 				\item Any subtour in $F$ that crosses a set in $\lamNS$ visits a vertex of the backbone\\
 			\end{enumerate}
 		\end{lemma}
-		
+
 		We will use the lemma to prove the following theorem, and prove the lemma later on.\\
-		
+
 		\begin{theorem}
 			There is an $O(1)$-light algorithm for local connectivity ATSP on vertebrate pairs.
 		\end{theorem}
@@ -84,7 +84,7 @@
 				\item[(b)] $\tilde{G}$ is disjoint from the backbone. In this case, $(4)$ guarantees that $\tilde{G}$ did not cross any set in $\lamNS$, so the only sets it might have crossed are singletons. Additionally, $(3)$ guarantees that it crosses each singleton at most four times. $$w(\tilde{G})\leqslant \sum_{v\in V(\tilde{G})}4\cdot 2\cdot y_v = 4\cdot\lb(\tilde{G})$$
 			\end{enumerate}
 		\end{proof}
-		
+
 		\subsection{Proof of \hyperref[lemma7]{Lemma \ref{lemma7}}: The final ingredient}
 
 			Order the laminar sets in $\lamNS$ by size so that $|S_1|\leqslant |S_2|\leqslant\cdots\leqslant |S_l| = |V|$. For each $v\in V$, define $level(v)$ to be the index of the smallest set it is contained in.\vspace{2mm}
@@ -107,10 +107,10 @@
 				\end{itemize}
 				Also for any set $S\subseteq V$, let $S^{sp}$ be its image in $G_{sp}$.
 			\end{definition}\vspace{2mm}
-			Consider the lift of some subtour in $G_{sp}$ that crosses at least one set in $\lamNS$. Let $S$ be the smallest set in $\lamNS$ that the subtour crosses. 
+			Consider the lift of some subtour in $G_{sp}$ that crosses at least one set in $\lamNS$. Let $S$ be the smallest set in $\lamNS$ that the subtour crosses.
 			Then the edge of the subtour going into $S$ must be a forward edge (i.e. a $1-1$ edge) by definition, and the edge going out of $S$ must be a backward edge (i.e. a $0-0$ edge). This means at some point, the subtour must use a $1-0$ edge, which it can only do if it crosses the backbone.\\\vspace{1mm}
 			So if we restrict ourself to lifts of subtours of $G_{sp}$ (instead of all subtours of $G$), guarantee (4) will always be true.\vspace{2mm}
-			\begin{lemma}\label{lemma6-1}		
+			\begin{lemma}\label{lemma6-1}
 				We can find $x_{sp}$, an eulerian vector on $G_{sp}$ that the image of $x_{sp}$ in $G$ is $x$.
 			\end{lemma}
 			\begin{proof}
@@ -122,7 +122,7 @@
 			\end{itemize}
 	\vspace{2mm}
 	After defining some $x_{sp}$ values on the $0-0$ and $1-1$ edges, there will be some "potential" on each vertex (i.e. the net outgoing flow), and since $x$ was eulerian, the potential of the $0$-copy of a vertex, say $v$, is exactly the negative potential of the $1$-copy.
-			If the potential of the $1$-copy is positive, $v^0$ and $v^1$ can be brought down to zero potential by routing that amount of flow through $(v^0,v^1)$. 
+			If the potential of the $1$-copy is positive, $v^0$ and $v^1$ can be brought down to zero potential by routing that amount of flow through $(v^0,v^1)$.
 			But if it is negative, this can only be equalized using a $(v^1,v^0)$ edge, which is impossible unless $v\in V(B)$. In other words, if we want $x_{sp}$ to be eulerian, it must also fulfil the following condition:
 			\begin{itemize}
 				\item[(d)] $x_{sp}(\delta^-(v_1)\setminus (v^0,v^1) )\geqslant x_{sp}(\delta^+(v_1)\setminus (v^0,v^1))$ for all $v\notin V(B)$.
@@ -130,7 +130,7 @@
 
 			It can easily be seen that (a), (b), (c), and (d) are also sufficient for some nonnegative $x_{sp}$ to fulfil the guarantees of \hyperref[lemma6-1]{Lemma \ref{lemma6-1}}.
 			 This gives rise to the following LP and its dual where $f$ can be interpreted as $x_{sp}$ restricted to $1-1$ edges:\\\vspace{2mm}
-			
+
 			\begin{minipage}{0.39\textwidth}
 			\begin{align*}
 				\max\quad\sum_{e\in E_f}&f(e)\\
@@ -150,17 +150,17 @@
 		\end{align*}
 		\end{minipage}
 
-	Once we have some primal feasible $f$, we can extend it by defining $x_{sp}$ as $f$ on $1-1$ edges, $x-f$ on $0-0$ edges, and eliminating potential differences between $0$ and $1$ copies using $0-1$ and $1-0$ edges. 
-	The first inequality of the LP guarantees (d) by definition. 
-	The second inequality guarantees (b) by definition. And the way we extend $f$ to $0-0$ edges guarantees (c). 
+	Once we have some primal feasible $f$, we can extend it by defining $x_{sp}$ as $f$ on $1-1$ edges, $x-f$ on $0-0$ edges, and eliminating potential differences between $0$ and $1$ copies using $0-1$ and $1-0$ edges.
+	The first inequality of the LP guarantees (d) by definition.
+	The second inequality guarantees (b) by definition. And the way we extend $f$ to $0-0$ edges guarantees (c).
 	Now if we know that the primal optimal value is equal to $\sum_{e\in E_f}x_e$, then it guarantees (a) as well. The following claim proves this, so (a), (b), (c), and (d) must all hold.	\end{proof}
 	\vspace{2mm}
 		\begin{claim}
 			The primal optimal value is equal to $\sum_{e\in E_f}x_e$.
 		\end{claim}
 		\begin{proof}
-			Note that if there were a dual optimal solution where $\pi = 0$, then the dual optimal (and hence primal optimal) value would be precisely $\sum_{e\in E_F}1\cdot x_e$. 
-			So consider any dual optimal solution, say $(z,\pi)$. Our goal is to convert it into a dual optimal solution whose $\pi$ has strictly smaller support. 
+			Note that if there were a dual optimal solution where $\pi = 0$, then the dual optimal (and hence primal optimal) value would be precisely $\sum_{e\in E_F}1\cdot x_e$.
+			So consider any dual optimal solution, say $(z,\pi)$. Our goal is to convert it into a dual optimal solution whose $\pi$ has strictly smaller support.
 			Running this procedure repeatedly proves that there is a dual optimal where $\pi = 0$.\vspace{2mm}
 			\\Let $T$ be the set of vertices in support($\pi$) with the smallest level, and let $S$ be the set corresponding to that level.
 			Also, let $F = \delta(V\setminus S, T)$, and $F' = \delta(T,S\setminus T)$.
@@ -171,10 +171,10 @@
 					\item[Case 3:] $u\notin S, v\in T$. In this case, the decrease in $\pi_v$ is matched by the increase in $z(u,v)$, so the inequalities are still satisfied.
 					\item[Case 4:] $u\in S\setminus T, v\in T$. In this case, $(u,v)$ cannot be a forward edge, since if it were, then $T$ would intersect a set in $\lamNS$ which was smaller than $S$. But we defined $S$ to be the smallest such set. So we only consider the second inequality, which must be satisfied, since $\pi_u$ was already $0$ and $\pi_v$ is nonnegative.
 				\end{itemize}
-			The inequality $\pi\geqslant 0$ must be satisfied simply because we reduced $\pi_v$ for $v\in T$ by $\min_{u\in T}\pi_u$. 
-			Also, since all edges $(u,v)$ in $F'$ are either neutral or forward, we originally satisfied $\pi_v - \pi_u + z(u,v)\geqslant 0$. Since $u\in T$ and $v\in S\setminus T$, we must have that $0 - \varepsilon + z(u,v)\geqslant 0$, that is, $z(u,v)\geqslant \varepsilon$. 
+			The inequality $\pi\geqslant 0$ must be satisfied simply because we reduced $\pi_v$ for $v\in T$ by $\min_{u\in T}\pi_u$.
+			Also, since all edges $(u,v)$ in $F'$ are either neutral or forward, we originally satisfied $\pi_v - \pi_u + z(u,v)\geqslant 0$. Since $u\in T$ and $v\in S\setminus T$, we must have that $0 - \varepsilon + z(u,v)\geqslant 0$, that is, $z(u,v)\geqslant \varepsilon$.
 	So the inequality $z\geqslant 0$ must be satisfied since we only reduced $z$-value in $F'$, and for all edges in $F'$, we already had $\varepsilon$ $z$-value to begin with.\vspace{2mm}
-	\\Now we will see that the new dual value is still optimal. 
+	\\Now we will see that the new dual value is still optimal.
 	The decrease in dual objective value was precisely $\varepsilon (x(F') - x(F\cap( E_f\cup E_n))\geqslant \varepsilon(x(F') - x(F))$. If we can show that this is positive, then the new dual value is still optimal. The proof relies on the fact that $S$ is either an original laminar set or $V$, so $x(\delta^-(S))\leqslant 1$. Now, $$1\leqslant x(\delta^-(S\setminus T)) = \underbrace{x(\delta^-(S)) - x(F)}_{\text{edges from outside } S} + \underbrace{x(F')}_{\text{edges from } T}\leqslant 1 - x(F) + x(F')$$
 	It follows that $x(F)\leqslant x(F')$, so the updated dual solution is still optimal, and there exists a dual optimal solution with $\pi = 0$.
 		\end{proof}
@@ -188,19 +188,19 @@
 			\item Redirect every edge in $X_i^-$ to $a_i$, and every edge in $X_i^+$ from $a_i$. In other words, $(u,v)\in X_i^-$ becomes $(u,a_i)$ and $(u,v)\in X_i^+$ becomes $(a_i, v)$. Also for each $u-v$ path we considered in the path decomposition (where $u\in X_i^-, v\in X_i^+$), reroute the $x_{sp}$ flow to the path $(u,a_i),(a_i,v)$. Call this modified flow $x'_{sp}$. Note that $x_{sp}'$ is still a circulation, and the original paths we considered are effectively deleted in $G'_{sp}$.
 			\end{itemize}
 		\end{definition}
-		We would like to round our circulation to an integral circulation. 
-		Note that for any vertex $v$ in $G_{sp}'$, we can easily modify the graph to impose capacity constraints for any subset $S$ of $\delta^-(v)$ by routing all the edges in $S$ to $v$ through a new intermediary vertex $\overline{v}$, and imposing a capacity constraint on the edge $(\overline{v},v)$. 
+		We would like to round our circulation to an integral circulation.
+		Note that for any vertex $v$ in $G_{sp}'$, we can easily modify the graph to impose capacity constraints for any subset $S$ of $\delta^-(v)$ by routing all the edges in $S$ to $v$ through a new intermediary vertex $\overline{v}$, and imposing a capacity constraint on the edge $(\overline{v},v)$.
 	So we can impose the following capacity constraints for some circulation $z_{sp}'$:
 		\begin{itemize}[-]
-		\item For all vertices $v\in V$, let $S_0$ be the set of $0-0$ edges into $v^0$ and $S_1$ be the set of $1-1$ edges into $v^1$. 
+		\item For all vertices $v\in V$, let $S_0$ be the set of $0-0$ edges into $v^0$ and $S_1$ be the set of $1-1$ edges into $v^1$.
 				Add the capacity constraints $z'_{sp}(S_0)\leqslant \ceil{2\cdot x_{sp}(S_0)}$ and $z'_{sp}(S_1)\leqslant \ceil{2\cdot x_{sp}(S_1)}$.
 		\item For all vertices $a_i$, add the constraint $z'_{sp}(\delta^-(a_i)) = 1\  (\ = 2\cdot x'_{sp}(\delta^-(a_i))\ )$
 		\end{itemize}
-		Note that $2\cdot x_{sp}'$ is feasible with respect to these constraints by construction. 
+		Note that $2\cdot x_{sp}'$ is feasible with respect to these constraints by construction.
 		So we can round $2\cdot x_{sp}'$ to obtain $z_{sp}'$, an integral, minimum-weight circulation, i.e. an eulerian set $F'$.\vspace{2mm}
-		\\However, the lift $F$ of this eulerian set from $G'_{sp}$ to $G$ might not be eulerian - recall that for every $U_i$, we replaced some $u-v$ paths with two edges $(u,a_i),(a_i,v)$. 
-		Due to the second capacity constraint, $F$ contains the first edge of one of these paths, and the last edge of one of these paths, i.e. it contains exactly one edge from $X_i^-$ and exactly one from $X_i^+$. 
-		Let these edges be $(u,v)$ and $(v',u')$ respectively. 
+		\\However, the lift $F$ of this eulerian set from $G'_{sp}$ to $G$ might not be eulerian - recall that for every $U_i$, we replaced some $u-v$ paths with two edges $(u,a_i),(a_i,v)$.
+		Due to the second capacity constraint, $F$ contains the first edge of one of these paths, and the last edge of one of these paths, i.e. it contains exactly one edge from $X_i^-$ and exactly one from $X_i^+$.
+		Let these edges be $(u,v)$ and $(v',u')$ respectively.
 		$v$ and $v'$ are the only vertices in $U_i$ that make $F$ non-eulerian, so we fix them by adding a $v-v'$ path within $U_i$. This accounts for the $(u,v)$ and $(v',u
 		)$ edges, making $F$ eulerian within $U_i$.\vspace{1mm}
 		\begin{claim}
