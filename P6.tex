@@ -5,17 +5,17 @@
 
 \begin{document}
 	\subsection{The Local Connectivity ATSP Problem}
-		Fix some function $\lb : 2^V\rightarrow \mathbb{R}^+$ that obeys the following properties:
+		Fix some function $\lb : 2^V\rightarrow \mathbb{R}^+$ that has the following properties:
 		\begin{enumerate}
 			\item $\lb(S) = \sum\limits_{v\in S}\lb(\{v\})$ for all $S\subseteq V$
 			\item $\lb(V) = \val(\calI)$
 		\end{enumerate}
-		One can think of \lb\ as being defined by distributing the LP value among the vertices in some way.\\
+		One can think of \lb\ as being defined by distributing the LP value among the vertices in some specified way.\\
 
 		\begin{problem}\
 			\begin{itemize}
 				\item[Input:]
-					An instance $\calI$, a partitioning of $V$ $V_1, \dots V_k$ such that each $V_i$ is strongly connected.
+					An instance $\calI$ along with a partition of the vertices into $V_1, \dots V_k$ such that each $V_i$ is strongly connected.
 				\item[Output:] $F$, an eulerian set of edges such that for every $i$, $F$ exits (and hence enters) $V_i$ at least once.\\
 			\end{itemize}
 		\end{problem}
@@ -28,8 +28,8 @@
 			An $\alpha$-light algorithm for local connectivity ATSP implies a $O(\alpha)$-approximation algorithm for ATSP.
 		\end{theorem}
 
-		The paper describes an $O(1)$-light algorithm for local connectivity on vertebrate pairs, which gives us an $O(1)$-approximation algorithm for ATSP on vertebrate pairs, and hence an $O(1)$-approximation algorithm for general ATSP.\\
-		We will also assume that $w(B)\leqslant O(1)\cdot \val(\calI)$, since in the previous reduction, this inequality is always true.\\
+		The paper describes an $O(1)$-light algorithm for local connectivity ATSP on vertebrate pairs, which gives us an $O(1)$-approximation algorithm for ATSP on vertebrate pairs, and hence an $O(1)$-approximation algorithm for general ATSP.\\
+		We will also assume that $w(B)\leqslant O(1)\cdot \val(\calI)$, since this will be true for any vertebrate pair instance created by the previous reductions.\\
 
 		\begin{definition}
 			For this algorithm, we will define \lb\ as
@@ -42,10 +42,7 @@
 			\]
 		\end{definition}
 
-		Note that this definition does not guarantee that $\lb(V) = \val(\calI)$, but $\lb(V)$ is always a constant factor away from $\val(\calI)$, so we can work with these \lb\ values and suffer a constant factor loss in the approximation ratio.\\
-
-		To make corner cases easier, we add $V$ to $\lamNS$ for the rest of this write up.\\
-
+		Note that this definition does not guarantee that $\lb(V) = \val(\calI)$, but $\lb(V)$ is always a constant factor away from $\val(\calI)$, so we can work with these \lb\ values and suffer a constant factor loss in the approximation ratio. Also, to make corner cases easier, we will add $V$ to $\lamNS$ for the rest of this write up.\vspace{2mm}\\
 		The following is the main technical lemma of the paper. \vspace{1mm}
 		\begin{lemma}[Lemma 7.3 in the paper]\label{lemma7}
 			Given $U_1,\ldots,U_l$ disjoint subsets of $V\setminus V(B)$ that are strongly connected in $G$, such that for each $S\in \lamNS$, either $U_i\in S$ or $U_i$ is disjoint from $S$, we can find eulerian $F\subseteq E$ that guarantees the following:
@@ -53,12 +50,10 @@
 				\item $w(F)\leqslant 3\cdot \val(I)$
 				\item $|\delta^-_F(U_i)|\geqslant 1$ for all $i$
 				\item $|\delta^-_F(v)|\leqslant 4$ for all $v$ such that $x(\delta^-(v)) = 1$
-				\item Any subtour in $F$ that crosses a set in $\lamNS$ visits a vertex of the backbone\\
+				\item Any subtour in $F$ that crosses a set in $\lamNS$ visits a vertex of the backbone
 			\end{enumerate}
 		\end{lemma}
-
 		We will use the lemma to prove the following theorem, and prove the lemma later on.\\
-
 		\begin{theorem}
 			There is an $O(1)$-light algorithm for local connectivity ATSP on vertebrate pairs.
 		\end{theorem}
@@ -66,7 +61,7 @@
 			We receive $(\calI,B)$ and $V_1,\ldots,V_k$ as input. We output $F^*=B\cup P\cup F$, where $P$ and $F$ are defined as:
 			\begin{enumerate}
 				\item[$P$:] If $B$ exists entirely within some $V_i$, then we pick $P$ the shortest cycle containing $u\in B$ and $v\notin V_i$. Otherwise we keep $P$ empty.
-				\item[$F$:] WLOG, let $V_1,\ldots,V_l$ be the partitions that are disjoint from $B$. Now let $V_i'$ be the intersection of $V_i$ with a minimal set in $\lamNS$ that $V_i$ intersects. Let $U_i$ be the first strongly connected component of $V_i'$ (in the topological order). Set $F$ to be the eulerian set guaranteed by running the algorithm of \hyperref[lemma7]{Lemma \ref{lemma7}} on $U_1,\ldots,U_l$.
+				\item[$F$:] WLOG, let $V_1,\ldots,V_l$ be the partitions that are disjoint from $B$. Now let $V_i'$ be the intersection of $V_i$ with a minimal set in $\lamNS$ that it intersects. Let $U_i$ be the first strongly connected component of $V_i'$ (in the topological order). Set $F$ to be the eulerian set guaranteed by running the algorithm of \hyperref[lemma7]{Lemma \ref{lemma7}} on $U_1,\ldots,U_l$.
 			\end{enumerate}\vspace{2mm}
 			Now we need to verify that $B\cup P\cup F$ is feasible, and that it is $O(1)$-light.
 			\\For each $V_i$, there are three possibilities:
@@ -75,8 +70,8 @@
 				\item[(b)] $V_i$ partially contains the backbone. In this case, $B$ trivially crosses $V_i$, so $F^*$ must enter $V_i$.
 				\item[(c)] $V_i$ is disjoint from the backbone. In this case, (2) tells us that some edge $(u,v)$ must enter $U_i$. $u\notin V_i'$ since $U_i$ is the source component of $V_i'$. So either $u\in S\setminus V_i$ or $u\notin S$. If the former is true, then $(u,v)$ enters $V_i$ from outside. If the latter is true, then $(u,v)$ crosses $S$, and guarantee $(4)$ of \hyperref[lemma7]{Lemma \ref{lemma7}} tells us that the subtour containing $(u,v)$ visits the backbone, which is outside $V_i$.
 			\end{enumerate}
-			In any case, $F^*$ crosses each $V_i$, so it is indeed feasible.\\\vspace{2mm}
-			Now consider any strongly connected component of $F^*$, say $\tilde{G}$. We would like to bound $w(\tilde(G))$ by $O(\lb(\tilde{G}))$. There are two possibilities for $\tilde{G}$:
+			In any case, $F^*$ crosses each $V_i$, so it is indeed feasible.\vspace{2mm}\\
+			Now consider any strongly connected component of $F^*$, say $\tilde{G}$. We would like to bound $w((\tilde{G}))$ by $O(\lb(\tilde{G}))$. There are two cases for $\tilde{G}$:
 			\begin{enumerate}
 				\item[(a)] $\tilde{G}$ contains the backbone. So $$w(\tilde{G})\leqslant w(B) + w(P) + w(F)\leqslant O(\val(I)) + \val(\calI) + 3\cdot\val(\calI) = O(\val(\calI))$$
 				      $$\lb(\tilde{G})\geqslant \lb(V(B)) = \val(\calI)$$
@@ -84,7 +79,6 @@
 				\item[(b)] $\tilde{G}$ is disjoint from the backbone. In this case, $(4)$ guarantees that $\tilde{G}$ did not cross any set in $\lamNS$, so the only sets it might have crossed are singletons. Additionally, $(3)$ guarantees that it crosses each singleton at most four times. $$w(\tilde{G})\leqslant \sum_{v\in V(\tilde{G})}4\cdot 2\cdot y_v = 4\cdot\lb(\tilde{G})$$
 			\end{enumerate}
 		\end{proof}
-
 		\subsection{Proof of \hyperref[lemma7]{Lemma \ref{lemma7}}: The final ingredient}
 
 			Order the laminar sets in $\lamNS$ by size so that $|S_1|\leqslant |S_2|\leqslant\cdots\leqslant |S_l| = |V|$. For each $v\in V$, define $level(v)$ to be the index of the smallest set it is contained in.\vspace{2mm}

@@ -4,8 +4,7 @@
 	\begin{definition}
 		Given a graph, let $\bm{\delta(U,V)}$ be the set of all edges from $U$ to $V$.
 		Let $\bm{\delta^+(U)}$ and $\bm{\delta^-(V)}$ be the set of outgoing and incoming edges from $U$ respectively.
-		Let $\bm{\delta(U)}:=\delta^+(U)\cup \delta^-(U)$.
-		\\Also for any set $S$, let $\bm{S_{in}}\subseteq S$ be the set of entry points to $S$, and $\bm{S_{out}}\subseteq S$ be the set of exit points of $S$.
+		Let $\bm{\delta(U)}:=\delta^+(U)\cup \delta^-(U)$. Also for any set $S$, let $\bm{S_{in}}\subseteq S$ be the set of entry points to $S$, and $\bm{S_{out}}\subseteq S$ be the set of exit points of $S$. A \textbf{laminar} set system is one where no two sets intersect partially.
 	\end{definition}\vspace{4mm}
 
 	\begin{definition}
@@ -28,8 +27,9 @@
 				y                                                             & \geqslant 0
 			\end{align*}
 		\end{minipage}
-		\vspace{7mm}
 	\end{definition}
+$\LP(G,w)$ is a linear relaxation of the ATSP problem, so we will consider approximation algorithms with respect to optimal LP-value.\vspace{4mm}
+
 
 	\begin{definition}
 		$(G,\lam,x,y)$ is called a \textbf{laminarly weighted instance} if $\lam$ forms a laminar family of subsets of $V$ and the following hold:
