@@ -57,11 +57,10 @@ Lifting $T$ consists of a sequence of replacements where in each replacement, a 
 	\end{definition}
 	The sub-tour obtained by lifting a tour of $\calI\setminus S$ is guaranteed to visit all vertices in $V\setminus S$, but the it is only guaranteed to visit some vertex of $S$. So we would like to use a tour in $\calI[S]$ to find some set $F$ that is contractible with respect to $S$.
 
-	Since every path passing through a laminar set must visit every strongly connected component of that laminar set, the lift of a tour of $\calI\setminus S$ must visit every strongly connected component of $S$.
-
-	Let $S_1, \dots, S_l$ be the strongly connected components in $S \in \lam$.
+	Since every path passing through a laminar set must visit every strongly connected component of that laminar set, the lift of a tour of $\calI\setminus S$ must visit every strongly connected component of $S$. Let $S_1, \dots, S_l$ be the strongly connected components in $S \in \lam$.
 	For all $i$, we obtain a tour $F_i$ of $S_i$ in the following way: include all edges in $T$ that are contianed within $S_i$, and for every time $T$ exits $S_i$ (say from $u_{out}$) and enters $S_i$ the next time through $v_{in}$, we add the shortest $u_{out} - v_{in}$ path in $S_i$.	This procedure is illustrated in \hyperref[fig:lift-i]{Figure \ref{fig:lift-i}}.
 	\vspace{2mm}
+
 	\subfile{Diagrams/Lift-Induced.tex}
 	\begin{definition}\label{def:3:indu-lift}
 		Given a tour $T$ of $\calI[S]$, its \textbf{lift} is defined to be $F_1\cup F_2\cup\cdots\cup F_l$.
@@ -70,8 +69,8 @@ Lifting $T$ consists of a sequence of replacements where in each replacement, a 
 
 
 
-	Due to the \hyperref[fig:tightPath]{structure of tight sets}, $F$ the lift of a tour in $\calI[S]$ must visit each stringly connected component in $S$ at least once. Therefore, $F$ makes $S$ contractible.\\
-	
+	Due to the \hyperref[fig:tightPath]{structure of laminar sets}, $F$ the lift of a tour in $\calI[S]$ must visit each stringly connected component in $S$ at least once. Therefore, $F$ makes $S$ contractible.\\
+
 
 	\begin{lemma}\label{lemm:3:lift-i}
 		Let $T$ be a tour in $\calI[S]$, and let its lift be $F$. Then $w_\calI(F) \leqslant w_{\calI[S]}(T).$

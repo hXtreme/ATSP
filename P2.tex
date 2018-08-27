@@ -17,18 +17,14 @@
 		For any strongly connected component $S_i \in S$, $\lam \cup \{S_i\}$ is also a laminar familiy.
 	\end{lemma}
 	\begin{proof}
-		Assume for contradiction that $\lam \cup S_i$ is not a laminar family.
-		Therefore, there must be some $R \in \lam$ such that $R\setminus S_i, S\setminus R$ and $R \cap S_i$ are all non-empty and $R \subsetneq S$.
-		We partition $R$ into three sets $R_{<i>}, R_i,$ and $R_{>i}$ containing the part of $R$ that intersects with any SCC before $S_i$, with $S_i$, and after $S_i$ respectively. Where as per our assumption $R_{<i}, R_i, R_{>i} \ne \emptyset$.
+		Assume for contradiction that $\lam \cup \{S_i\}$ is not a laminar family.
+		Therefore, there must be some $R \in \lam$ such that $R\setminus S_i,\ S\setminus R$, and $R \cap S_i$ are all non-empty.
+		We partition $R$ into three sets $R_{<i}, R_i,$ and $R_{>i}$ containing the part of $R$ that intersects with any SCC before $S_i$, with $S_i$, and after $S_i$ respectively. As per our assumption, at least one of $R_{<i},\ R_{>i}$ are nonempty. WLOG, assume that $R_{<i}\neq \emptyset$.
 		\begin{align*}
-			x(\delta^-(R)) &\geqslant x(\delta^-(R_{<i})) + x(\delta(S_i\setminus R_i, R_i)) & \text{Due to topological order.}\\
-			&\geqslant 1 + x(\delta(S_i\setminus R_i, R_i))\\
-			\therefore x(\delta^-(R)) &>1 & \text{A contradiction.}
+			x(\delta^-(R)) \geqslant x(\delta^-(R_{<i})) + x(\delta(S_i\setminus R_i, R_i)) \geqslant 1 + x(\delta(S_i\setminus R_i, R_i))
 		\end{align*}
+		Since $S_i$ is strongly connected, there must be at least one edge in $\delta(S_i\setminus R_i, R_i)$, implying $x(\delta^-(R)) > 1$, a contradiction.
 	\end{proof}
-	\begin{corollary}
-		For any SCC $S_i \in S$, $S_i$ agrees with all laminar sets that are a subset of $S$.\\
-	\end{corollary}
 
 	\begin{definition}\label{def:value}
 		Let $\bm{\textbf{\val}_\calI(S)}$ be the LP value of $\calI$ stored within $S$, and let $\bm{\textbf{\val}(\calI)}$ be the total LP value of $\calI$. Formally,
@@ -38,10 +34,11 @@
 	\end{definition}
 
 	\begin{definition}
+	\label{def:D}
 		Let $\bm{d_S(u,v)}$ be the weight of the shortest path from $u$ to $v$ inside $S$. Also, let
-		\begin{equation}
+		\begin{equation*}
 			\bm{D_S(u,v)}:=\overbrace{\sum_{\substack{R\in \lam \\ u\in R\subsetneq S}}y_R}^{(a)} + \overbrace{\rule{0pt}{4mm}d_s(u,v)}^{(b)} + \overbrace{\sum_{\substack{R\in \lam \\ v\in R\subsetneq S}}y_R}^{(c)}\label{def:1}
-		\end{equation}
+		\end{equation*}
 		Furthermore, let $\bm{D_{\max}(S)} := \max\limits_{u \in S_{in}, v \in S_{out}}D_S(u,v)$.
 
 		Intuitively, $D_s(u,v)$ is the cost of entering $u$ from outside $S$, taking a shortest path from $u$ to $v$, and exiting from $v$ to outside $S$. See \hyperref[fig:Duv]{Figure \ref{fig:Duv}} for a visualization of this split of cost.\\
@@ -60,14 +57,13 @@
 		After repeatedly shortcutting any $u-v$ path until each laminar set is entered at most once, the cost of the path that each set $R$ is responsible for is at most $2\cdot y_R$ (one for entering $R$, and one for exiting $R$), and \textit{(1)} follows from the \hyperref[def:value]{definition of $\val_\calI(S)$}.\\
 		The idea for \textit{(2)} is similar. One can show (using a case-by-case analysis) that for all $R\in \lam$ with $R\subsetneq S$, after shortcutting a path, at most two of the following are true:
 		\begin{enumerate}
-			\item $u\in R$ (contributes to $(a)$)
-			\item $v\in R$ (contributes to $(c)$)
-			\item The path enters $R$ (contributes to $(b)$)
-			\item The path exits $R$ (contributes to $(b)$)
+			\item $u\in R$ (contributes to \hyperref[def:D]{$(a)$})
+			\item $v\in R$ (contributes to \hyperref[def:D]{$(c)$})
+			\item The path enters $R$ (contributes to \hyperref[def:D]{$(b)$})
+			\item The path exits $R$ (contributes to \hyperref[def:D]{$(b)$})
 		\end{enumerate}
-		In other words, every laminar set $R\subsetneq S$ contibutes at most $2\cdot y_R$ in the right hand side of \hyperref[def:1]{Equation \ref{def:1}}. So, \textit{(2)} follows from the definition of $\val_\calI(S)$.
+		In other words, every laminar set $R\subsetneq S$ contibutes at most $2\cdot y_R$ in the right hand side of \hyperref[def:1]{Equation \ref{def:1}}, and \textit{(2)} follows from the definition of $\val_\calI(S)$.
 	\end{proof}
 	\subfile{Diagrams/D.tex}
-
-	This lemma gives us useful bounds on costs our algorithm will be incurring.
+	This lemma gives us useful bounds on costs the algorithms will be incurring.
 \end{document}
