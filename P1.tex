@@ -58,8 +58,8 @@
 		\end{theorem}
 		\begin{proof}
 			We are given $I=(G,w)$ as input to general ATSP. Let $x$ be a optimal solution to $\LP(G,w)$ and $(y,\alpha)$ be the laminar optimal solution to $\DUAL(G,w)$ guaranteed by the above claim.
-			Let $E'$ be the support of $x$, and $\lam$ be the support of $y$. Then complimentary slackness implies that $\calI'=((V,E'), \lam, x, y)$ is a laminarly weighted instance.\\
-			Note that (by complimentary slackness) the induced weight on $\calI'$ is $w'(u,v) = w(u,v) + \alpha_v - \alpha_u$. Although these weights are different from our original weights, the weight of every cycle in $\calI'$ is the same as its weight in $I$ and therefore the weight of every circulation in $\calI'$ is also the same as its weight in $\calI$. In particular, the weight of a tour remains the same, and the optimal \LP-value remains the same.
+			Let $E'$ be the support of $x$, and $\lam$ be the support of $y$. Then complimentary slackness implies that $\calI'=((V,E'), \lam, x, y)$ is a laminarly weighted instance.\vspace{2mm}\\
+			Note that (by complimentary slackness) the induced weight on $\calI'$ is $w'(u,v) = w(u,v) + \alpha_v - \alpha_u$. Although these weights are different from our original weights, the weight of every cycle in $\calI'$ is the same as its weight in $I$ and therefore the weight of every circulation in $\calI'$ is also the same as its weight in $\calI$.
 			This leads to the final algorithm - simply run the $\alpha$-approximation algorithm for laminarly weighted instances on $\calI'$ and return the resulting tour, say $T$.
 			Then the weight of $T$ in $\calI$ is given by:
 			\[
