@@ -38,7 +38,7 @@
 	\subsection{Obtaining a Vertebrate Pair}
 	Now we would like to find a way to convert an instance $\calI$ and quasi-backbone $B$ into a vertebrate pair $(\calI', B')$ and then use an algorithm for vertebrate pairs to make some progress on finding a tour in $\calI$.\\
 	\begin{theorem}
-		Assume there exists an approximation algorithm, that given a vertebrate pair $(\calI, B)$, returns a tour of length at most $\kappa\cdot\val(\calI) + \eta\cdot w(B)$. Then there is a $\rho$-approximation algorithm for irreducible instances, where $\rho = \frac{\kappa + \eta(\alpha_{NW} + 3)}{1 - 2\epsilon}$
+		Assume there exists an approximation algorithm, that given a vertebrate pair $(\calI, B)$, returns a tour of length at most $\kappa\cdot\val(\calI) + \eta\cdot w(B)$. Then there is a $\frac{\rho}{1 - 2\epsilon}$-approximation algorithm for irreducible instances, where $\rho = \kappa + \eta(\alpha_{NW} + 3)$
 	\end{theorem}
 	\begin{algorithm}\label{alg:6:irr-atsp}
 		\caption{IRREDUCIBLE $\rightarrow$ VERTEBRATE PAIRS}
@@ -55,23 +55,9 @@
 	\end{algorithm}
 
 	\begin{proof}
-		The reduction is described in Algorithm 2.
-		\begin{align*}
-			w(F) &\leqslant w(T') \leqslant \kappa\val(\calI) + \eta(\alpha_{NW} + 3)\val(\calI) \\
-			w(F) &\leqslant \left(\kappa + \eta(\alpha_{NW} + 3)\right)\val(\calI)
-		\end{align*}
-		\begin{align*}
-			w(F_S) &\leqslant w_{\calI[S]}(T_S) \leqslant \rho \val(\calI[S])\\
-			w(F_S)&\leqslant 2\rho\val_{\calI}(S)\\
-			%\bigcup_{S \in \lam^*_{\max}} w(F_S) &\leqslant 2\rho \left(1 - \delta\right) \val(\calI)  \hspace*{2cm} -  \text{ As all $S$ are disjoint and, \hyperref[def:6:q-bb]{from \ref{def:6:q-bb}} as $B$ was a quasi-backbone.}
-			\bigcup_{S \in \lam^*_{\max}} w(F_S) &\leqslant 2\rho (\epsilon\cdot\val(\calI))  \hspace*{2cm} -  \text{ As all $S$ are disjoint and, \hyperref[def:6:q-bb]{from \ref{def:6:q-bb}} as $B$ was a quasi-backbone.}
-		\end{align*}
-		\begin{align*}
-			Cost(\calI) &= w(F) + \cup_{S \in \lam^*_{\max}} w(F_S)\\
-			%&\leqslant \left(\kappa + \eta(\alpha_{NW} + 3)\right)\val(\calI) + 2\rho \left(1 - \delta\right) \val(\calI)\\
-			&\leqslant \left(\kappa + \eta(\alpha_{NW} + 3)\right)\val(\calI) + 2\rho (\epsilon\cdot \val(\calI))\\
-			Cost(\calI) &\leqslant \rho\val(\calI)
-		\end{align*}
+		The reduction is described in Algorithm 2. Note that step 8 is valid since all the sets in $L_{\geq 2}$ that were not visited by $B$ are actually singletons in $\calI'$.\vspace{2mm}
+		\\That the total value of sets in $\lam^*_{\max}$ is at most $\epsilon\cdot \val(\calI)$ by definition of the quasi-backbone. So the total value of the recursive instances is $\sum_{S\in \lam^*_{\max}}2\cdot\val_{\calI}(S)\leqslant 2\epsilon\cdot\val(\calI)$. In other words, the total value at some recursive depth is a geometric sequence with respect to the depth whose ratio is equal to $2\cdot\epsilon$.\vspace{2mm}
+		\\Since the non-recursive cost incurred by the algorithm is at most $(\kappa + \eta (\alpha_{NW} + 3))\cdot\val(\calI) = \rho$, and the $\val$ decays geometrically with recursion, the algorithm's cost is bounded by $\frac{\rho}{1-2\epsilon}\val(\calI)$.
 
 	\end{proof}
 \end{document}
