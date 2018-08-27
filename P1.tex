@@ -10,21 +10,21 @@
 
 	\begin{definition}
 		Given an edge-weighted ATSP instance (G,w), consider the following LPs:\\
-		\begin{minipage}{0.20\textwidth}
+		\begin{minipage}{0.40\textwidth}
 			\begin{align*}
 				&\textbf{\LP(G,w):}\\
 				\min\quad\sum_{e\in E}&w_e\cdot x_e\\
-				s.t.\quad x(\delta^+(v)) & = x(\delta^-(v))\quad & v\in V                     \\
-				x(\delta(S))             & \geqslant 2\quad           & \emptyset\neq S\subseteq V \\
+				s.t.\quad x(\delta^+(v)) & = x(\delta^-(v))\quad & v\in V\quad                     \\
+				x(\delta(S))             & \geqslant 2\quad           & \emptyset\neq S\subseteq V\quad \\
 				x&\geqslant 0
 			\end{align*}
 		\end{minipage}
-		\hfill\vline\hfill
-		\begin{minipage}{0.55\textwidth}
+		\hfill\vline
+		\begin{minipage}{0.65\textwidth}
 			\begin{align*}
 				\textbf{\DUAL}                                                 & \textbf{(G,w):}             \\
 				\max\quad\sum_{S\subseteq V}                                  & 2\cdot y_S                  \\
-				s.t.\quad\sum_{S:(u,v)\in \delta(S)}y_S + \alpha_u - \alpha_v & \leqslant w(u,v)\quad (u,v)\in E \\
+				s.t.\sum_{S:(u,v)\in \delta(S)}y_S + \alpha_u - \alpha_v & \leqslant w(u,v)\quad (u,v)\in E \\
 				y                                                             & \geqslant 0
 			\end{align*}
 		\end{minipage}
