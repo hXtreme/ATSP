@@ -1,10 +1,8 @@
 \documentclass[../main.tex]{subfiles}
 
 \begin{document}
-	\definecolor{qqffqq}{rgb}{0.,0.4,0.}
-	\definecolor{qqqqff}{rgb}{0.,0.,1.}
-	\definecolor{ffqqqq}{rgb}{1.,0.,0.}
-	\definecolor{ududff}{rgb}{0.30196078431372547,0.30196078431372547,1.}
+	\definecolor{drk-green}{rgb}{0.,0.3,0.}
+	\definecolor{blueish}{rgb}{0.30196078431372547,0.30196078431372547,1.}
 
 	\begin{figure}
 		\centering
@@ -17,21 +15,21 @@
 		\draw [line width=0.7pt] (9.857,2.489) ellipse (1.075cm and 0.649cm);
 		\draw [rotate around={65:(5.560,2.280)},line width=0.7pt] (5.560,2.280) ellipse (1.073cm and 0.689cm);
 		\draw [rotate around={-64:(7.419,2.333)},line width=0.7pt] (7.419,2.333) ellipse (1.197cm and 0.639cm);
-		\draw [->,line width=0.7pt,color=ffqqqq] (0.5,2.5) -- (2.803,2.495);
-		\draw [->,line width=0.7pt,color=qqqqff] (10.122,2.486) -- (12.5,2.5);
-		\draw [->-,line width=0.7pt,dash pattern={on 4pt off 4pt},color=qqffqq] (2.803,2.495) .. controls (5.5,1.5) and (7.5,3) .. (10.122,2.486);
+		\draw [->,line width=0.7pt,color=red] (0.5,2.5) -- (2.803,2.495);
+		\draw [->,line width=0.7pt,color=blue] (10.122,2.486) -- (12.5,2.5);
+		\draw [->-,line width=0.7pt,dash pattern={on 4pt off 4pt},color=drk-green] (2.803,2.495) .. controls (5.5,1.5) and (7.5,3) .. (10.122,2.486);
 
 		\begin{scriptsize}
 		\draw[color=black] (1.5,3.2) node {$S$};
-		\draw [fill=ududff] (2.803,2.495) circle (2.5pt);
-		\draw[color=ududff] (2.865,2.657) node {$u$};
-		\draw [fill=ududff] (3.9,2.185) circle (2.5pt);
-		\draw [fill=ududff] (10.122,2.486) circle (2.5pt);
-		\draw[color=ududff] (10.182,2.648) node {$v$};
-		\draw [fill=ududff] (5.5,2.19) circle (2.5pt);
-		\draw [fill=ududff] (7.5,2.5) circle (2.5pt);
+		\draw [fill=blueish] (2.803,2.495) circle (2.5pt);
+		\draw[color=blueish] (2.865,2.657) node {$u$};
+		\draw [fill=blueish] (3.9,2.185) circle (2.5pt);
+		\draw [fill=blueish] (10.122,2.486) circle (2.5pt);
+		\draw[color=blueish] (10.182,2.648) node {$v$};
+		\draw [fill=blueish] (5.5,2.19) circle (2.5pt);
+		\draw [fill=blueish] (7.5,2.5) circle (2.5pt);
 		\end{scriptsize}
 		\end{tikzpicture}
-		\caption{The leftmost edge is paid for by $(a)$, the dotted path is paid for by $(b)$, and the rightmost edge is paid for by $(c)$ summing to $D_S(u, v)$.}\label{fig:Duv}
+		\caption{{The \color{red}leftmost edge} is paid for by $(a)$, {\color{drk-green}\text{the dotted path}} is paid for by $(b)$, and {\color{blue}the rightmost edge} is paid for by $(c)$ summing to $D_S(u, v)$.}\label{fig:Duv}
 	\end{figure}
 \end{document}
