@@ -223,18 +223,13 @@
 		Let these edges be $(u,v)$ and $(v',u')$ respectively. There is an excess unit of incoming and outgoing edge for $v$ and, $v'$ respectively and these are the only vertices in $U_i$ that make $F$ non-eulerian, so we fix them by adding a $v-v'$ path within $U_i$. This accounts for the $(u,v)$ and $(v',u
 		)$ edges, making $F$ eulerian within $U_i$.\vspace{1mm}
 		\begin{claim}
-			For $(u,v),(v',u')\in F$ such that $(u,v)\in X^-_i$ and $(v',u')\in X^+_i$, there is always a $v-v'$ path within $U_i$.\label{claim:7:uvpath}
+			For $(u,v),(v',u')\in F$ such that $(u,v)\in X^-_i$ and $(v',u')\in X^+_i$, there is always a $v-v'$ path $P_i$ within $U_i$ of weight no more than $\val(U_i)$.\label{claim:7:uvpath}
 		\end{claim}
 		\begin{proof}
 			First note that since for every $S\in \lamNS$, $U_i\subseteq S$ or $U_i\cap S = \emptyset$, all the edges within $U_i$ are neutral edges (i.e. they don't cross any set in $\lamNS$) and, by definition $U_i \cap B = \emptyset$.
 			So all $v \in U_i$ have the same level and all edges are neutral.
-			Therefore all the $0$-vertices, and $1$-vertices in $U_i$ are strongly connected. Furthermore, we can always go from a $0$-vertex to a $1$-vertex. This along with the fact that we can't have $1-1$ edges in $X_i^-$ if we have a $0-0$ edge in $X_i^+$ proves the claim.
+			Therefore all the $0$-vertices, and $1$-vertices in $U_i$ are strongly connected. Furthermore, we can always go from a $0$-vertex to a $1$-vertex. This along with the fact that we can't have $1-1$ edges in $X_i^-$ if we have a $0-0$ edge in $X_i^+$ proves the first part of the claim also, as $U_i$ agrees with the laminar family $w(P_i) \leqslant \val(U_i)$ follows directly from \hyperref[lemm:2:D-val]{lemma \ref{lemm:2:D-val}}.\\
 		\end{proof}
-
-		\begin{claim}
-			For any $U_i$, let $P_i$ be the $v - v'$ path from \hyperref[claim:7:uvpath]{claim \ref{claim:7:uvpath}} then, $w(P_i) \leqslant \val(U_i)$.
-		\end{claim}
-		As $U_i$ agrees with the laminar family the claim follows directly from \hyperref[lemm:2:D-val]{lemma \ref{lemm:2:D-val}}.\\
 
 		\begin{claim}
 			$w(F) \leqslant 3\cdot\val(\calI)$
