@@ -77,7 +77,7 @@
 				\item[(c)] $V_i$ is disjoint from the backbone. In this case, (2) tells us that some edge $(u,v)$ must enter $U_i$. $u\notin V_i'$ since $U_i$ is the source component of $V_i'$. So either $u\in S\setminus V_i$ or $u\notin S$. If the former is true, then $(u,v)$ enters $V_i$ from outside. If the latter is true, then $(u,v)$ crosses $S$, and guarantee $(4)$ of \hyperref[lemma7]{Lemma \ref{lemma7}} tells us that the subtour containing $(u,v)$ visits the backbone, which is outside $V_i$.
 			\end{enumerate}
 
-			Regardless the case, $F^*$ crosses each $V_i$, so it is indeed feasible.\vspace{2mm}\\
+			Regardless, $F^*$ crosses each $V_i$, so it is indeed feasible.\vspace{2mm}
 
 			Now consider any strongly connected component of $F^*$, say $\tilde{G}$. We would like to bound $w(\tilde(G))$ by $O(\lb(\tilde{G}))$. There are two possibilities for $\tilde{G}$:
 			\begin{enumerate}
@@ -108,23 +108,22 @@
 					\item $(u^1, v^1)$ for all $(u,v)\in E_f\cup E_n$ with weight $w(u,v)$. Call these edges $1-1$ edges.
 					\item $(u^0, v^0)$ for all $(u,v)\in E_b\cup E_n$ with weight $w(u,v)$. Call these edges $0-0$ edges.
 				\end{itemize}
-				Also for any set $S\subseteq V$, let $S^{sp}$ be its image in $G_{sp}$.\\
+				Also for any set $S\subseteq V$, let $S^{sp}$ be its image in $G_{sp}$.
 			\end{definition}
-
 			Consider the lift of some subtour in $G_{sp}$ that crosses at least one set in $\lamNS$. Let $S$ be the smallest set in $\lamNS$ that the subtour crosses.
-			Then the edge of the subtour going into $S$ must be a forward edge (i.e. a $1-1$ edge) by definition, and the edge going out of $S$ must be a backward edge (i.e. a $0-0$ edge). This means at some point, the subtour must use a $1-0$ edge, which it can only do if it crosses the backbone.\\
-			\vspace{1mm}
-			So if we restrict ourself to lifts of subtours of $G_{sp}$ (instead of all subtours of $G$), we guarantee \hyperref[lemm:main:4]{condition (4)}.\vspace{2mm}
+			Then the edge of the subtour going into $S$ must be a forward edge (i.e. a $1-1$ edge) by definition, and the edge going out of $S$ must be a backward edge (i.e. a $0-0$ edge). This means at some point, the subtour must use a $1-0$ edge, which it can only do if it crosses the backbone.
+			\vspace{1mm}\\
+			So if we restrict ourself to lifts of subtours of $G_{sp}$ (instead of all subtours of $G$), guarantee (4) will always be true.\vspace{2mm}
 
 			\begin{lemma}\label{lemma6-1}
-				We can find $x_{sp}$, an eulerian vector on $G_{sp}$ so that the image of $x_{sp}$ in $G$ is $x$.
+				We can find $x_{sp}$, a circulation on $G_{sp}$ so that the image of $x_{sp}$ in $G$ is $x$.
 			\end{lemma}
 			\begin{proof}
 			If we want the image of $x_{sp}$ to be $x$, we must necessarily have the following conditions:
 				\begin{itemize}
 					\item[(a)] $x_{sp}(u^0,v^0) = 0$, for all $(u,v)\in E_f$, since there is no $(u^0,v^0)$ edge in $G_{sp}$.
 					\item[(b)] $x_{sp}(u^1,v^1) = 0$, for all $(u,v)\in E_b$, since there is no $(u^1,v^1)$ edge in $G_{sp}$.
-					\item[(c)] $x_{sp}(u^0,v^0)+x_{sp}(u^1,v^1) = x(u,v)$ for all $(u,v)\in E$, since the image of $x_{sp}$ in $G$ must be $x$.\\
+					\item[(c)] $x_{sp}(u^0,v^0)+x_{sp}(u^1,v^1) = x(u,v)$ for all $(u,v)\in E$, since the image of $x_{sp}$ in $G$ must be $x$.
 				\end{itemize}
 	% \vspace{2mm}
 	After defining some $x_{sp}$ values on the $0-0$ and $1-1$ edges, there will be some "potential" on each vertex (i.e. the net outgoing flow), and since $x$ was eulerian, the potential of the $0$-copy of a vertex, say $v$, is exactly the negative potential of the $1$-copy.
@@ -135,7 +134,7 @@
 			\end{itemize}
 
 			It can easily be seen that (a), (b), (c), and (d) are also sufficient for some nonnegative $x_{sp}$ to fulfil the guarantees of \hyperref[lemma6-1]{Lemma \ref{lemma6-1}}.
-			 This gives rise to the following LP and its dual where $f$ can be interpreted as $x_{sp}$ restricted to $1-1$ edges:\\
+			 This gives rise to the following LP and its dual where $f$ can be interpreted as $x_{sp}$ restricted to $1-1$ edges:
 			 \vspace{2mm}
 
 			\begin{minipage}{0.39\textwidth}
@@ -155,7 +154,7 @@
 					\pi_v &= 0 &v\in V(B)\\
 					\pi, z&\geqslant 0
 				\end{align*}
-			\end{minipage}
+			\end{minipage}\vspace{3mm}
 
 	Once we have some primal feasible $f$, we can extend it by defining $x_{sp}$ as $f$ on $1-1$ edges, $x-f$ on $0-0$ edges, and eliminating potential differences between $0$ and $1$ copies using $0-1$ and $1-0$ edges.
 	The first inequality of the LP guarantees (d) by definition.
@@ -170,8 +169,7 @@
 		\begin{proof}
 			Note that if there were a dual optimal solution where $\pi = 0$, then the dual optimal (and hence primal optimal) value would be precisely $\sum_{e\in E_F}1\cdot x_e$.
 			So consider any dual optimal solution, say $(z,\pi)$. Our goal is to convert it into a dual optimal solution whose $\pi$ has strictly smaller support.
-			Running this procedure repeatedly proves that there is a dual optimal where $\pi = 0$.\\
-			\vspace{2mm}
+			Running this procedure repeatedly proves that there is a dual optimal where $\pi = 0$.\vspace{2mm}\\
 			Let $T$ be the set of vertices in support($\pi$) with the smallest level, and let $S$ be the set corresponding to that level.
 			Also, let $F = \delta(V\setminus S, T)$, and $F' = \delta(T,S\setminus T)$.\\
 
@@ -185,12 +183,10 @@
 			The inequality $\pi\geqslant 0$ must be satisfied simply because we reduced $\pi_v$ for $v\in T$ by $\min_{u\in T}\pi_u$.
 			Also, since all edges $(u,v)$ in $F'$ are either neutral or forward, we originally satisfied $\pi_v - \pi_u + z(u,v)\geqslant 0$. Since $u\in T$ and $v\in S\setminus T$, we must have that $0 - \varepsilon + z(u,v)\geqslant 0$, that is, $z(u,v)\geqslant \varepsilon$.
 
-			So the inequality $z\geqslant 0$ must be satisfied since we only reduced $z$-value in $F'$, and for all edges in $F'$, we already had $\varepsilon$ $z$-value to begin with.\\\vspace{2mm}
-
+			So the inequality $z\geqslant 0$ must be satisfied since we only reduced $z$-value in $F'$, and for all edges in $F'$, we already had $\varepsilon$ $z$-value to begin with.\vspace{2mm}\\
 			Now we will see that the new dual value is still optimal.
 			The decrease in dual objective value was precisely $\varepsilon (x(F') - x(F\cap( E_f\cup E_n))\geqslant \varepsilon(x(F') - x(F))$.
 			If we can show that this is positive, then the new dual value is still optimal. The proof relies on the fact that $S$ is either an original laminar set or $V$, so $x(\delta^-(S))\leqslant 1$.
-			Now,
 			\[
 				1\leqslant x(\delta^-(S\setminus T)) = \underbrace{x(\delta^-(S)) - x(F)}_{\text{edges from outside } S} + \underbrace{x(F')}_{\text{edges from } T}\leqslant 1 - x(F) + x(F')
 			\]
@@ -218,31 +214,25 @@
 			\item For all vertices $a_i$, add the constraint $z'_{sp}(\delta^-(a_i)) = 1\  (\ = 2\cdot x'_{sp}(\delta^-(a_i))\ )$
 		\end{itemize}
 		Note that $2\cdot x_{sp}'$ is feasible with respect to these constraints by construction.
-		So we can round $2\cdot x_{sp}'$ to obtain $z_{sp}'$, an integral, minimum-weight circulation, i.e. an eulerian set $F'$.\\
-		\vspace{2mm}
-
-		However, the lift $F$ of this eulerian set from $G'_{sp}$ to $G$ might not be eulerian - recall that for every $U_i$, we replaced some $u-v$ paths with two edges $(u,a_i),(a_i,v)$.
-		Due to the second capacity constraint for $a_i$, $F$ contains the first and last edge of exactly one of these paths, i.e. it contains exactly one edge from $X_i^-$ and exactly one from $X_i^+$.
-		Let these edges be $(u,v)$ and $(v',u')$ respectively. There is an excess unit of incoming and outgoing edge for $v$ and, $v'$ respectively and these are the only vertices in $U_i$ that make $F$ non-eulerian, so we fix them by adding a $v-v'$ path within $U_i$. This accounts for the $(u,v)$ and $(v',u
-		)$ edges, making $F$ eulerian within $U_i$.\vspace{1mm}
+		So we can round $2\cdot x_{sp}'$ to obtain $z_{sp}'$, an integral, minimum-weight circulation which can be interpreted as an eulerian set $F'$.
+		\vspace{2mm}\\
+		We will use $F'$ to find an eulerian set of edges in $G_{sp}$. Note that for every $U_i$, $F'$ has an edge going into and out of $a_i$, say $(u,a_i),(a_i,v)$. Let their images in $G_{sp}$ be $(u,v'),(u',v)$ respectively. Then the image of $F'$ in $G_{sp}$ is not eulerian, since $v'$ and $u'$ have net incoming and outgoing flows respectively. We can fix this by simply adding a $v'-u'$ path.\vspace{2mm}
 		\begin{claim}
-			For $(u,v),(v',u')\in F$ such that $(u,v)\in X^-_i$ and $(v',u')\in X^+_i$, there is always a $v-v'$ path $P_i$ within $U_i$ of weight no more than $\val(U_i)$.\label{claim:7:uvpath}
+			There is always a $v'-u'$ path within $U_i$ of weight no more than $\val(U_i)$.\label{claim:7:uvpath}
 		\end{claim}
 		\begin{proof}
-			First note that since for every $S\in \lamNS$, $U_i\subseteq S$ or $U_i\cap S = \emptyset$, all the edges within $U_i$ are neutral edges (i.e. they don't cross any set in $\lamNS$) and, by definition $U_i \cap B = \emptyset$.
-			So all $v \in U_i$ have the same level and all edges are neutral.
-			Therefore all the $0$-vertices, and $1$-vertices in $U_i$ are strongly connected. Furthermore, we can always go from a $0$-vertex to a $1$-vertex. This along with the fact that we can't have $1-1$ edges in $X_i^-$ if we have a $0-0$ edge in $X_i^+$ proves the first part of the claim also, as $U_i$ agrees with the laminar family $w(P_i) \leqslant \val(U_i)$ follows directly from \hyperref[lemm:2:D-val]{lemma \ref{lemm:2:D-val}}.\\
+			First note that the assumptions in \hyperref[lemma7]{Lemma \ref{lemma7}} imply that all the edges within $U_i$ are neutral edges, so $G_{sp}$ contains both $0-0$ and $1-1$ copies of every edge in $U_i$. Also, since $U_i$ was strongly connected, the $0$-copy and $1$-copy of $U_i$ are strongly connected. Since there are $0-1$ edges corresponding to all vertices, there is always a $v'-u'$ path unless $v'$ is a $1$-copy and $u'$ is a $0$-copy. But $U_i$ is disjoint from the backbone, so that is impossible by the construction of $G_{sp}$. By \hyperref[lemm:2:D-val]{Lemma \ref{lemm:2:D-val}}, the path weighs no more than $\val(U_i)$.\\
 		\end{proof}
+Now we can take the image of this eulerian set to $G$, say $F$, and guarantees $(2)$ and $(4)$ are automatically fulfilled.\vspace{2mm}
 
 		\begin{claim}
-			$w(F) \leqslant 3\cdot\val(\calI)$
+			$w(F) \leqslant 3\cdot\val(\calI)$. That is, guarantee $(1)$ holds.
 		\end{claim}
 		\begin{proof}
-			We know that $F = F' \cup (\cup_{i \in [l]} P_i)$. Therefore,
 			\begin{align*}
-				w(F) &\leqslant w_{sp}(F') + \sum_{i \in [l]} w(P_i)\\
-				&\leqslant \sum_{e \in E_{sp}} w'_{sp}(e)z'_{sp}(e) + \sum_{i \in [l]} \val(U_i) \leqslant 2\val(\calI) + \val(\calI)\\
-				w(F) &\leqslant 3\val(\calI)
+				w(F) &\leqslant \sum_{e \in E_{sp}} w'_{sp}(e)z'_{sp}(e) + \sum_{i \in [l]} \val(U_i)\\
+				 &\leqslant 2\sum_{e\in E_{sp}}w'_{sp}(e)x'_{sp}(e) + \val(\calI)\\
+			 	&\leqslant 3\cdot\val(\calI)
 			\end{align*}
 		\end{proof}
 		Finally we would like to show that for any tight vertex, $F$ doesn't visit it too many times; i.e: $\forall v \in V$ such that $x(\delta^-(v)) = 1$, $|\delta^-_F(v)| \leqslant 4$.\\
