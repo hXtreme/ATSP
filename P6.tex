@@ -3,6 +3,8 @@
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
+\newcommand{\level}{\textsf{\textup{level}}}
+
 \begin{document}
 	\subsection{The Local Connectivity ATSP Problem}
 		Fix some function $\lb : 2^V\rightarrow \mathbb{R}^+$ that has the following properties:
@@ -77,7 +79,7 @@
 
 				\item[(b)] $V_i$ partially contains the backbone. In this case, $B$ trivially crosses $V_i$, so $F^*$ must enter $V_i$.
 
-				\item[(c)] $V_i$ is disjoint from the backbone. In this case, (2) tells us that some edge $(u,v)$ must enter $U_i$. $u\notin V_i'$ since $U_i$ is the source component of $V_i'$. So either $u\in S\setminus V_i$ or $u\notin S$. If the former is true, then $(u,v)$ enters $V_i$ from outside. If the latter is true, then $(u,v)$ crosses $S$, and guarantee $(4)$ of \hyperref[lemma7]{Lemma \ref{lemma7}} tells us that the subtour containing $(u,v)$ visits the backbone, which is outside $V_i$.
+				\item[(c)] $V_i$ is disjoint from the backbone. In this case, \hyperref[lemm:main:2]{(2)} tells us that some edge $(u,v)$ must enter $U_i$. $u\notin V_i'$ since $U_i$ is the source component of $V_i'$. So either $u\in S\setminus V_i$ or $u\notin S$. If the former is true, then $(u,v)$ enters $V_i$ from outside. If the latter is true, then $(u,v)$ crosses $S$, and \hyperref[lemm:main:4]{condition (4)} guarantees us that the subtour containing $(u,v)$ visits the backbone, which is outside $V_i$.
 			\end{enumerate}
 
 			Regardless, $F^*$ crosses each $V_i$, so it is indeed feasible.\vspace{2mm}
@@ -88,18 +90,22 @@
 				      $$\lb(\tilde{G})\geqslant \lb(V(B)) = \val(\calI)$$
 				      And it follows that $w(\tilde{G})\leqslant O(\lb(\tilde{G}))$.
 
-				\item[(b)] $\tilde{G}$ is disjoint from the backbone. In this case, $(4)$ guarantees that $\tilde{G}$ did not cross any set in $\lamNS$, so the only sets it might have crossed are singletons. Additionally, $(3)$ guarantees that it crosses each singleton at most four times. $$w(\tilde{G})\leqslant \sum_{v\in V(\tilde{G})}4\cdot 2\cdot y_v = 4\cdot\lb(\tilde{G})$$
+				\item[(b)] $\tilde{G}$ is disjoint from the backbone. In this case, \hyperref[lemm:main:4]{(4)} guarantees that $\tilde{G}$ did not cross any set in $\lamNS$, so the only sets it might have crossed are singletons. Additionally, \hyperref[lemm:main:3]{(3)} guarantees that it crosses each singleton at most four times.
+				\[
+					w(\tilde{G})\leqslant \sum_{v\in V(\tilde{G})}4\cdot 2\cdot y_v = 4\cdot\lb(\tilde{G})
+				\]
 			\end{enumerate}
 		\end{proof}
+
 		\subsection{Proof of \hyperref[lemma7]{Lemma \ref{lemma7}}: The final ingredient}
 
-			Order the laminar sets in $\lamNS$ by size so that $|S_1|\leqslant |S_2|\leqslant\cdots\leqslant |S_l| = |V|$. For each $v\in V$, define $level(v)$ to be the index of the smallest set it is contained in.\\
+			Order the laminar sets in $\lamNS$ by size so that $|S_1|\leqslant |S_2|\leqslant\cdots\leqslant |S_l| = |V|$. For each $v\in V$, define $\level(v)$ to be the index of the smallest set it is contained in.\\
 			\begin{definition}
 				An edge $e$ is called a \textbf{forward edge}, \textbf{backward edge}, or \textbf{neutral edge} if $e\in E_f$, $e\in E_b$, or $e\in E_n$ respectively, where $E_f, E_b,$ and $E_n$ are defined as:
 				\begin{enumerate}[$-$]
-					\item $\bm{E_f}:=\{(u,v)\in E\mid level(u) > level(v)\}$
+					\item $\bm{E_f}:=\{(u,v)\in E\mid \level(u) > \level(v)\}$
 
-					\item $\bm{E_b}:=\{u,v)\in E\mid level(u) < level(v)\}$
+					\item $\bm{E_b}:=\{u,v)\in E\mid \level(u) < \level(v)\}$
 
 					\item $\bm{E_n}:=E\setminus (E_f\cup E_b)$\\
 				\end{enumerate}
@@ -119,6 +125,7 @@
 				\end{itemize}
 				Also for any set $S\subseteq V$, let $S^{sp}$ be its image in $G_{sp}$.
 			\end{definition}
+
 			Consider the lift of some subtour in $G_{sp}$ that crosses at least one set in $\lamNS$. Let $S$ be the smallest set in $\lamNS$ that the subtour crosses.
 			Then the edge of the subtour going into $S$ must be a forward edge (i.e. a $1-1$ edge) by definition, and the edge going out of $S$ must be a backward edge (i.e. a $0-0$ edge). This means at some point, the subtour must use a $1-0$ edge, which it can only do if it crosses the backbone.
 			\vspace{1mm}\\
@@ -136,7 +143,7 @@
 
 					\item[(c)] $x_{sp}(u^0,v^0)+x_{sp}(u^1,v^1) = x(u,v)$ for all $(u,v)\in E$, since the image of $x_{sp}$ in $G$ must be $x$.
 				\end{itemize}
-	% \vspace{2mm}
+
 	After defining some $x_{sp}$ values on the $0-0$ and $1-1$ edges, there will be some "potential" on each vertex (i.e. the net outgoing flow), and since $x$ was eulerian, the potential of the $0$-copy of a vertex, say $v$, is exactly the negative potential of the $1$-copy.
 			If the potential of the $1$-copy is positive, $v^0$ and $v^1$ can be brought down to zero potential by routing that amount of flow through $(v^0,v^1)$.
 			But if it is negative, this can only be equalized using a $(v^1,v^0)$ edge, which is impossible unless $v\in V(B)$. In other words, if we want $x_{sp}$ to be eulerian, it must also fulfil the following condition:
@@ -181,7 +188,7 @@
 			Note that if there were a dual optimal solution where $\pi = 0$, then the dual optimal (and hence primal optimal) value would be precisely $\sum_{e\in E_F}1\cdot x_e$.
 			So consider any dual optimal solution, say $(z,\pi)$. Our goal is to convert it into a dual optimal solution whose $\pi$ has strictly smaller support.
 			Running this procedure repeatedly proves that there is a dual optimal where $\pi = 0$.\vspace{2mm}\\
-			Let $T$ be the set of vertices in support($\pi$) with the smallest level, and let $S$ be the set corresponding to that level.
+			Let $T$ be the set of vertices in support($\pi$) with the smallest \level, and let $S$ be the set corresponding to that \level.
 			Also, let $F = \delta(V\setminus S, T)$, and $F' = \delta(T,S\setminus T)$.
 
 			We update the dual solution as follows:
