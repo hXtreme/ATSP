@@ -48,11 +48,11 @@
 			Given $U_1,\ldots,U_l$ disjoint subsets of $V\setminus V(B)$ that are strongly connected in $G$, such that for each $S\in \lamNS$, either $U_i\in S$ or $U_i$ is disjoint from $S$, we can find eulerian $F\subseteq E$ that guarantees the following:
 			\begin{enumerate}[(1)]
 				\item $w(F)\leqslant 3\cdot \val(I)$\label{lemm:main:1}
-				
+
 				\item $|\delta^-_F(U_i)|\geqslant 1$ for all $i$\label{lemm:main:2}
-				
+
 				\item $|\delta^-_F(v)|\leqslant 4$ for all $v$ such that $x(\delta^-(v)) = 1$\label{lemm:main:3}
-				
+
 				\item Any subtour in $F$ that crosses a set in $\lamNS$ visits a vertex of the backbone\label{lemm:main:4}
 			\end{enumerate}
 		\end{lemma}
@@ -65,7 +65,7 @@
 
 			\begin{enumerate}
 				\item[$P$:] If $B$ exists entirely within some $V_i$, then we pick $P$ the shortest cycle containing $u\in B$ and $v\notin V_i$. Otherwise we keep $P$ empty.
-				
+
 				\item[$F$:] WLOG, let $V_1,\ldots,V_l$ be the partitions that are disjoint from $B$. Now let $V_i'$ be the intersection of $V_i$ with a minimal set in $\lamNS$ that it intersects. Let $U_i$ be the first strongly connected component of $V_i'$ (in the topological order). Set $F$ to be the eulerian set guaranteed by running the algorithm of \hyperref[lemma7]{Lemma \ref{lemma7}} on $U_1,\ldots,U_l$.
 			\end{enumerate}\vspace{2mm}
 
@@ -74,9 +74,9 @@
 			For each $V_i$, there are three possibilities:
 			\begin{enumerate}
 				\item[(a)] $V_i$ completely contains the backbone. The set $P$ guarantees that $F^*$ enters $V_i$ at least once.
-				
+
 				\item[(b)] $V_i$ partially contains the backbone. In this case, $B$ trivially crosses $V_i$, so $F^*$ must enter $V_i$.
-				
+
 				\item[(c)] $V_i$ is disjoint from the backbone. In this case, (2) tells us that some edge $(u,v)$ must enter $U_i$. $u\notin V_i'$ since $U_i$ is the source component of $V_i'$. So either $u\in S\setminus V_i$ or $u\notin S$. If the former is true, then $(u,v)$ enters $V_i$ from outside. If the latter is true, then $(u,v)$ crosses $S$, and guarantee $(4)$ of \hyperref[lemma7]{Lemma \ref{lemma7}} tells us that the subtour containing $(u,v)$ visits the backbone, which is outside $V_i$.
 			\end{enumerate}
 
@@ -87,7 +87,7 @@
 				\item[(a)] $\tilde{G}$ contains the backbone. So $$w(\tilde{G})\leqslant w(B) + w(P) + w(F)\leqslant O(\val(I)) + \val(\calI) + 3\cdot\val(\calI) = O(\val(\calI))$$
 				      $$\lb(\tilde{G})\geqslant \lb(V(B)) = \val(\calI)$$
 				      And it follows that $w(\tilde{G})\leqslant O(\lb(\tilde{G}))$.
-							
+
 				\item[(b)] $\tilde{G}$ is disjoint from the backbone. In this case, $(4)$ guarantees that $\tilde{G}$ did not cross any set in $\lamNS$, so the only sets it might have crossed are singletons. Additionally, $(3)$ guarantees that it crosses each singleton at most four times. $$w(\tilde{G})\leqslant \sum_{v\in V(\tilde{G})}4\cdot 2\cdot y_v = 4\cdot\lb(\tilde{G})$$
 			\end{enumerate}
 		\end{proof}
@@ -98,9 +98,9 @@
 				An edge $e$ is called a \textbf{forward edge}, \textbf{backward edge}, or \textbf{neutral edge} if $e\in E_f$, $e\in E_b$, or $e\in E_n$ respectively, where $E_f, E_b,$ and $E_n$ are defined as:
 				\begin{enumerate}[$-$]
 					\item $\bm{E_f}:=\{(u,v)\in E\mid level(u) > level(v)\}$
-					
+
 					\item $\bm{E_b}:=\{u,v)\in E\mid level(u) < level(v)\}$
-					
+
 					\item $\bm{E_n}:=E\setminus (E_f\cup E_b)$\\
 				\end{enumerate}
 			\end{definition}
@@ -110,11 +110,11 @@
 				Call $\bm{G_{sp}}$ the \textbf{split graph}, where we define it as follows: for each $v\in V$, create $v^0$ and $v^1$ in $V(G_{sp})$. Create the following edges along with weights $\bm{w_{sp}}$:
 				\begin{itemize}[$-$]
 					\item $(v^0, v^1)$ for all $v\in V$ with weight $0$. Call these edges $0-1$ edges.
-					
+
 					\item $(v^1, v^0)$ for all $v\in V(B)$ with weight $0$. Call these edges $1-0$ edges.
-					
+
 					\item $(u^1, v^1)$ for all $(u,v)\in E_f\cup E_n$ with weight $w(u,v)$. Call these edges $1-1$ edges.
-					
+
 					\item $(u^0, v^0)$ for all $(u,v)\in E_b\cup E_n$ with weight $w(u,v)$. Call these edges $0-0$ edges.
 				\end{itemize}
 				Also for any set $S\subseteq V$, let $S^{sp}$ be its image in $G_{sp}$.
@@ -131,9 +131,9 @@
 			If we want the image of $x_{sp}$ to be $x$, we must necessarily have the following conditions:
 				\begin{itemize}
 					\item[(a)] $x_{sp}(u^0,v^0) = 0$, for all $(u,v)\in E_f$, since there is no $(u^0,v^0)$ edge in $G_{sp}$.
-					
+
 					\item[(b)] $x_{sp}(u^1,v^1) = 0$, for all $(u,v)\in E_b$, since there is no $(u^1,v^1)$ edge in $G_{sp}$.
-					
+
 					\item[(c)] $x_{sp}(u^0,v^0)+x_{sp}(u^1,v^1) = x(u,v)$ for all $(u,v)\in E$, since the image of $x_{sp}$ in $G$ must be $x$.
 				\end{itemize}
 	% \vspace{2mm}
@@ -182,25 +182,21 @@
 			So consider any dual optimal solution, say $(z,\pi)$. Our goal is to convert it into a dual optimal solution whose $\pi$ has strictly smaller support.
 			Running this procedure repeatedly proves that there is a dual optimal where $\pi = 0$.\vspace{2mm}\\
 			Let $T$ be the set of vertices in support($\pi$) with the smallest level, and let $S$ be the set corresponding to that level.
-			Also, let $F = \delta(V\setminus S, T)$, and $F' = \delta(T,S\setminus T)$.\\
+			Also, let $F = \delta(V\setminus S, T)$, and $F' = \delta(T,S\setminus T)$.
 
-			To start off, let's decrement the $\pi$-values of all vertices in $T$ by the smallest $\pi$-value of any vertex in $T$, say $\varepsilon$. Now $\pi$ has a smaller support, but it may not be feasible. In order to correct this, we increase $z(e)$ by $\varepsilon$ for all $e\in F$. Now the solution might not be optimal. In order to correct this, we decrease $z(e)$ by $\varepsilon$ for all $e\in F'$. In order to see why the new dual is feasible, note that an edge $(u,v)$ can be of the following types:
-				\begin{itemize}
-					\item[Case 1:] $v\notin T$. Since we only decreased the $\pi$-value of vertices in $T$ (and left all other vertices unchanged), the left hand side of each of the first two dual inequalities can only increase. So these inequalities are still satisfied.
-					
-					\item[Case 2:] $u,v\in T$. In this case, the decrease in $\pi_v$ is matched by the increase in $-\pi_u$, so the inequalities are still satisfied.
-					
-					\item[Case 3:] $u\notin S, v\in T$. In this case, the decrease in $\pi_v$ is matched by the increase in $z(u,v)$, so the inequalities are still satisfied.
-					
-					\item[Case 4:] $u\in S\setminus T, v\in T$. In this case, $(u,v)$ cannot be a forward edge, since if it were, then $T$ would intersect a set in $\lamNS$ which was smaller than $S$. But we defined $S$ to be the smallest such set. So we only consider the second inequality, which must be satisfied, since $\pi_u$ was already $0$ and $\pi_v$ is nonnegative.
-				\end{itemize}
-			The inequality $\pi\geqslant 0$ must be satisfied simply because we reduced $\pi_v$ for $v\in T$ by $\min_{u\in T}\pi_u$.
-			Also, since all edges $(u,v)$ in $F'$ are either neutral or forward, we originally satisfied $\pi_v - \pi_u + z(u,v)\geqslant 0$. Since $u\in T$ and $v\in S\setminus T$, we must have that $0 - \varepsilon + z(u,v)\geqslant 0$, that is, $z(u,v)\geqslant \varepsilon$.
+			We update the dual solution as follows:
+			\begin{itemize}[-]
+				\item Decrease $\pi_v$ by $\varepsilon := \min_{v\in T} \pi_v$ for all $v\in T$ .
 
-			So the inequality $z\geqslant 0$ must be satisfied since we only reduced $z$-value in $F'$, and for all edges in $F'$, we already had $\varepsilon$ $z$-value to begin with.\vspace{2mm}\\
-			Now we will see that the new dual value is still optimal.
+				\item Increase $z(e)$ by $\varepsilon$ for all $e\in F$.
+
+				\item Decrease $z(e)$ by $\varepsilon$ for all $e\in F'$.
+			\end{itemize}
+			One can think of the purpose of the first step as decreasing the support of $\pi$. However, this step might make it infeasible. So one can think of the second step as trying to make it feasible again. However, this might make the objective value suboptimal. So one can think of the third step as trying to regain optimality.\vspace{2mm}
+
+			It can be checked using a case-by-case analysis that the updated dual is indeed feasible.	It remains to check that it is still optimal.
 			The decrease in dual objective value was precisely $\varepsilon (x(F') - x(F\cap( E_f\cup E_n))\geqslant \varepsilon(x(F') - x(F))$.
-			If we can show that this is positive, then the new dual value is still optimal. The proof relies on the fact that $S$ is either an original laminar set or $V$, so $x(\delta^-(S))\leqslant 1$.
+			If we can show that this is positive, then the new dual value is still optimal. Here we use two facts - (i) since the backbone visits every laminar set, $S\setminus T$ is nonempty, and (ii) since $S\in \lam_{\geq 2}$, $x(\delta^-(S))\leqslant 1$.
 			\[
 				1\leqslant x(\delta^-(S\setminus T)) = \underbrace{x(\delta^-(S)) - x(F)}_{\text{edges from outside } S} + \underbrace{x(F')}_{\text{edges from } T}\leqslant 1 - x(F) + x(F')
 			\]
@@ -214,11 +210,11 @@
 			The modified split graph $\bm{G'_{sp}}$ and a circulation on it $\bm{x'_{sp}}$ are created by modifying $G_{sp}$ and $x_{sp}$ according to the following procedure for every $U_i$:
 			\begin{itemize}[-]
 				\item Add a new vertex called $a_i$.
-				
+
 				\item Pick $X_i^-$ to be a subset of incoming edges to $U_i^{sp}$ such that $x_{sp}(X_i^-) = 1/2$ and $X_i^-$ consists of either solely $1-1$ edges or solely $0-0$ edges. This must be possible since the total $x$-value coming into $U_i^{sp}$ is at least $1$.
-				
+
 				\item Let $X_i^+$ be a subset of edges leaving $U_i^{sp}$ that entered through some edge in $X_i^-$. This can be found using a path decomposition of $x_{sp}$ on $U_i$ and following each edge of $X_i^-$ along its paths. Then $x_{sp}(X_i^+) = 1/2$.
-				
+
 				\item Redirect every edge in $X_i^-$ to $a_i$, and every edge in $X_i^+$ from $a_i$. In other words, $(u,v)\in X_i^-$ becomes $(u,a_i)$ and $(u,v)\in X_i^+$ becomes $(a_i, v)$. Also for each $u-v$ path we considered in the path decomposition (where $u\in X_i^-, v\in X_i^+$), reroute the $x_{sp}$ flow to the path $(u,a_i),(a_i,v)$. Call this modified flow $x'_{sp}$. Note that $x_{sp}'$ is still a circulation, and the original paths we considered are deleted from $G'_{sp}$.\\
 			\end{itemize}
 		\end{definition}
@@ -228,7 +224,7 @@
 		\begin{itemize}[-]
 			\item For all vertices $v\in V$, let $S_0$ be the set of $0-0$ edges into $v^0$ and $S_1$ be the set of $1-1$ edges into $v^1$.
 					Add the capacity constraints $z'_{sp}(S_0)\leqslant \ceil{2\cdot x_{sp}(S_0)}$ and $z'_{sp}(S_1)\leqslant \ceil{2\cdot x_{sp}(S_1)}$.
-					
+
 			\item For all vertices $a_i$, add the constraint $z'_{sp}(\delta^-(a_i)) = 1\  (\ = 2\cdot x'_{sp}(\delta^-(a_i))\ )$
 		\end{itemize}
 		Note that $2\cdot x_{sp}'$ is feasible with respect to these constraints by construction.
