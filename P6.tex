@@ -47,10 +47,13 @@
 		\begin{lemma}[Lemma 7.3 in the paper]\label{lemma7}
 			Given $U_1,\ldots,U_l$ disjoint subsets of $V\setminus V(B)$ that are strongly connected in $G$, such that for each $S\in \lamNS$, either $U_i\in S$ or $U_i$ is disjoint from $S$, we can find eulerian $F\subseteq E$ that guarantees the following:
 			\begin{enumerate}[(1)]
-				\item $w(F)\leqslant 3\cdot \val(I)$
-				\item $|\delta^-_F(U_i)|\geqslant 1$ for all $i$
-				\item $|\delta^-_F(v)|\leqslant 4$ for all $v$ such that $x(\delta^-(v)) = 1$
-				\item Any subtour in $F$ that crosses a set in $\lamNS$ visits a vertex of the backbone
+				\item $w(F)\leqslant 3\cdot \val(I)$\label{lemm:main:1}
+				
+				\item $|\delta^-_F(U_i)|\geqslant 1$ for all $i$\label{lemm:main:2}
+				
+				\item $|\delta^-_F(v)|\leqslant 4$ for all $v$ such that $x(\delta^-(v)) = 1$\label{lemm:main:3}
+				
+				\item Any subtour in $F$ that crosses a set in $\lamNS$ visits a vertex of the backbone\label{lemm:main:4}
 			\end{enumerate}
 		\end{lemma}
 		We will use the lemma to prove the following theorem, and prove the lemma later on.\\
@@ -111,7 +114,7 @@
 			Consider the lift of some subtour in $G_{sp}$ that crosses at least one set in $\lamNS$. Let $S$ be the smallest set in $\lamNS$ that the subtour crosses.
 			Then the edge of the subtour going into $S$ must be a forward edge (i.e. a $1-1$ edge) by definition, and the edge going out of $S$ must be a backward edge (i.e. a $0-0$ edge). This means at some point, the subtour must use a $1-0$ edge, which it can only do if it crosses the backbone.\\
 			\vspace{1mm}
-			So if we restrict ourself to lifts of subtours of $G_{sp}$ (instead of all subtours of $G$), guarantee (4) will always be true.\vspace{2mm}
+			So if we restrict ourself to lifts of subtours of $G_{sp}$ (instead of all subtours of $G$), we guarantee \hyperref[lemm:main:4]{condition (4)}.\vspace{2mm}
 
 			\begin{lemma}\label{lemma6-1}
 				We can find $x_{sp}$, an eulerian vector on $G_{sp}$ so that the image of $x_{sp}$ in $G$ is $x$.
