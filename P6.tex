@@ -190,8 +190,8 @@
 			Running this procedure repeatedly proves that there is a dual optimal where $\pi = 0$.\vspace{2mm}\\
 			Let $T$ be the set of vertices in support($\pi$) with the smallest \level, and let $S$ be the set corresponding to that \level.
 			Also, let $F = \delta(V\setminus S, T)$, and $F' = \delta(T,S\setminus T)$.
-			\subfile{Diagrams/fig-claim6_1.tex}
-			
+			\subfile{Diagrams/fig-claim6_1.tex}\vspace{5mm}
+
 			We update the dual solution as follows:
 			\begin{itemize}[-]
 				\item Decrease $\pi_v$ by $\varepsilon := \min_{v\in T} \pi_v$ for all $v\in T$ .
@@ -200,11 +200,11 @@
 
 				\item Decrease $z(e)$ by $\varepsilon$ for all $e\in F'$.
 			\end{itemize}
-			One can think of the purpose of the first step as decreasing the support of $\pi$. However, this step might make it infeasible. So one can think of the second step as trying to make it feasible again. However, this might make the objective value suboptimal. So one can think of the third step as trying to regain optimality.\vspace{2mm}
+			The purpose of the first step is to decrease the support of $\pi$. However, this step might make it infeasible, and the second step fixes this infeasibility. Now the second step might make the dual value suboptimal. The third step makes it optimal once again.\vspace{2mm}
 
 			It can be checked using a case-by-case analysis that the updated dual is indeed feasible.	It remains to check that it is still optimal.
 			The decrease in dual objective value was precisely $\varepsilon (x(F') - x(F\cap( E_f\cup E_n))\geqslant \varepsilon(x(F') - x(F))$.
-			If we can show that this is positive, then the new dual value is still optimal. Here we use two facts - (i) since the backbone visits every laminar set, $S\setminus T$ is nonempty, and (ii) since $S\in \lam_{\geq 2}$, $x(\delta^-(S))\leqslant 1$.
+			If we can show that this is nonnegative, then the new dual value is still optimal. We use two facts - (i) since the backbone visits every laminar set, $S\setminus T$ is nonempty, and (ii) since $S\in \lam_{\geq 2}$, $x(\delta^-(S))\leqslant 1$.
 			\[
 				1\leqslant x(\delta^-(S\setminus T)) = \underbrace{x(\delta^-(S)) - x(F)}_{\text{edges from outside } S} + \underbrace{x(F')}_{\text{edges from } T}\leqslant 1 - x(F) + x(F')
 			\]
@@ -221,9 +221,9 @@
 
 				\item Pick $X_i^-$ to be a subset of incoming edges to $U_i^{sp}$ such that $x_{sp}(X_i^-) = 1/2$ and $X_i^-$ consists of either solely $1-1$ edges or solely $0-0$ edges. This must be possible since the total $x$-value coming into $U_i^{sp}$ is at least $1$.
 
-				\item Let $X_i^+$ be a subset of edges leaving $U_i^{sp}$ that entered through some edge in $X_i^-$. This can be found using a path decomposition of $x_{sp}$ on $U_i$ and following each edge of $X_i^-$ along its paths. Then $x_{sp}(X_i^+) = 1/2$.
+				\item Let $X_i^+$ be a subset of edges leaving $U_i^{sp}$ that entered through some edge in $X_i^-$. This can be found using a path decomposition of $x_{sp}$ on $U_i$ and following each edge of $X_i^-$ along its paths until the paths leave $U_i$. Then $x_{sp}(X_i^+) = 1/2$.
 
-				\item Redirect every edge in $X_i^-$ to $a_i$, and every edge in $X_i^+$ from $a_i$. In other words, $(u,v)\in X_i^-$ becomes $(u,a_i)$ and $(u,v)\in X_i^+$ becomes $(a_i, v)$. Also for each $u-v$ path we considered in the path decomposition (where $u\in X_i^-, v\in X_i^+$), reroute the $x_{sp}$ flow to the path $(u,a_i),(a_i,v)$. Call this modified flow $x'_{sp}$. Note that $x_{sp}'$ is still a circulation, and the original paths we considered are deleted from $G'_{sp}$.\\
+				\item Redirect every edge in $X_i^-$ to $a_i$, and every edge in $X_i^+$ from $a_i$. In other words, $(u,v)\in X_i^-$ becomes $(u,a_i)$ and $(u,v)\in X_i^+$ becomes $(a_i, v)$. Also for each $u-v$ path we considered in the path decomposition (where $u\in X_i^-, v\in X_i^+$), reroute the $u-v$ flow in $x_{sp}$ flow through the edges $(u,a_i),(a_i,v)$. Call this modified flow $x'_{sp}$. Note that $x_{sp}'$ is still a circulation, and the original paths we considered are deleted from $G'_{sp}$.\\
 			\end{itemize}
 		\end{definition}
 		We would like to round our circulation to an integral circulation.
@@ -238,12 +238,13 @@
 		Note that $2\cdot x_{sp}'$ is feasible with respect to these constraints by construction.
 		So we can round $2\cdot x_{sp}'$ to obtain $z_{sp}'$, an integral, minimum-weight circulation which can be interpreted as an eulerian set $F'$.
 		\vspace{2mm}\\
-		We will use $F'$ to find an eulerian set of edges in $G_{sp}$. Note that for every $U_i$, $F'$ has an edge going into and out of $a_i$, say $(u,a_i),(a_i,v)$. Let their images in $G_{sp}$ be $(u,v'),(u',v)$ respectively. Then the image of $F'$ in $G_{sp}$ is not eulerian, since $v'$ and $u'$ have net incoming and outgoing flows respectively. We can fix this by simply adding a $v'-u'$ path.\vspace{2mm}
+		We will use $F'$ to find an eulerian set of edges in $G_{sp}$. Note that for every $U_i$, $F'$ has an edge going into and out of $a_i$, say $(u,a_i),(a_i,v)$. Let their images in $G_{sp}$ be $(u,v'),(u',v)$ respectively. Then the image of $F'$ in $G_{sp}$ is not eulerian, since $v'$ and $u'$ have net incoming and outgoing flows respectively. We can fix this by simply adding a $v'-u'$ path.\\\vspace{2mm}
+
 		\begin{claim}
-			There is always a $v'-u'$ path within $U_i$ of weight no more than $\val(U_i)$.\label{claim:7:uvpath}
+			There is always a $v'-u'$ path in $G_{sp}$. Also, its weight is no more than $\val(U_i)$.\label{claim:7:uvpath}
 		\end{claim}
 		\begin{proof}
-			First note that the assumptions in \hyperref[lemma7]{Lemma \ref{lemma7}} imply that all the edges within $U_i$ are neutral edges, so $G_{sp}$ contains both $0-0$ and $1-1$ copies of every edge in $U_i$. Also, since $U_i$ was strongly connected, the $0$-copy and $1$-copy of $U_i$ are strongly connected. Since there are $0-1$ edges corresponding to all vertices, there is always a $v'-u'$ path unless $v'$ is a $1$-copy and $u'$ is a $0$-copy. But $U_i$ is disjoint from the backbone, so that is impossible by the construction of $G_{sp}$. By \hyperref[lemm:2:D-val]{Lemma \ref{lemm:2:D-val}}, the path weighs no more than $\val(U_i)$.\\
+			First note that the assumptions in \hyperref[lemma7]{Lemma \ref{lemma7}} imply that all the edges within $U_i$ are neutral edges, so $G_{sp}$ contains both $0-0$ and $1-1$ copies of every edge in $U_i$. Also, since $U_i$ was strongly connected, the $0$-copy and $1$-copy of $U_i$ are strongly connected. Since there are $0-1$ edges corresponding to all vertices, there is always a $v'-u'$ path unless $v'$ is a $1$-copy and $u'$ is a $0$-copy. But $U_i$ is disjoint from the backbone, so by the construction of $G_{sp}$, it's not possible that $v'$ is a $1$-copy and $u'$ is a $0$-copy. By \hyperref[lemm:2:D-val]{Lemma \ref{lemm:2:D-val}}, the path weighs no more than $\val(U_i)$.\\
 		\end{proof}
 Now we can take the image of this eulerian set to $G$, say $F$, and guarantees $(2)$ and $(4)$ are automatically fulfilled.\vspace{2mm}
 
