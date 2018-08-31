@@ -258,10 +258,16 @@ Now we can take the image of this eulerian set to $G$, say $F$, and guarantees $
 			 	&\leqslant 3\cdot\val(\calI)
 			\end{align*}
 		\end{proof}
+		\begin{claim}
+			If $\delta^-(v) = 1$, then $|\delta^-_F(v)|\leq 4$.
+		\end{claim}
+		\begin{proof}
+			Fix some $v$ such that $\delta^-(v) = 1$, and let $S_0$ and $S_1$ be the set of incoming $0-0$ and $1-1$ edges into $v$ respectively. Then $1=x(\delta^-(v))\geq x'_{sp}(S_0) + x'_{sp}(S_1)$. Note that while converting $F'$ to $F$, we added a path in each $U_i$, so the in-degree of each vertex increased by at most $1$.
+			\[
+				|\delta^-_F(v)| \leqslant z'_{sp}(S_0) + z'_{sp}(S_1) + 1\leqslant \ceil{2x'_{sp}(S_0)} + \ceil{2x'_{sp}(S_1)} + 1
+			\]
+		\end{proof}
 		Finally we would like to show that for any tight vertex, $F$ doesn't visit it too many times; i.e: $\forall v \in V$ such that $x(\delta^-(v)) = 1$, $|\delta^-_F(v)| \leqslant 4$.\\
 		A any vertex $v$ may be visited by the circulation $F'$ in $G_{sp}$ or by some path $P_i$.
-		\begin{align*}
-			|\delta^-_F(v)| &\leqslant z'_{sp}(\delta^-(\{(v^1, v^0)\})) + 1 \leqslant z'_{sp}(S_0) + z'_{sp}(S_1) + 1\\
-			|\delta^-_F(v)| &\leqslant 4.
-		\end{align*}
+
 \end{document}
