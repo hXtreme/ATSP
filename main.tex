@@ -1,10 +1,13 @@
-\documentclass[11pt]{extarticle}
+\documentclass{article}
 \setcounter{secnumdepth}{1}
 
 %%---------------------------------------
 %%Subfile
 %%---------------------------------------
 \usepackage{subfiles}
+
+% To make all fonts darker
+\usepackage{pdfrender,xcolor}
 
 
 %%----------------------------------------
@@ -192,6 +195,10 @@
 \newcommand{\DUAL}{\textup{DUAL}}
 
 \begin{document}
+
+% make lines thick
+%\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.1pt}
+
 \thispagestyle{firstpage}
 \PrintHeader
 
