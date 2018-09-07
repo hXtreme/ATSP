@@ -162,7 +162,12 @@
 
 			We will show that $S$ obeys \hyperref[equation:hoffman]{(\ref{equation:hoffman})} using induction on the number of sets in $\lamNS$ that intersect with $S$. The base case is when every set in $\lamNS$ is disjoint from $S$. This case is trivial since the left hand side is zero.
 
-			If at least one set in $\lamNS$ intersects $S$, let $T$ be such a set with the smallest index. Refer to \hyperref[figure:xsp1]{Figure \ref{figure:xsp1}} for the definitions of edge sets $B$, $C$, $A_s$, $A_l$, $D_S$, and $D_l$. Also, let $A = A_s\cup A_l$ and $D = D_s\cup D_l$. Now, by the induction hypothesis, \hyperref[equation:hoffman]{(\ref{equation:hoffman})} must be true for $S':=S\setminus T$. In other words, \[ l(\delta^-(S)) - l(D) + \underbrace{l(B)}_{=0} = l(\delta^-(S'))\leq u(\delta^+(S')) = u(\delta^+(S)) - u(A) + u(C) \]
+			If at least one set in $\lamNS$ intersects $S$, let $T$ be such a set with the smallest index. Refer to \hyperref[figure:xsp1]{Figure \ref{figure:xsp1}} for the definitions of edge sets $B$, $C$, $A_s$, $A_l$, $D_S$, and $D_l$.
+			Also, let $A = A_s\cup A_l$ and $D = D_s\cup D_l$. 
+			Now, by the induction hypothesis, \hyperref[equation:hoffman]{(\ref{equation:hoffman})} must be true for $S':=S\setminus T$. In other words, 
+			\[ 
+				l(\delta^-(S)) - l(D) + \underbrace{l(B)}_{=0} = l(\delta^-(S'))\leq u(\delta^+(S')) = u(\delta^+(S)) - u(A) + u(C) 
+			\]
 			Note that $l(B) = 0$ since all the edges in $B$ must be back edges by choice of $T$. If we want to prove $\hyperref[equation:hoffman]{(\ref{equation:hoffman})}$ for $S$, it is left to show that $l(D) + u(C)\leq u(A)$.
 
 			Since $B$ passes through $T$ and $B$ is disjoint from $S$, $T\setminus$ is nonempty. Note that since $T$ is laminar, $x(\delta^-(T)) = 1$. \[ 1\leq x(\delta^-(T\setminus S))=\underbrace{x(\delta^-(T))}_{=1} - x(C) - x(D_l) + x(A_s) \]
