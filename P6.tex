@@ -162,18 +162,26 @@
 
 			We will show that $S$ obeys \hyperref[equation:hoffman]{(\ref{equation:hoffman})} using induction on the number of sets in $\lamNS$ that intersect with $S$. The base case is when every set in $\lamNS$ is disjoint from $S$. This case is trivial since the left hand side is zero.
 
-			If at least one set in $\lamNS$ intersects $S$, let $T$ be such a set with the smallest index. Refer to \hyperref[figure:xsp1]{Figure \ref{figure:xsp1}} for the definitions of edge sets $B$, $C$, $A_s$, $A_l$, $D_S$, and $D_l$.
-			Also, let $A = A_s\cup A_l$ and $D = D_s\cup D_l$. 
+			If at least one set in $\lamNS$ intersects $S$, let $T$ be such a set with the smallest index. Refer to \hyperref[figure:xsp1]{Figure \ref{figure:xsp1}} for the definitions of edge sets $C_b$, $C_f$, $A_s$, $A_l$, $D_S$, and $D_l$.
+			% Also, let $A = A_s\cup A_l$ and $D = D_s\cup D_l$. 
 			Now, by the induction hypothesis, \hyperref[equation:hoffman]{(\ref{equation:hoffman})} must be true for $S':=S\setminus T$. In other words, 
+			\begin{align}
+				l(\delta^-(S)) - l(D_l) - \underbrace{l(D_s)}_{=0} + \underbrace{l(C_b)}_{=0} = l(\delta^-(S')) &\leqslant u(\delta^+(S')) = u(\delta^+(S)) - u(A_l) - \underbrace{u(A_s)}_{= x(A_s)} + u(C_f)\nonumber\\
+				\implies l(\delta^-(S)) - u(\delta^+(S)) \leqslant u(C_f) + l(D_l) - u(A_s) &\leqslant x(C_f) + x(D_l) - x(A_s) \label{P6:eqn:altproof}
+			\end{align}
+			Note that $l(C_b) = 0$ since all the edges in $C_b$ must be back edges by choice of $T$ similarly, $l(D_s) = 0$ as all edges in $D_s$ are back edges and, $u(A_s) = x(A_s)$ since all edges in $A_s$ must either be forward or neutral.
+			If we want to prove $\hyperref[equation:hoffman]{(\ref{equation:hoffman})}$ for $S$, it is left to show that $x(C_f) + x(D_l) - x(A_s) \leqslant 0$.
+
+			Since the backbone $B$ passes through $T$ and $B$ is disjoint from $S$, $T\setminus$ is nonempty. Note that since $T$ is laminar, $x(\delta^-(T)) = 1$. 
 			\[ 
-				l(\delta^-(S)) - l(D) + \underbrace{l(B)}_{=0} = l(\delta^-(S'))\leq u(\delta^+(S')) = u(\delta^+(S)) - u(A) + u(C) 
+				1\leq x(\delta^-(T\setminus S))=\underbrace{x(\delta^-(T))}_{=1} - x(C_f) - x(D_l) + x(A_s) 
 			\]
-			Note that $l(B) = 0$ since all the edges in $B$ must be back edges by choice of $T$. If we want to prove $\hyperref[equation:hoffman]{(\ref{equation:hoffman})}$ for $S$, it is left to show that $l(D) + u(C)\leq u(A)$.
 
-			Since $B$ passes through $T$ and $B$ is disjoint from $S$, $T\setminus$ is nonempty. Note that since $T$ is laminar, $x(\delta^-(T)) = 1$. \[ 1\leq x(\delta^-(T\setminus S))=\underbrace{x(\delta^-(T))}_{=1} - x(C) - x(D_l) + x(A_s) \]
-
-			So $x(C) + x(D_l)\leq x(A_s)$. Note that $A_s$ cannot contain a back edge by the choice of $T$. So $u(A)\geq x(A_s)$. For the same reason, $D_s$ cannot have any forward edges, so $D_l$ alone contributes to $l(D)$. Finally, $C$ must only contain forward edges for the same reason, so $x(C) = u(C)$. Combining all these facts, we have \[l(D) + u(C)\leq x(C) + x(D_l)\leq x(A_s)\leq u(A)\]
-			This is what we had left to show. Therefore by induction, all $S$ obey \hyperref[equation:hoffman]{(\ref{equation:hoffman})}, and by Hoffman's Circulation Theorem, we can find a valid $f$. Hence we can find a valid $x_{sp}$, proving the lemma.
+			So $x(C_f) + x(D_l) - x(A_s) \leqslant 0$. Using this in \hyperref[P6:eqn:altproof]{equation \ref{P6:eqn:altproof}} we get, $l(\delta^-(S)) \leqslant u(\delta^+(S))$.
+			
+			% Note that $A_s$ cannot contain a back edge by the choice of $T$. So $u(A)\geq x(A_s)$. For the same reason, $D_s$ cannot have any forward edges, so $D_l$ alone contributes to $l(D)$. Finally, $C$ must only contain forward edges for the same reason, so $x(C) = u(C)$. Combining all these facts, we have \[l(D) + u(C)\leq x(C) + x(D_l)\leq x(A_s)\leq u(A)\]
+			% This is what we had left to show. 
+			Therefore by induction, all $S$ obey \hyperref[equation:hoffman]{(\ref{equation:hoffman})}, and by Hoffman's Circulation Theorem, we can find a valid $f$. Hence we can find a valid $x_{sp}$, proving the lemma.
 	\end{proof}
 	\subfile{Diagrams/xsp1.tex}\vspace{5mm}
 
