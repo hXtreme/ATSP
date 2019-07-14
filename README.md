@@ -1,12 +1,2 @@
 # ATSP
-ATSP Write Up
-
-## TODO
-Flesh out argument for sec 2 lemma 3.1ish in paper. - DONE
-Define $S_in$ and $S_out$ - DONE
-
-D(u,v)
-
-Lemma 2.1
-
-Definition custom spacing
+A condensed version of [A Constant-Factor Approximation Algorithm for the Asymmetric Traveling Salesman Problem](https://arxiv.org/abs/1708.04215) - Ola Svensson, Jakub Tarnawski, László A. Végh.
