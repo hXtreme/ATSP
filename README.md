@@ -6,4 +6,4 @@ aimed towards use as lecture notes and quick reference.
 Please check [here](https://github.com/hXtreme/ATSP/releases) for the latest version.
 
 ## Disclaimer
-While we've taken care to fix and avoid mistakes some errors do pass under the radar as such request you to use these notes while keeping this in mind.
+While we've taken care to fix and avoid mistakes however, some errors can always pass under the radar as such request you to use these notes while keeping this in mind.
